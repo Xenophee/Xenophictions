@@ -1,0 +1,156 @@
+@import url('variablesLight.css');
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* PARTIE HISTORIQUE */
+
+.profilTitle {
+    border-bottom: #5f2823 2px solid;
+}
+
+.profilComment {
+    width: 48%;
+}
+
+.currentStory {
+    width: 90%;
+    background-color: var(--lighter-color);
+    border: var(--border-lighter-double);
+}
+
+.coverStory {
+    width: 90%;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.btnRead {
+    width: 80%;
+}
+
+.ancientStory {
+    width: 20%;
+    background-color: #a79a8a;
+    border: var(--border-light-double);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* PARTIE AJOUTER UNE HISTOIRE */
+
+#storyName {
+    width: 100%;
+}
+
+#next,
+#previous,
+#finish {
+    width: 100%;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* PARTIE LISTE UTILISATEURS */
+
+table {
+    color: var(--dark-color);
+}
+
+span {
+    font-weight: bold;
+}
+
+.profilImg {
+    width: 10px;
+}
+
+.edit {
+    background-color: var(--dark-color);
+}
+
+.delete {
+    background-color: var(--danger-color);
+}
+
+.view:hover,
+.edit:hover,
+.delete:hover {
+    background-color: transparent;
+    color: var(--dark-color);
+    border: var(--border-dark-double);
+}
+
+.profilAvatar {
+    border-radius: 50%;
+    border: var(--border-dark-double-large);
+    box-shadow: 0px 0px 20px #5f2823;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* MODERATION */
+
+.ok,
+.stop {
+    padding: 10px 30px 10px;
+    width: 100%;
+}
+
+.stop {
+    background-color: transparent;
+    color: var(--dark-color);
+    border: var(--border-dark-double);
+    box-shadow: none;
+}
+
+.stop:hover {
+    background-color: var(--danger-color);
+}
+
+.commentContent {
+    line-height: 25px;
+    margin: 0;
+}
+
+.userAvatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: var(--border-dark-double);
+    box-shadow: rgba(32, 3, 5, 0.12) 0px 2px 4px 0px, rgba(32, 3, 5, 0.32) 0px 2px 16px 0px;
+}
+
+.comment {
+    background-color: var(--lighter-color);
+    border: var(--border-dark-dotted);
+    width: 75%;
+}
+
+.commentary {
+    background-color: var(--light-color);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* GENERAL */
+
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+
+    .ok, .stop {
+        padding: 10px 0px 10px;
+        width: 25%;
+    }
+
+}

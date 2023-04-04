@@ -1,0 +1,167 @@
+@import url('variablesLight.css');
+
+
+.blocForm {
+    border: var(--border-dark-double-large);
+}
+
+.form-select {
+    background-image: url(../img/icones/down.png);
+}
+
+.form-control, .form-select {
+    box-shadow: inset 0 0 10px #cac7c6;
+    border: var(--border-dark-dotted);
+    height: 55px;
+    color: var(--dark-color);
+}
+
+#requestMessage {
+    height: 250px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--dark-color);
+    box-shadow: 0px 0px 15px #5f282383;
+    border-width: 2px;
+    color: var(--dark-color);
+}
+
+.form-check-input {
+    border: var(--border-dark-dotted);
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0;
+}
+
+.form-check-input:checked {
+    background-color: var(--special-color);
+    box-shadow: #bd5f13 0 0 4px;
+    border: var(--border-light-dotted);
+}
+
+.form-check-input:focus {
+    box-shadow: #bd5f13 0 0 4px;
+    border: var(--border-light-dotted);
+}
+
+.forgotten {
+    color: var(--special-color);
+}
+
+.forgotten:hover {
+    color: var(--dark-color);
+}
+
+
+
+/* ------------------------------------------------ */
+
+.avatar {
+    position: relative;
+    cursor: pointer;
+    width: 60%;
+    max-width: 240px;
+    border-radius: 50%;
+    border: var(--border-dark-double-large);
+    box-shadow: 0px 0px 20px #5f2823;
+}
+
+.avatar:hover {
+    animation: shadowAvatar 5s infinite !important;
+}
+
+.avatarImg:hover {
+    cursor: pointer;
+}
+
+.editAvatar {
+    position: absolute;
+    color: var(--dark-color);
+    font-size: 4rem;
+    cursor: pointer;
+    top: 50%; 
+    left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    opacity: 0;
+    transition: all ease-in-out .3s;
+    
+}
+
+.editAvatar:hover {
+    opacity: 1;
+    transition: all ease-in-out .3s;
+}
+
+/* .avatar-info {
+    height: 1500px;
+} */
+
+@keyframes shadowAvatar {
+    50% {box-shadow: 0px 0px 50px #bd5f13;}
+}
+
+
+
+/* PARTIE AJOUTER UNE HISTOIRE */
+
+
+.formStories {
+    width: 80%;
+}
+
+#synopsis, #summary {
+    height: 300px;
+}
+
+#description {
+    height: 200px;
+}
+
+#content {
+    height: 700px;
+}
+
+/* #storyName {
+    width: 100%;
+} */
+
+#next, #previous, #finish {
+    width: 100%;
+}
+
+
+/* PARTIE MODIFICATION D'HISTOIRE */
+
+
+
+/* PARTIE LISTE UTILISATEURS */
+
+.profilImg {
+    width: 10px;
+}
+
+
+/* PARTIE THEME CATEGORIE */
+
+.form-control.updateInput {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    height: 40px;
+    /* width: 30%; */
+}
+
+.updateInput:focus {
+    background-color: #f1e5cc;
+    border: none;
+    box-shadow: none;
+}
+
+.updateBtn {
+    width: 50%;
+}
+
+.btnSubmitThemeCategory {
+    height: 55px;
+}

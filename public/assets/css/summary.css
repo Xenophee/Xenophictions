@@ -1,0 +1,240 @@
+@import url('variablesLight.css');
+
+.summary {
+    background-color: #5f2823;
+}
+
+.coverSection {
+    background-color: #f1f1e79e;
+    border: var(--border-dark-dotted);
+    box-shadow: rgba(0, 0, 0, 0.06) 2px 4px 8px 0px inset;
+}
+
+.coverCard {
+    position: relative;
+}
+
+.coverImg {
+    border: var(--border-dark-double-large);
+    border-top-right-radius: 50% 25%;
+    border-top-left-radius: 50% 25%;
+    border-bottom-right-radius: 50% 15%;
+    border-bottom-left-radius: 50% 15%;
+    box-shadow: rgba(32, 3, 5, 0.1) 0px 8px 24px, rgba(32, 3, 5, 0.1) 0px 16px 56px, rgba(32, 3, 5, 0.1) 0px 24px 80px;
+}
+
+.note {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: var(--border-dark-double);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(32, 3, 5, 0.25) 0px 13px 27px -5px, rgba(32, 3, 5, 0.3) 0px 8px 16px -8px;
+    cursor: pointer;
+    transition: 1.5s;
+}
+
+.note:hover {
+    background-color: var(--special-color);
+    color: var(--light-color);
+    border: var(--border-light-double);
+    transition: 1.5s;
+}
+
+.categoryInfo {
+    background-color: var(--dark-color);
+    color: var(--lighter-color);
+    font-size: 0.9rem;
+    width: auto;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.progressionSection {
+    border-top: var(--border-dark-solid);
+    border-bottom: var(--border-dark-solid);
+    background-color: #f1f1e742;
+}
+
+.btn {
+    width: auto;
+    padding: 15px 55px 15px;
+}
+
+#restart, #read {
+    width: 100%;
+    padding: 20px 0px 20px;
+}
+
+#restart {
+    background-color: var(--dark-color);
+    border: var(--border-light-double);
+    color: var(--light-color);
+}
+
+#restart:hover {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    border: var(--border-light-double);
+}
+
+.summaryNav {
+    border-bottom: #5f2823 5px solid;
+}
+
+.navStory {
+    width: 100%;
+    height: 10vh;
+    cursor: pointer;
+}
+
+.navStory.active {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    box-shadow: 0 -5px 5px -5px #5f2823;
+}
+
+.btnReading {
+    min-width: 100%;
+    padding: 10px 35px 10px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: var(--border-dark-double);
+    box-shadow: rgba(32, 3, 5, 0.12) 0px 2px 4px 0px, rgba(32, 3, 5, 0.32) 0px 2px 16px 0px;
+}
+
+.comment {
+    background-color: #f1f1e7;
+    border: var(--border-dark-dotted);
+}
+
+.commentary {
+    background-color: #f1e5cc;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+
+.needModeration {
+    background-color: #ba9f8d;
+}
+
+#commentary {
+    height: 130px;
+    color: var(--dark-color);
+    border: var(--border-dark-double);
+}
+
+#commentary:focus {
+    border-color: var(--dark-color);
+    box-shadow: 0px 0px 10px #ba9f8d;
+    border-width: 2px;
+}
+
+.ok, .stop {
+    padding: 10px 30px 10px;
+    width: 100%;
+}
+
+.stop {
+    background-color: transparent;
+    color: var(--dark-color);
+    border: var(--border-dark-double);
+    box-shadow: none;
+}
+
+.stop:hover {
+    background-color: var(--danger-color);
+}
+
+.commentContent {
+    line-height: 25px;
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------------------------------------------- */
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+
+    #restart, #read {
+        width: 30%;
+        padding: 20px 0px 20px;
+    }
+    
+    .ok, .stop {
+        padding: 10px 0px 10px;
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    
+    .coverImg {
+        width: 50%;
+    }
+
+    .note {
+        height: 100px;
+        width: 100px;
+    }
+
+    .navStory {
+        width: 35%;
+        height: 5vh;
+    }
+
+    .btnReading {
+        min-width: 30%;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .coverImg {
+        width: 50%;
+    }
+
+    .note {
+        height: 100px;
+        width: 100px;
+    }
+
+    .navStory {
+        width: 35%;
+        height: 5vh;
+    }
+
+    .btnReading {
+        min-width: 25%;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    .coverImg {
+        width: 100%;
+    }
+
+    #restart, #read {
+        padding: 15px 0px 15px;
+    }
+
+    .navStory {
+        width: 35%;
+        height: 7vh;
+    }
+}

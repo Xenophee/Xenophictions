@@ -1,0 +1,210 @@
+@import url('variablesLight.css');
+
+
+
+.profilNav {
+    padding: 0;
+    background-color: #200305;
+}
+
+.profilNav nav {
+    border: none;
+    min-height: auto;
+}
+
+.offcanvasColor .nav-item:hover {
+    border-top: #a79a8a 2px solid;
+    border-bottom: #a79a8a 2px solid;
+}
+
+.offcanvasColor {
+    background-color: #200305;
+}
+
+.profilNav .nav-link {
+    font-size: 1.1rem;
+}
+
+.profilNav .nav-link.active {
+    background-color: #f1e5cc;
+    color: #5f2823 !important;
+}
+
+section {
+    width: 100%;
+}
+
+
+.avatar {
+    position: relative;
+    cursor: pointer;
+    width: 60%;
+    max-width: 240px;
+    border-radius: 50%;
+    border: #5f2823 10px double;
+    box-shadow: 0px 0px 20px #5f2823;
+}
+
+.avatar:hover {
+    animation: shadowAvatar 5s infinite !important;
+}
+
+@keyframes shadowAvatar {
+    50% {
+        box-shadow: 0px 0px 50px #bd5f13;
+    }
+}
+
+.avatarImg:hover {
+    cursor: pointer;
+}
+
+.editAvatar {
+    position: absolute;
+    color: #5f2823;
+    font-size: 4rem;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+    /* décalage de 50% de sa propre taille */
+    opacity: 0;
+    transition: all ease-in-out .3s;
+
+}
+
+.editAvatar:hover {
+    opacity: 1;
+    transition: all ease-in-out .3s;
+
+}
+
+.formProfil {
+    width: 90%;
+}
+
+#textStory {
+    height: 1000px;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* PARTIE HISTORIQUE */
+
+.profilTitle {
+    border-bottom: #5f2823 2px solid;
+}
+
+.profilComment {
+    width: 48%;
+}
+
+.currentStory {
+    width: 90%;
+    background-color: var(--lighter-color);
+    border: var(--border-lighter-double);
+}
+
+.coverStory {
+    width: 90%;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.btnRead {
+    width: 80%;
+}
+
+.ancientStory {
+    width: 20%;
+    background-color: #a79a8a;
+    border: var(--border-light-double);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* PARTIE LISTE AVEC TABLEAUX */
+
+.table {
+    color: var(--dark-color);
+}
+
+.table-group-divider {
+    border-top-color: var(--dark-color);
+}
+
+/* ----------------------------------------------------------------------------------------------------------------- */
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+
+    .currentStory {
+        width: 40%;
+    }
+
+    .ancientStory {
+        width: 40%;
+    }
+
+    .coverStory {
+        width: 90%;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    }
+
+    .btnRead {
+        width: 80%;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    .formProfil {
+        width: 50%;
+    }
+
+    .currentStory {
+        width: 25%;
+    }
+
+    .ancientStory {
+        width: 25%;
+    }
+
+    .coverStory {
+        width: 90%;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    }
+
+    .btnRead {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+
+    .formProfil {
+        width: 50%;
+    }
+
+    .currentStory {
+        width: 20%;
+    }
+
+    .ancientStory {
+        width: 20%;
+    }
+
+    .coverStory {
+        width: 90%;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    }
+
+    .btnRead {
+        width: 80%;
+    }
+
+}

@@ -1,0 +1,243 @@
+/* DECLARATION DES VARIABLES */
+
+@import url('variablesLight.css');
+
+/* MISE EN PAGE DU HEADER */
+
+.deco {
+    width: 100%;
+    background-color: var(--dark-color);
+    background-image: url(../img/frise.jpg);
+    background-size: contain;
+    /* background-image: url(../img/240_F_294127549_xsb3blk7fb8GPRCs2TMllyXr4IjoAIsx.jpg); */
+    height: 20vh;
+}
+
+header {
+    background-color: var(--dark-color);
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 20%;
+}
+
+nav {
+    /* min-height: 10vh; */
+    /* background-color: #5f2823; */
+    font-size: 1.5rem;
+    font-family: 'Lora', serif;
+    border-bottom: var(--border-light-solid);
+    /* text-shadow: #200305 1px 0px 10px; */
+    /* font-size: 2.2rem; */
+}
+
+nav img {
+    width: 70%;
+}
+
+.userAvatarNav {
+    width: 30%;
+    border: #f1e5cc 5px double;
+}
+
+.userLink {
+    width: 60%;
+}
+
+.navbar-toggler {
+    color: #f1e5cc98;
+    border-color: #f1e5cc;
+}
+
+.navbar-toggler-icon {
+    background-image: url(../img/icones/hamburger.png);
+}
+
+.nav-link {
+    color: var(--light-color);
+}
+
+.nav-link:hover {
+    color: var(--lighter-color);
+}
+
+.navbar-brand {
+    width: 20vh;
+}
+
+.logIn {
+    border: var(--border-light-double);
+    border-radius: 20px;
+    background-color: var(--special-color);
+}
+
+.nav-link.active {
+    color: var(--lighter-color) !important;
+}
+
+
+/* ------------------------------------------------------------------------------------------------- */
+
+/* MISE EN PAGE DU FOOTER */
+
+footer {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border-top: var(--border-light-solid);
+}
+
+footer h4 {
+    font-weight: bold;
+    font-family: 'Lora', serif;
+}
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+footer a {
+    color: var(--light-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--lighter-color);
+}
+
+footer .bi {
+    font-size: 2.5rem;
+}
+
+
+/* ------------------------------------------------------------------------------------------------- */
+
+/* MISE EN PAGE GENERALE */
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-family: 'Merriweather', serif;
+    margin: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+    font-family: 'Lora', serif;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    /* text-shadow: #200304 1px 1px 1px; */
+}
+
+p {
+    text-align: justify;
+    line-height: 30px;
+}
+
+span {
+    font-weight: bold;
+}
+
+hr {
+    border: #5f2823 5px double;
+}
+
+.btn {
+    background-color: var(--special-color);
+    /* background-color: #c16706; */
+    color: var(--light-color);
+    border: var(--border-light-double);
+    border-radius: 15px;
+    transition: 1.5s;
+    box-shadow: rgba(32, 3, 5, 0.1) 0px 4px 12px;
+}
+
+.btn:hover {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border: var(--border-light-double);
+    border-radius: 15px;
+    transition: 1.5s;
+}
+
+.btn:active {
+    box-shadow: none;
+    transform: translateY(3px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: var(--border-danger-double);
+    color: var(--danger-color);
+    transition: 1.5s;
+}
+
+.btn-outline:hover {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    border-color: var(--light-color);
+    transition: 1.5s;
+}
+
+.page-link {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+}
+
+.page-link:hover {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.page-link.active {
+    background-color: var(--special-color);
+    border: var(--border-light-solid);
+    color: var(--light-color);
+}
+
+.modal-content {
+    background-color: var(--darker-color);
+    color: var(--light-color);
+}
+
+.modal-header {
+    border-bottom-color: var(--light-color);
+}
+
+.modal-footer {
+    border-top-color: var(--light-color);
+}
+
+.alert {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border: var(--border-darker-solid);
+}
+
+#resetBtn {
+    background-color: transparent;
+    border: var(--border-light-double);
+}
+
+#deleteLink {
+    text-decoration: none;
+}
+
+a {
+    color: var(--special-color);
+}
+
+a:hover {
+    color: var(--danger-color);
+}
