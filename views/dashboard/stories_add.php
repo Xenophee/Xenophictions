@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="d-flex flex-wrap justify-content-around">
-                            <!-- CATEGORIES SCIENCE-FICTION -->
+                            <!-- CATEGORIES -->
                             <?php foreach ($themesCategories as $key => $themeCategory) { ?>
                                 <div class="d-flex flex-column mt-4 mb-5 mx-5">
                                     <h2 class="text-center mb-4"><?= $themeCategory->themes_name ?></h2>

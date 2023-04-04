@@ -9,5 +9,5 @@ $chapters = Chapter::getAll($story);
 
 echo json_encode($chapters);
 
-echo json_encode($sections);
+// echo json_encode($sections);
 

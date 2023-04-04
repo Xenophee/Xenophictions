@@ -26,6 +26,8 @@ try {
     // METHODES POUR AFFICHER LES DONNEES DES HISTOIRES
     $stories = Story::getAll();
     // $sections = Section::getAll();
+    $sections = Section::getAll(1);
+    var_dump($sections);
 
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

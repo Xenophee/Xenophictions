@@ -70,13 +70,25 @@
                         </div>
 
                         <!-- CHOIX DE LA SECTION LIE -->
-                        <label for="section" class="form-label mb-2">Choisir la section parente :</label>
-                        <select class="form-select" name="section" id="section">
-                            <option>-</option>
-                            <?php foreach ($sections as $section) {
-                                echo "<option value=\"$section->id_sections\">$section->title</option>";
-                            } ?>
-                        </select>
+                        <div class="d-flex flex-wrap justify-content-around" id="sectionsLink">
+                            <!-- SECTIONS -->
+                            <?php foreach ($sections as $key => $section) { ?>
+                                <div class="d-flex flex-column mt-4 mb-5 mx-5">
+                                    <h2 class="text-center mb-4"><?= $section->chapters_titles ?></h2>
+                                    <?php 
+                                        $count = 1;
+                                        $sectionsTitles = explode('|', $section->sections_titles);
+                                        $sectionsId = explode('|', $section->id_sections);
+                                        // array_multisort($categories, SORT_ASC, $categoriesId);
+                                        foreach (array_combine($sectionsId, $sectionsTitles) as $id => $sectionTitle) {
+                                            $isChecked = (isset($themeCategories) && in_array($id, $themeCategories)); ?>
+                                            <div class="form-check d-flex align-items-center mb-4 mb-lg-2">
+                                                <input class="form-check-input" type="checkbox" name="sectionsLink[]" value="<?= $id ?>" id="<?= $sectionTitle ?>" required <?= $isChecked ? 'checked' : '' ?>>
+                                                <label class="form-check-label ms-3" for="<?= $sectionTitle ?>">{<?= $id ?>} <?= $sectionTitle ?></label>
+                                            </div> <?php 
+                                            } ?>
+                                </div> <?php } ?>
+                        </div>
                         <small class="text-danger fst-italic mt-2"><?= $errors['section'] ?? '' ?></small>
 
                         <!-- BOUTON VALIDATION -->
