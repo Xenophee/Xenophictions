@@ -9,4 +9,6 @@ $story = intval(filter_input(INPUT_POST, 'story', FILTER_SANITIZE_NUMBER_INT));
 $sections = Section::getAll($story);
 
 
-echo json_encode($sections);
+// json_encode($sections);
+
+echo html_entity_decode(json_encode($sections));

@@ -35,10 +35,11 @@ try {
         // RECUPERATION DES DONNEES ENVOYEES
         $story = intval(filter_input(INPUT_POST, 'story', FILTER_SANITIZE_NUMBER_INT));
         $chapter = intval(filter_input(INPUT_POST, 'chapter', FILTER_SANITIZE_NUMBER_INT));
-        $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
-        $description = intval(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
+        $title = trim((string)filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
+        $description = trim((string)filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
         $content = trim(filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS));
-        $section = intval(filter_input(INPUT_POST, 'section', FILTER_SANITIZE_NUMBER_INT));
+        $sectionsLink = filter_input(INPUT_POST, 'sectionsLink', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY) ?? [];
+        
         
         // VERIFICATION QU'UNE HISTOIRE A ETE SELECTIONNEE
         if (empty($story)) {
@@ -70,7 +71,7 @@ try {
         }
 
         // VERIFICATION QU'UNE OU PLUSIEURS SECTIONS PARENTES ONT ETE CHOISIES
-        if (empty($section)) {
+        if (empty($sectionsLink)) {
             $errors['section'] = 'Veuillez choisir la section de référence';
         }
 
@@ -102,13 +103,14 @@ try {
             $isDeleted = Section_Section::delete($id);
 
             // AJOUT DU LIEN SECTION / SECTION A LA BASE
-            $addSectionSection = new Section_Section;
-            $addSectionSection->setId_sections_parent($idParentSection);
-            $addSectionSection->setId_sections_child($id);
+            foreach($sectionsLink as $sectionLink) {
+                $addSectionSection = new Section_Section;
+                $addSectionSection->setId_sections_parent($sectionLink);
+                $addSectionSection->setId_sections_child($idSection);
+                $isAddLinkSection[] = $addSectionSection->add();
+            }
 
-            $isAddSectionSection = $addSectionSection->add();
-
-            if ($isUpdate == true && $isAddLink == true && $isDeletedLink == true && $isDeleted == true && $isAddSectionSection == true) {
+            if ($isUpdate === true && $isAddLink === true && $isDeletedLink === true && $isDeleted === true && !in_array(false, $isAddLinkSection, true)) {
                 $pdo->commit();
                 Flash::setMessage('Le section a été mise à jour.');
             } else {

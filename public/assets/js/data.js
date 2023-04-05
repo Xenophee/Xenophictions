@@ -43,34 +43,48 @@ const getAllSections = (event) => {
     }
 
     fetch('/controllers/ajax/getSectionsByChapters.php', options)
-        .then(response => {
-            console.log(response);
-            return (response.json())
-            
-        })
-        .then(sections => {
-            console.log(sections);
-            let sectionsHTML = '';
-            sections.forEach(section => {
-                let sectionsTitles = '';
-                const sectionsTitlesArray = section.sections_titles.split('|');
-                const sectionsIdArray = section.id_sections.split('|');
-            
-                sectionsIdArray.forEach((id, index) => {
-                    const sectionTitle = sectionsTitlesArray[index];
-                    // const isChecked = themeCategories && themeCategories.includes(parseInt(id));
-                    sectionsTitles += `<div class="form-check d-flex align-items-center mb-4 mb-lg-2" id="sectionsLink">
-                        <input class="form-check-input" type="checkbox" name="sectionsLink[]" value="${id}" id="${sectionTitle}" required ${isChecked ? 'checked' : ''}>
-                        <label class="form-check-label ms-3" for="${sectionTitle}">{${id}} ${sectionTitle}</label>
-                    </div>`;
-                });
-            
-                sectionsHTML += `<div class="d-flex flex-column mt-4 mb-5 mx-5">
-                    <h2 class="text-center mb-4">${section.chapters_titles}</h2>
-                    ${sectionsTitles}
-                  </div>`;
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(section => {
+              const sectionDiv = document.createElement('div');
+              sectionDiv.classList.add('d-flex', 'flex-column', 'mt-4', 'mb-5', 'mx-5');
+              sectionsLink.appendChild(sectionDiv);
+      
+              const sectionTitle = document.createElement('h2');
+              sectionTitle.classList.add('text-center', 'mb-4');
+              sectionTitle.textContent = section.chapters_titles;
+              sectionDiv.appendChild(sectionTitle);
+      
+              const sectionsTitles = section.sections_titles.split('|');
+              console.log(sectionsTitles);
+              const sectionsIds = section.id_sections.split('|');
+              sectionsIds.forEach((sectionId, index) => {
+                const sectionLabel = document.createElement('label');
+                sectionLabel.classList.add('form-check-label', 'ms-3');
+                sectionLabel.setAttribute('for', sectionsTitles[index]);
+                sectionLabel.textContent = `{${sectionId}} ${sectionsTitles[index]}`;
+      
+                const sectionInput = document.createElement('input');
+                sectionInput.classList.add('form-check-input');
+                sectionInput.setAttribute('type', 'checkbox');
+                sectionInput.setAttribute('name', 'sectionsLink[]');
+                sectionInput.setAttribute('value', sectionId);
+                sectionInput.setAttribute('id', sectionsTitles[index]);
+                sectionInput.setAttribute('required', '');
+                // if (themeCategories.includes(sectionId)) {
+                //   sectionInput.setAttribute('checked', '');
+                // }
+      
+                const sectionCheckboxDiv = document.createElement('div');
+                sectionCheckboxDiv.classList.add('form-check', 'd-flex', 'align-items-center', 'mb-4', 'mb-lg-2');
+                sectionCheckboxDiv.appendChild(sectionInput);
+                sectionCheckboxDiv.appendChild(sectionLabel);
+      
+                sectionDiv.appendChild(sectionCheckboxDiv);
               });
-        })
-}
+            });
+          })
+        .catch(error => console.error(error));
+    }
 
-story.addEventListener('change', getAllSections)
+    story.addEventListener('change', getAllSections)

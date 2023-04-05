@@ -7,7 +7,9 @@ $story = intval(filter_input(INPUT_POST, 'story', FILTER_SANITIZE_NUMBER_INT));
 
 $chapters = Chapter::getAll($story);
 
-echo json_encode($chapters);
+// json_encode($chapters);
+
+echo html_entity_decode(json_encode($chapters));
 
 // echo json_encode($sections);
 
