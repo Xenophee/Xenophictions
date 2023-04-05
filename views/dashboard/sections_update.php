@@ -30,7 +30,8 @@
                                 <select class="form-select" name="story" id="story">
                                     <option>-</option>
                                     <?php foreach ($stories as $story) {
-                                        echo "<option value=\"$story->id_stories\">$story->title</option>";
+                                        $isSelected = ($story->id_stories == $idStory) ? 'selected' : '';
+                                        echo "<option value=\"$story->id_stories\" $isSelected>$story->title</option>";
                                     } ?>
                                 </select>
                                 <small class="text-danger fst-italic mt-2"><?= $errors['story'] ?? '' ?></small>
@@ -78,19 +79,25 @@
                             <?php foreach ($sections as $key => $section) { ?>
                                 <div class="d-flex flex-column mt-4 mb-5 mx-5">
                                     <h2 class="text-center mb-4"><?= $section->chapters_titles ?></h2>
-                                    <?php 
-                                        $count = 1;
-                                        $sectionsTitles = explode('|', $section->sections_titles);
-                                        $sectionsId = explode('|', $section->id_sections);
-                                        // array_multisort($categories, SORT_ASC, $categoriesId);
-                                        foreach (array_combine($sectionsId, $sectionsTitles) as $id => $sectionTitle) {
-                                            $isChecked = (isset($themeCategories) && in_array($id, $themeCategories)); ?>
-                                            <div class="form-check d-flex align-items-center mb-4 mb-lg-2" id="sectionsLink">
-                                                <input class="form-check-input" type="checkbox" name="sectionsLink[]" value="<?= $id ?>" id="<?= $sectionTitle ?>" required <?= $isChecked ? 'checked' : '' ?>>
-                                                <label class="form-check-label ms-3" for="<?= $sectionTitle ?>">{<?= $id ?>} <?= $sectionTitle ?></label>
-                                            </div> <?php 
+                                    <?php
+                                    $count = 1;
+                                    $sectionsTitles = explode('|', $section->sections_titles);
+                                    $sectionsId = explode('|', $section->id_sections);
+                                    foreach (array_combine($sectionsId, $sectionsTitles) as $id => $sectionTitle) {
+                                        $isChecked = (isset($themeCategories) && in_array($id, $themeCategories)); ?>
+                                        <div class="form-check d-flex align-items-center mb-4 mb-lg-2" id="sectionsLink">
+                                            <input class="form-check-input" type="checkbox" name="sectionsLink[]" value="<?= $id ?>" id="<?= $sectionTitle ?>" required <?= $isChecked ? 'checked' : '' ?>>
+                                            <label class="form-check-label ms-3" for="<?= $sectionTitle ?>">{<?= $id ?>} <?= $sectionTitle ?></label>
+                                        </div> <?php
                                             } ?>
                                 </div> <?php } ?>
+
+                            <!-- CHOIX DE LA SECTION LIE -->
+                            <div class="d-flex flex-wrap justify-content-around" id="sectionsLink">
+                                <!-- SECTIONS -->
+
+                            </div>
+                            <small class="text-danger fst-italic mt-2"><?= $errors['section'] ?? '' ?></small>
                         </div>
                         <small class="text-danger fst-italic mt-2"><?= $errors['section'] ?? '' ?></small>
 

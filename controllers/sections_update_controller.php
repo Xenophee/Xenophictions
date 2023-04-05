@@ -26,6 +26,7 @@ try {
 
     // RECUPERATION DE L'IDENTIFIANT DE SECTION ET UTILISATION DE LA METHODE DE RECUPERATION DES INFOS
     $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+    $idStory = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
     $section = Section::get($id);
     var_dump($section);
 

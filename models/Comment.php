@@ -2,7 +2,8 @@
 
 require_once(__DIR__ . '/../helpers/Database.php');
 
-class Comment {
+class Comment
+{
 
     private int $id_comments;
     private string $comment;
@@ -19,7 +20,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setId_comments (int $value):void {
+    public function setId_comments(int $value): void
+    {
         $this->id_comments  = $value;
     }
 
@@ -27,8 +29,9 @@ class Comment {
      * Permet de récupérer l'id du commentaire
      * @return int
      */
-    public function getId_comments  ():int {
-        return $this->id_comments ;
+    public function getId_comments(): int
+    {
+        return $this->id_comments;
     }
 
     /**
@@ -37,7 +40,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setComment (string $value):void {
+    public function setComment(string $value): void
+    {
         $this->comment = $value;
     }
 
@@ -45,7 +49,8 @@ class Comment {
      * Permet de récupérer le contenu du commentaire
      * @return int
      */
-    public function getComment ():string {
+    public function getComment(): string
+    {
         return $this->comment;
     }
 
@@ -55,7 +60,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setSent_at (string $value):void {
+    public function setSent_at(string $value): void
+    {
         $this->sent_at = $value;
     }
 
@@ -63,7 +69,8 @@ class Comment {
      * Permet de récupérer la date d'envoi du commentaire
      * @return string
      */
-    public function getSent_at ():string {
+    public function getSent_at(): string
+    {
         return $this->sent_at;
     }
 
@@ -73,7 +80,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setPublished_at (string $value):void {
+    public function setPublished_at(string $value): void
+    {
         $this->published_at = $value;
     }
 
@@ -81,7 +89,8 @@ class Comment {
      * Permet de récupérer la date de mise à jour du commentaire
      * @return string
      */
-    public function getPublished_at ():string {
+    public function getPublished_at(): string
+    {
         return $this->published_at;
     }
 
@@ -91,7 +100,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setUpdated_at (string $value):void {
+    public function setUpdated_at(string $value): void
+    {
         $this->updated_at = $value;
     }
 
@@ -99,7 +109,8 @@ class Comment {
      * Permet de récupérer la date de mise à jour du commentaire
      * @return string
      */
-    public function getUpdated_at ():string {
+    public function getUpdated_at(): string
+    {
         return $this->updated_at;
     }
 
@@ -109,7 +120,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setDeleted_at (string $value):void {
+    public function setDeleted_at(string $value): void
+    {
         $this->deleted_at = $value;
     }
 
@@ -117,7 +129,8 @@ class Comment {
      * Permet de récupérer la date de suppression du commentaire
      * @return string
      */
-    public function getDeleted_at ():string {
+    public function getDeleted_at(): string
+    {
         return $this->deleted_at;
     }
 
@@ -127,7 +140,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setId_users (int $value):void {
+    public function setId_users(int $value): void
+    {
         $this->id_users  = $value;
     }
 
@@ -135,8 +149,9 @@ class Comment {
      * Permet de récupérer l'id de l'utilisateur auquel le commentaire est rattaché
      * @return int
      */
-    public function getId_users ():int {
-        return $this->id_users ;
+    public function getId_users(): int
+    {
+        return $this->id_users;
     }
     /**
      * Permet de définir l'id de l'histoire auquel le commentaire est rattaché
@@ -144,7 +159,8 @@ class Comment {
      * 
      * @return void
      */
-    public function setId_stories (int $value):void {
+    public function setId_stories(int $value): void
+    {
         $this->id_stories  = $value;
     }
 
@@ -152,15 +168,28 @@ class Comment {
      * Permet de récupérer l'id de l'histoire auquel le commentaire est rattaché
      * @return int
      */
-    public function getId_stories ():int {
-        return $this->id_stories ;
+    public function getId_stories(): int
+    {
+        return $this->id_stories;
     }
 
-    public static function getAll():array {
+    public static function getAll(int $id = null): array
+    {
         $pdo = Database::getInstance();
         $sql = 'SELECT `comments`.*, `users`.`username` FROM `comments`
-        JOIN `users` ON `users`.`id_users` = `comments`.`id_users`;';
+        JOIN `users` ON `users`.`id_users` = `comments`.`id_users`';
+
+        if (!is_null($id)) {
+            $sql .= 'WHERE `comments`.`id_stories` = :id_stories';
+        }
+
+        $sql .= ';';
+
         $sth = $pdo->prepare($sql);
+
+        if (!is_null($id)) {
+            $sth->bindValue(':id_stories', $id, PDO::PARAM_INT);
+        }
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
@@ -182,7 +211,7 @@ class Comment {
 
         return $sth->execute();
     }
-    
+
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();

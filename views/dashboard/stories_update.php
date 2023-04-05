@@ -21,18 +21,30 @@
                         </div>
                     <?php } ?>
 
-                    <form class="formStories" method="POST" novalidate>
+                    <form class="formStories" method="POST" enctype="multipart/form-data" novalidate>
+
+                        <!-- IMAGE DE L'HISTOIRE -->
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="../public/assets/img/livresLandscape.jpg" class="coverLandscape img-fluid" alt="Image de couverture">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn">
+                                <label class="form-label m-1" for="cover">Image de couverture :</label>
+                                <input type="file" class="form-control d-none" id="cover" name="cover" accept="image/jpeg" required>
+                            </div>
+                        </div>
+
                         <!-- TITRE DE L'OEUVRE -->
                         <div class="d-flex flex-column align-items-center my-5">
                             <label for="title" class="form-label mb-2">Titre de l'oeuvre * :</label>
-                            <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($story->title) ?>" required>
+                            <input type="text" class="form-control" id="title" name="title" value="<?= $story->title ?>" required>
                             <small class="text-danger fst-italic mt-2"><?= $errors['title'] ?? '' ?></small>
                         </div>
 
                         <!-- AUTEUR -->
                         <div class="d-flex flex-column align-items-center my-5">
                             <label for="author" class="form-label mb-2">Auteur :</label>
-                            <input type="text" class="form-control" id="author" name="author" value="<?= htmlentities($story->author) ?>">
+                            <input type="text" class="form-control" id="author" name="author" value="<?= $story->author ?>">
                             <small class="text-danger fst-italic mt-2"><?= $errors['author'] ?? '' ?></small>
                         </div>
 
@@ -82,7 +94,7 @@
                         <!-- SYNOPSIS -->
                         <div class="mb-3">
                             <label for="synopsis" class="form-label d-flex justify-content-center">Synopsis * :</label>
-                            <textarea class="form-control" id="synopsis" name="synopsis" required><?= htmlentities($story->synopsis) ?></textarea>
+                            <textarea class="form-control" id="synopsis" name="synopsis" required><?= $story->synopsis ?></textarea>
                             <small class="text-danger fst-italic mt-2"><?= $errors['synopsis'] ?? '' ?></small>
                         </div>
 
@@ -137,7 +149,7 @@
                                         <td><?= $chapter->id_sections_parent ?></td>
                                         <td><?= $chapter->id_sections_child ?></td>
                                         <td class="d-flex justify-content-end">
-                                            <a href="../../controllers/sections_update_controller.php?id=<?= $id ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
+                                            <a href="../../controllers/sections_update_controller.php?id=<?= $id ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
                                                 <i class="bi bi-pen"></i>
                                             </a>
                                             <!-- Bouton supprimer -->

@@ -19,7 +19,19 @@
                         </div>
                     <?php } ?>
 
-                    <form class="formStories" method="POST" novalidate>
+                    <form class="formStories" method="POST" enctype="multipart/form-data" novalidate>
+
+                        <!-- IMAGE DE L'HISTOIRE -->
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="../public/assets/img/livresLandscape.jpg" class="coverLandscape img-fluid" alt="Image de couverture">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn">
+                                <label class="form-label m-1" for="cover">Image de couverture :</label>
+                                <input type="file" class="form-control d-none" id="cover" name="cover" accept="image/jpeg" required>
+                            </div>
+                        </div>
+
                         <!-- TITRE DE L'OEUVRE -->
                         <div class="d-flex flex-column align-items-center my-5">
                             <label for="title" class="form-label mb-2">Titre de l'oeuvre * :</label>
@@ -73,7 +85,7 @@
                                             </div> <?php }
                                             } ?>
                                 </div> <?php } ?>
-                                <small class="text-danger fst-italic mt-2"><?= $errors['themeCategories'] ?? '' ?></small>
+                            <small class="text-danger fst-italic mt-2"><?= $errors['themeCategories'] ?? '' ?></small>
                         </div>
 
                         <!-- SYNOPSIS -->

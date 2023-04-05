@@ -49,6 +49,9 @@ try {
     // RECUPERATION DES CHAPITRES POUR LE SOMMAIRE
     $chapters = Chapter::getAll($id);
 
+    // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
+    $comments = Comment::getAll($id);
+    var_dump($comments);
 
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;

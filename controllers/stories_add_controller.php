@@ -75,6 +75,29 @@ try {
                 $storyCategoryAdd->setIdCategories($themeCategory);
                 $isAddLink[] = $storyCategoryAdd->add();
             }
+
+            if (isset($_FILES['cover'])) {
+                $cover = $_FILES['cover'];
+                if (!empty($cover['tmp_name'])) {
+                    if ($cover['error'] == 4) {
+                        $error['cover'] = 'Image obligatoire';
+                    } else if ($cover['error'] > 0) {
+                        $error['cover'] = 'Erreur survenue durant le transfert du fichier';
+                    } else {
+                        if (!in_array($cover['type'], AUTHORIZED_IMAGE_FORMAT)) {
+                            $error['cover'] = 'Ce type de fichier n\'est pas accepté';
+                        } else if ($_FILES['cover']['size'] > MAX_FILE_SIZE) {
+                            $error['cover'] = 'Poids de l\'image trop élevé';
+                        } else {
+                            $extension = pathinfo($cover['name'], PATHINFO_EXTENSION);
+                            $from = $cover['tmp_name'];
+                            $fileName = $idStory . '.' . $extension;
+                            $to = LOCATION_STORIES . $fileName;
+                            move_uploaded_file($from, $to);
+                        }
+                    }
+                }
+            }
             
             if ($isAdd === true && !in_array(false, $isAddLink, true)) {
                 $pdo->commit();

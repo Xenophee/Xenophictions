@@ -6,7 +6,7 @@
                     <div class="col-12 col-lg-10 col-xl-4 coverSection py-5 px-5">
                         <!-- IMAGE DE COUVERTURE -->
                         <div class="d-flex justify-content-center coverCard mb-5">
-                            <img src="../public/assets/img/coverImgPortrait/01.jpg" class="coverImg img-fluid" alt="">
+                            <img src="../public/uploads/stories/<?= $id ?>.jpg" class="coverImg img-fluid" alt="">
                             <div class="d-flex justify-content-center align-items-center note"><?= $note ?>/10</div>
                         </div>
 
@@ -111,10 +111,18 @@
                     </div>
                 </div>
 
-
                 <!-- SECTION COMMENTAIRES -->
                 <div class="row justify-content-center d-none" id="comments">
                     <div class="col-11 col-lg-10 col-xl-7">
+
+                    <?php if (Flash::isExist()) { ?>
+                        <div class="alert alert-dismissible fade show w-100 mt-5" role="alert">
+                            <strong><?php echo Flash::getMessage();
+                                    ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php } ?>
+                    
                         <div class="comment py-4 px-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../../public/assets/img/others/avatar2.jpg" class="avatar mb-3 mb-md-0 me-md-3" alt="">
@@ -138,26 +146,28 @@
                             </form>
                         </div>
 
+                        <?php foreach($comments as $comment) {
+                            if(!is_null($comment->published_at)) { ?>
                         <hr>
                         <div class="comment py-4 px-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../../public/assets/img/others/avatar2.jpg" class="avatar mb-3 mb-md-0 me-md-3" alt="">
-                                    <div>Par <span>nom d'utilisateur</span></div>
+                                    <div>Par <span><?= $comment->username ?></span></div>
                                 </div>
-                                <small class="mt-3 mt-md-0">14/05/2023</small>
+                                <small class="mt-3 mt-md-0"><?= date('d/m/Y à H:i', strtotime($comment->published_at)) ?></small>
                             </div>
                             <form action="">
                                 <div class="commentary px-3 py-3">
-                                    <p class="commentContent">J'ai regardé ton code source et il pue la merde !</p>
+                                    <p class="commentContent"><?= $comment->comment ?></p>
                                 </div>
 
                                 <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
                                     <button type="reset" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
                                         class="bi bi-dash-circle me-3"></i>Supprimer</button>
-                                    <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button>
+                                    <!-- <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button> -->
                                 </div>
                             </form>
-                        </div>
+                        </div> <?php } } ?>
 
                     </div>
                 </div>

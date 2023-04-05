@@ -20,8 +20,14 @@ try {
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
 
-    $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
-
+    $idStory = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+    
+    // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
+    
+    $story = Story::get($idStory);
+    $chapters = Section::getAll($idStory);
+    var_dump($chapters);
+    $themesCategories = Theme_Category::getAll();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -73,17 +79,40 @@ try {
                 $addStory->setType($type);
                 $addStory->setSynopsis($synopsis);
 
-                $isAdd = $addStory->update($id);
+                $isAdd = $addStory->update($idStory);
 
                 $idStory = $pdo->lastInsertId();
 
-                if (Story_Category::delete($id)) {
+                if (Story_Category::delete($idStory)) {
 
                     foreach ($themeCategories as $themeCategory) {
                         $storyCategoryAdd = new Story_Category;
-                        $storyCategoryAdd->setIdStories($id);
+                        $storyCategoryAdd->setIdStories($idStory);
                         $storyCategoryAdd->setIdCategories($themeCategory);
                         $isAddLink[] = $storyCategoryAdd->add();
+                    }
+
+                    if (isset($_FILES['cover'])) {
+                        $cover = $_FILES['cover'];
+                        if (!empty($cover['tmp_name'])) {
+                            if ($cover['error'] == 4) {
+                                $error['cover'] = 'Image obligatoire';
+                            } else if ($cover['error'] > 0) {
+                                $error['cover'] = 'Erreur survenue durant le transfert du fichier';
+                            } else {
+                                if (!in_array($cover['type'], AUTHORIZED_IMAGE_FORMAT)) {
+                                    $error['cover'] = 'Ce type de fichier n\'est pas accepté';
+                                } else if ($_FILES['cover']['size'] > MAX_FILE_SIZE) {
+                                    $error['cover'] = 'Poids de l\'image trop élevé';
+                                } else {
+                                    $extension = pathinfo($cover['name'], PATHINFO_EXTENSION);
+                                    $from = $cover['tmp_name'];
+                                    $fileName = $idStory . '.' . $extension;
+                                    $to = LOCATION_STORIES . $fileName;
+                                    move_uploaded_file($from, $to);
+                                }
+                            }
+                        }
                     }
 
                     if ($isAdd === true && !in_array(false, $isAddLink, true)) {
@@ -127,11 +156,7 @@ try {
         }
     }
 
-    // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
-    $themesCategories = Theme_Category::getAll();
-    $story = Story::get($id);
-    $chapters = Section::getAll($id);
-    var_dump($chapters);
+    
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

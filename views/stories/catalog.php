@@ -37,7 +37,7 @@
                     <article class="d-flex mx-auto">
                         <div class="row story align-items-center align-items-lg-stretch mb-5 g-0">
                             <div class="col-12 col-lg-5 col-xl-4 coverCard">
-                                <img src="../public/assets/img/originImg/01.jpg" class="img-fluid coverImg" alt="...">
+                                <img src="../public/uploads/stories/<?= $story->id_stories ?>.jpg" class="img-fluid coverImg" alt="...">
                                 <div class="d-flex justify-content-center align-items-center note"><?php
                                                                                                     if (!is_null($story->note)) {
                                                                                                         // Arrondir le nombre à un chiffre après la virgule

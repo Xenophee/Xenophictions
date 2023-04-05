@@ -33,8 +33,8 @@
                                 </div>
 
                                 <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
-                                    <button type="reset" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i class="bi bi-dash-circle me-3"></i>Supprimer</button>
-                                    <a href="../../controllers/publication_controller.php?id=<?= $comment->id_comments ?>&publish=2" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Valider</a>
+                                    <a href="../../controllers/delete_controller.php?id=<?= $comment->id_comments ?>&delete=2" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i class="bi bi-dash-circle me-3"></i>Supprimer</a>
+                                    <a href="../../controllers/publication_controller.php?id=<?= $comment->id_comments ?>&publish=2" class="btn ok" id="send"><i class="bi bi-check2-circle me-3"></i>Valider</a>
                                 </div>
                             </div> <?php }
                             } ?>

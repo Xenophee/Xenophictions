@@ -15,7 +15,8 @@ define('REGEX_DATE',"^\d{4}-\d{2}-\d{1,2}$");
 
 define('AUTHORIZED_IMAGE_FORMAT', ['image/jpeg', 'image/png']);
 define('MAX_FILE_SIZE', 5*1024*1024);
-define('LOCATION_USERS', $_SERVER['DOCUMENT_ROOT'] . '/public/uploads/users');
+define('LOCATION_USERS', $_SERVER['DOCUMENT_ROOT'] . '/public/uploads/users/');
+define('LOCATION_STORIES', $_SERVER['DOCUMENT_ROOT'] . '/public/uploads/stories/');
 // 5 Mo
 
 
