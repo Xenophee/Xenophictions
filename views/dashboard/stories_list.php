@@ -83,7 +83,7 @@
                                 <td><?= date('d/m/Y à H:i', strtotime($story->published_at)) ?></td>
                                 <td><?= $story->theme_name ?></td>
                                 <td class="d-flex justify-content-end">
-                                    <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn view py-2 px-4 me-3" title="Consulter les détails"><i class="bi bi-eye"></i></a>
+                                    <!-- <a href="../../controllers/stories_update_controller.php?id=" class="btn view py-2 px-4 me-3" title="Consulter les détails"><i class="bi bi-eye"></i></a> -->
                                     <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn edit py-2 px-4 me-3" title="Editer l'histoire"><i class="bi bi-pen"></i></a>
                                     <a href="" class="btn delete py-2 px-4" title="Supprimer l'histoire" data-id="<?= $story->id_stories ?>" data-deleteparam="4" data-bs-toggle="modal" data-bs-target="#deleteStory"><i class="bi bi-trash3" data-id="<?= $story->id_stories ?>" data-deleteparam="4"></i></a>
                                 </td>

@@ -27,7 +27,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="btn">
-                                <label class="form-label m-1" for="cover">Image de couverture :</label>
+                                <label class="form-label m-1" for="cover">Image de couverture</label>
                                 <input type="file" class="form-control d-none" id="cover" name="cover" accept="image/jpeg" required>
                             </div>
                         </div>
