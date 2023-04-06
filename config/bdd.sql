@@ -57,11 +57,10 @@ CREATE TABLE `comments`(
    `published_at` DATETIME,
    `updated_at` DATETIME,
    `deleted_at` DATETIME,
-   `id_users` INT NOT NULL,
+   `id_users` INT,
    `id_stories` INT NOT NULL,
    PRIMARY KEY(`id_comments`),
-   -- CONSTRAINT `fk_comments_users` FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`) ON DELETE SET NULL,
-   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`),
+   CONSTRAINT `fk_comments_users` FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`) ON DELETE SET NULL,
    CONSTRAINT `fk_comments_stories` FOREIGN KEY(`id_stories`) REFERENCES `stories`(`id_stories`) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
@@ -71,11 +70,10 @@ CREATE TABLE `notes`(
    `noted_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
    `updated_at` DATETIME,
    `deleted_at` DATETIME,
-   `id_users` INT NOT NULL,
+   `id_users` INT,
    `id_stories` INT NOT NULL,
    PRIMARY KEY(`id_notes`),
-   -- CONSTRAINT `fk_notes_users` FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`) ON DELETE SET NULL,
-   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`),
+   CONSTRAINT `fk_notes_users` FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`) ON DELETE SET NULL,
    CONSTRAINT `fk_notes_stories` FOREIGN KEY(`id_stories`) REFERENCES `stories`(`id_stories`) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
@@ -121,6 +119,9 @@ CREATE TABLE `users_sections`(
    FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`),
    FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`)
 )ENGINE=InnoDB;
+
+
+
 
 -- CREATE TABLE `themes_categories`(
 --    `id_themes` INT,

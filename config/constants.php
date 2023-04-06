@@ -35,6 +35,7 @@ define('CSS', [
 // REPERTOIRE DES FICHIERS JS
 define('JS', [
     'data' => '../../public/assets/js/data.js',
+    'summary' => '../../public/assets/js/summary.js',
     'script' => '../../public/assets/js/script.js'
 ]);
 

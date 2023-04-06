@@ -4,6 +4,19 @@ require_once(__DIR__ . '/../config/init.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else {
+        $user = $_SESSION['user'];
+    }
+
+    // EXPULSION DES NON INSCRITS
+    if (empty($user)) {
+        header('location: /404.php');
+        die;
+    }
+
     // FICHIER CSS A CHARGER
     $css = CSS['account'];
     $css3 = CSS['form'];

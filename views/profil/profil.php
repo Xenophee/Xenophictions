@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center my-5">
-                            <button type="submit" class="btn btn-outline px-5 py-2"><i class="bi bi-x-octagon me-3"></i>Fermer le compte</button>
+                            <button type="button" class="btn btn-outline px-5 py-2" data-bs-toggle="modal" data-bs-target="#deleteUser"><i class="bi bi-x-octagon me-3"></i>Fermer le compte</button>
                         </div>
                     </form>
                 </section>
@@ -96,3 +96,24 @@
         </div>
     </div>
 </main>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserFromBase" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteUserFromBase">Suppression du compte</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes vous certain de vouloir supprimer votre compte ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
+                <button type="button" class="btn py-2 px-4"><a href="../../controllers/delete_controller.php?id=<?= $user->id_users ?>&delete=1" class="link-light" id="deleteLink">Valider</a></button>
+            </div>
+        </div>
+    </div>
+</div>

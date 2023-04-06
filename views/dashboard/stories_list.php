@@ -113,8 +113,8 @@
                 <p>Êtes vous certain de vouloir supprimer cette histoire ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn"><a class="link-light" id="deleteLink">Valider</a></button>
+                <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
+                <button type="button" class="btn py-2 px-4"><a class="link-light" id="deleteLink">Valider</a></button>
             </div>
         </div>
     </div>

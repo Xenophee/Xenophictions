@@ -96,9 +96,9 @@
                                                 <td class="d-flex justify-content-end">
                                                     <button type="submit" class="btn edit py-2 px-4 me-3" title="Editer la catégorie"><i class="bi bi-pen"></i></button>
                                                     <!-- Bouton supprimer -->
-                                                    <a href="" class="btn delete py-2 px-4" title="Supprimer la catégorie" data-id="<?= $id ?>" data-deleteparam="2" data-bs-toggle="modal" data-bs-target="#deleteThemeCategory">
+                                                    <button type="button" class="btn delete py-2 px-4" title="Supprimer la catégorie" data-id="<?= $id ?>" data-deleteparam="2" data-bs-toggle="modal" data-bs-target="#deleteThemeCategory">
                                                         <i class="bi bi-trash3" data-id="<?= $id ?>" data-deleteparam="2"></i>
-                                                    </a>
+                                                    </button>
                                                 </td>
                                             </form>
                                         </tr> <?php }

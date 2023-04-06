@@ -43,16 +43,16 @@
                                     <th scope="row"><?= $key + 1 ?></th>
                                     <td><?= $user->username ?></td>
                                     <td><a href="mailto:<?= $user->email ?>"><?= $user->email ?></a></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($user->registered_at)) ?></td>
+                                    <td><?= date('d/m/Y à H:i', strtotime($user->registered_at)) ?></td>
                                     <td><?php echo (!is_null($user->validated_at)) ? 'Oui' : 'Non'; ?></td>
                                     <td><?php echo ($user->newsletter) ? 'Oui' : 'Non'; ?></td>
                                     <td class="d-flex justify-content-end">
                                         <a href="../../controllers/user_informations_controller.php?id=<?= $user->id_users ?>" class="btn view py-2 px-4 me-3" title="Consulter le profil"><i class="bi bi-eye"></i></a>
                                         <!-- <a href="" class="btn edit py-2 px-4 me-3" title="Editer le profil"><i class="bi bi-pen"></i></a> -->
                                         <!-- Bouton supprimer -->
-                                        <a href="" class="btn delete py-2 px-4" title="Supprimer l'utilisateur" data-id="<?= $user->id_users ?>" data-deleteparam="1" data-bs-toggle="modal" data-bs-target="#deleteUser">
+                                        <button type="button" class="btn delete py-2 px-4" title="Supprimer l'utilisateur" data-id="<?= $user->id_users ?>" data-deleteparam="1" data-bs-toggle="modal" data-bs-target="#deleteUser">
                                             <i class="bi bi-person-dash" data-id="<?= $user->id_users ?>" data-deleteparam="1"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr> <?php } ?>
                         </tbody>
@@ -83,8 +83,8 @@
                 <p>Êtes vous certain de vouloir supprimer cet utilisateur ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn"><a class="link-light" id="deleteLink">Valider</a></button>
+                <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
+                <button type="button" class="btn py-2 px-4"><a class="link-light" id="deleteLink">Valider</a></button>
             </div>
         </div>
     </div>

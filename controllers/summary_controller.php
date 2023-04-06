@@ -10,10 +10,13 @@ try {
     // FICHIER CSS A CHARGER
     $css = CSS['summary'];
 
+    // FICHIER CSS A CHARGER
+    $js = JS['summary'];
+
     // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
     if (isset($_COOKIE['userSession'])) {
         $user = unserialize($_COOKIE['userSession']);
-    } else {
+    } else if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
     }
 
@@ -51,7 +54,7 @@ try {
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
     $comments = Comment::getAll($id);
-    var_dump($comments);
+    // var_dump($comments);
 
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;

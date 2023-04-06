@@ -123,6 +123,7 @@
                         </div>
                     <?php } ?>
                     
+                    <?php if (!empty($user)) { ?>
                         <div class="comment py-4 px-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../../public/assets/img/others/avatar2.jpg" class="avatar mb-3 mb-md-0 me-md-3" alt="">
@@ -144,15 +145,16 @@
                                             class="bi bi-arrow-right-circle me-3"></i>Envoyer</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> <?php } ?>
 
                         <?php foreach($comments as $comment) {
-                            if(!is_null($comment->published_at)) { ?>
+                            if(!is_null($comment->published_at)) {
+                                $username = (!is_null($comment->username)) ? $comment->username : 'un Gobelin'; ?>
                         <hr>
                         <div class="comment py-4 px-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../../public/assets/img/others/avatar2.jpg" class="avatar mb-3 mb-md-0 me-md-3" alt="">
-                                    <div>Par <span><?= $comment->username ?></span></div>
+                                    <div>Par <span><?= $username ?></span></div>
                                 </div>
                                 <small class="mt-3 mt-md-0"><?= date('d/m/Y à H:i', strtotime($comment->published_at)) ?></small>
                             </div>
@@ -162,8 +164,8 @@
                                 </div>
 
                                 <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
-                                    <button type="reset" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
-                                        class="bi bi-dash-circle me-3"></i>Supprimer</button>
+                                    <!-- <button type="reset" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
+                                        class="bi bi-dash-circle me-3"></i>Supprimer</button> -->
                                     <!-- <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button> -->
                                 </div>
                             </form>

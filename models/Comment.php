@@ -177,7 +177,7 @@ class Comment
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `comments`.*, `users`.`username` FROM `comments`
-        JOIN `users` ON `users`.`id_users` = `comments`.`id_users`';
+        LEFT JOIN `users` ON `users`.`id_users` = `comments`.`id_users`';
 
         if (!is_null($id)) {
             $sql .= 'WHERE `comments`.`id_stories` = :id_stories';

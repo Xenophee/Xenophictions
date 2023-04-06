@@ -327,6 +327,20 @@ class Story
         }
     }
 
+    public static function deleteAll(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `categories` WHERE `id_categories` IN (
+            SELECT `id_categories` FROM `themes_categories` WHERE `id_themes` = :id)';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
+
     public static function count(): int
     {
         $sql = 'SELECT COUNT(`id_stories`) as `storiesNb` FROM `stories`';

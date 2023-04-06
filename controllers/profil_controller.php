@@ -5,16 +5,22 @@ require_once(__DIR__ . '/../models/User.php');
 
 try {
 
-    // FEUILLE CSS A CHARGER
-    $css = CSS['account'];
-    $css2 = CSS['form'];
-
     // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
     if (isset($_COOKIE['userSession'])) {
         $user = unserialize($_COOKIE['userSession']);
     } else {
         $user = $_SESSION['user'];
     }
+
+    // EXPULSION DES NON INSCRITS
+    if (empty($user)) {
+        header('location: /404.php');
+        die;
+    }
+
+    // FEUILLE CSS A CHARGER
+    $css = CSS['account'];
+    $css2 = CSS['form'];
 
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -5,6 +5,8 @@ require_once(__DIR__ . '/../models/User.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Theme.php');
 require_once(__DIR__ . '/../models/Story.php');
+require_once(__DIR__ . '/../models/Chapter.php');
+require_once(__DIR__ . '/../models/Section.php');
 require_once(__DIR__ . '/../models/Note.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
@@ -53,8 +55,8 @@ try {
             break;
         case '4':
             // SUPPRESSION D'UNE HISTOIRE
-            $isDeletedFirst = Theme::deleteAll($id);
-            $isDeletedSecond = Theme::delete($id);
+            // $isDeletedFirst = Theme::deleteAll($id);
+            $isDeletedSecond = Story::delete($id);
             if ($isDeletedSecond) {
                 Flash::setMessage(CODE[6]);
             } else {
@@ -66,6 +68,7 @@ try {
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');
