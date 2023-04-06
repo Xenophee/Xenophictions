@@ -111,15 +111,24 @@ CREATE TABLE `characters`(
    PRIMARY KEY(`id_characters`)
 )ENGINE=InnoDB;
 
-CREATE TABLE `users_sections`(
-   `id_users` INT,
-   `id_sections` INT,
-   `read_at` DATETIME,
-   PRIMARY KEY(`id_users`, `id_sections`),
-   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`),
-   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`)
-)ENGINE=InnoDB;
+-- CREATE TABLE `users_sections`(
+--    `id_users` INT,
+--    `id_sections` INT,
+--    `read_at` DATETIME,
+--    PRIMARY KEY(`id_users`, `id_sections`),
+--    FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`),
+--    FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`)
+-- )ENGINE=InnoDB;
 
+CREATE TABLE `saves`(
+   `id_sections` INT,
+   `id_users` INT,
+   `id_saves` INT AUTO_INCREMENT,
+   `read_at` DATETIME,
+   PRIMARY KEY(`id_saves`),
+   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`),
+   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`)
+)ENGINE=InnoDB;
 
 
 

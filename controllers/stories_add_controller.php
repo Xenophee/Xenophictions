@@ -7,8 +7,15 @@ require_once(__DIR__ . '/../models/Theme_Category.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+
     // EXPULSION DES UTILISATEURS NON ADMIN
-    if ($_SESSION['user']->admin == false) {
+    if ($user->admin == false) {
         header('location: /404.php');
         die;
     }
@@ -17,6 +24,9 @@ try {
     $css = CSS['account'];
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
+
+    // FICHIER CSS A CHARGER
+    $js = JS['form'];
 
     // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
     $themesCategories = Theme_Category::getAll();

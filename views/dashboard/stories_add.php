@@ -76,7 +76,6 @@
                                         $count = 1;
                                         $categories = explode(',', $themeCategory->categories_names);
                                         $categoriesId = explode(',', $themeCategory->id_categories);
-                                        array_multisort($categories, SORT_ASC, $categoriesId);
                                         foreach (array_combine($categoriesId, $categories) as $id => $category) {
                                             $isChecked = (isset($themeCategories) && in_array($id, $themeCategories)); ?>
                                             <div class="form-check d-flex align-items-center mb-4 mb-lg-2">

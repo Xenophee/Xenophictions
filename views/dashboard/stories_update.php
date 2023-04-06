@@ -25,7 +25,7 @@
 
                         <!-- IMAGE DE L'HISTOIRE -->
                         <div class="d-flex justify-content-center mb-4">
-                            <img src="../public/assets/img/livresLandscape.jpg" class="coverLandscape img-fluid" alt="Image de couverture">
+                            <img src="../public/uploads/stories/<?= $story->id_stories ?>.jpg" class="coverLandscape img-fluid" alt="Image de couverture">
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="btn">
@@ -78,7 +78,6 @@
                                         $count = 1;
                                         $categories = explode(',', $themeCategory->categories_names);
                                         $categoriesId = explode(',', $themeCategory->id_categories);
-                                        array_multisort($categories, SORT_ASC, $categoriesId);
                                         $storyCategories = explode(',', $story->categories);
                                         foreach (array_combine($categoriesId, $categories) as $id => $category) {
                                             $isChecked = (in_array($category, $storyCategories)) ? 'checked' : ''; ?>
@@ -106,7 +105,9 @@
 
 
                     <!-- TABLEAU QUI AFFICHE TOUS LES CHAPITRES ET LEURS SECTIONS -->
-                    <?php foreach ($chapters as $key => $chapter) { ?>
+                    
+                    <?php var_dump($chapters);
+                    foreach ($chapters as $key => $chapter) { ?>
                         <table class="table align-middle table-striped table-hover my-5">
                             <thead>
                                 <form method="POST">
@@ -136,9 +137,10 @@
                             <tbody class="table-group-divider">
                                 <?php
                                 $count = 1;
+                                
                                 $sections = explode('|', $chapter->sections_titles);
                                 $sectionsId = explode('|', $chapter->id_sections);
-                                array_multisort($sections, SORT_ASC, $sectionsId);
+                                var_dump($sections);
                                 foreach (array_combine($sectionsId, $sections) as $id => $section) { ?>
                                     <tr>
                                         <th scope="row"><?= $count++ ?></th>

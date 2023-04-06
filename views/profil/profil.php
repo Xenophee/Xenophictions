@@ -112,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
-                <button type="button" class="btn py-2 px-4"><a href="../../controllers/delete_controller.php?id=<?= $user->id_users ?>&delete=1" class="link-light" id="deleteLink">Valider</a></button>
+                <button type="button" class="btn py-2 px-4"><a href="../../controllers/delete_user_controller.php?id=<?= $user->id_users ?>&delete=1" class="link-light" id="deleteLink">Valider</a></button>
             </div>
         </div>
     </div>

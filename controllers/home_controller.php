@@ -5,6 +5,13 @@ require_once(__DIR__ . '/../config/init.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+
     // FICHIER CSS A CHARGER
     $css = CSS['home'];
 

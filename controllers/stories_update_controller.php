@@ -9,8 +9,15 @@ require_once(__DIR__ . '/../models/Story_Category.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+
     // EXPULSION DES UTILISATEURS NON ADMIN
-    if ($_SESSION['user']->admin == false) {
+    if ($user->admin == false) {
         header('location: /404.php');
         die;
     }
@@ -20,14 +27,11 @@ try {
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
 
+    // FICHIER CSS A CHARGER
+    $js = JS['form'];
+
     $idStory = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
     
-    // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
-    
-    $story = Story::get($idStory);
-    $chapters = Section::getAll($idStory);
-    var_dump($chapters);
-    $themesCategories = Theme_Category::getAll();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -42,6 +46,8 @@ try {
         $chapterTitle = trim((string)filter_input(INPUT_POST, 'chapterTitle', FILTER_SANITIZE_SPECIAL_CHARS));
         $index = intval(filter_input(INPUT_POST, 'index', FILTER_SANITIZE_NUMBER_INT));
         $chapterId = intval(filter_input(INPUT_POST, 'chapterId', FILTER_SANITIZE_NUMBER_INT));
+
+        var_dump($themeCategories);
 
         if (isset($_POST['storyForm'])) {
 
@@ -80,10 +86,14 @@ try {
                 $addStory->setSynopsis($synopsis);
 
                 $isAdd = $addStory->update($idStory);
+                
 
-                $idStory = $pdo->lastInsertId();
+                // $idStory = $pdo->lastInsertId();
+                // var_dump($idStory);
 
                 if (Story_Category::delete($idStory)) {
+
+                    $isAddLink = [];
 
                     foreach ($themeCategories as $themeCategory) {
                         $storyCategoryAdd = new Story_Category;
@@ -92,12 +102,12 @@ try {
                         $isAddLink[] = $storyCategoryAdd->add();
                     }
 
+                    var_dump($isAddLink);
+
                     if (isset($_FILES['cover'])) {
                         $cover = $_FILES['cover'];
                         if (!empty($cover['tmp_name'])) {
-                            if ($cover['error'] == 4) {
-                                $error['cover'] = 'Image obligatoire';
-                            } else if ($cover['error'] > 0) {
+                            if ($cover['error'] > 0) {
                                 $error['cover'] = 'Erreur survenue durant le transfert du fichier';
                             } else {
                                 if (!in_array($cover['type'], AUTHORIZED_IMAGE_FORMAT)) {
@@ -155,6 +165,13 @@ try {
 
         }
     }
+
+    // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
+    
+    $story = Story::get($idStory);
+    var_dump($story);
+    $chapters = Section::getAll($idStory);
+    $themesCategories = Theme_Category::getAll();
 
     
 

@@ -5,8 +5,15 @@ require_once(__DIR__ . '/../models/Comment.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+
     // EXPULSION DES UTILISATEURS NON ADMIN
-    if ($_SESSION['user']->admin == false) {
+    if ($user->admin == false) {
         header('location: /404.php');
         die;
     }

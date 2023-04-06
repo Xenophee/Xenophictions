@@ -2,11 +2,6 @@
 
 require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/User.php');
-require_once(__DIR__ . '/../models/Category.php');
-require_once(__DIR__ . '/../models/Theme.php');
-require_once(__DIR__ . '/../models/Story.php');
-require_once(__DIR__ . '/../models/Chapter.php');
-require_once(__DIR__ . '/../models/Section.php');
 require_once(__DIR__ . '/../models/Note.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
@@ -21,8 +16,8 @@ try {
         $user = $_SESSION['user'];
     }
 
-    // EXPULSION DES UTILISATEURS NON ADMIN
-    if ($user->admin == false) {
+    // EXPULSION DES NON INSCRIT
+    if (empty($user)) {
         header('location: /404.php');
         die;
     }
@@ -34,15 +29,19 @@ try {
     switch ($delete) {
         case '1':
             // SUPPRESSION D'UN UTILISATEUR
-            $isDeleted = User::delete($id);
-            if ($isDeleted) {
-                Flash::setMessage(CODE[0]);
-            } else {
-                Flash::setMessage(CODE[1]);
+            if ($user->id_users == $id) {
+                $isDeleted = User::delete($id);
+                if ($isDeleted) {
+                    Flash::setMessage(CODE[0]);
+                } else {
+                    Flash::setMessage(CODE[1]);
+                }
+                header('location: /controllers/deconnection_controller.php');
+                die;
             }
             break;
         case '2':
-            // SUPPRESSION D'UNE CATEGORIE
+            // SUPPRESSION D'UNE COMMENTAIRE
             $isDeleted = Category::delete($id);
             if ($isDeleted) {
                 Flash::setMessage(CODE[2]);
@@ -51,7 +50,7 @@ try {
             }
             break;
         case '3':
-            // SUPPRESSION D'UN THEME ET DE SES CATEGORIES
+            // SUPPRESSION D'UNE NOTE
             $isDeletedFirst = Theme::deleteAll($id);
             $isDeletedSecond = Theme::delete($id);
             if ($isDeletedSecond) {
@@ -60,22 +59,12 @@ try {
                 Flash::setMessage(CODE[5]);
             }
             break;
-        case '4':
-            // SUPPRESSION D'UNE HISTOIRE
-            // $isDeletedFirst = Theme::deleteAll($id);
-            $isDeletedSecond = Story::delete($id);
-            if ($isDeletedSecond) {
-                Flash::setMessage(CODE[6]);
-            } else {
-                Flash::setMessage(CODE[7]);
-            }
-            break;
     }
 
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
-
+    
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

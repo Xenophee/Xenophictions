@@ -12,10 +12,10 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // RECUPERATION DES DONNEES ENVOYEES
-        $email = trim((string)filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS));
+        $email = trim((string)filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
         $password = filter_input(INPUT_POST, 'password');
         $stayConnect = intval(filter_input(INPUT_POST, 'stayConnect', FILTER_SANITIZE_NUMBER_INT));
-
+        
         // VERIFICATION DE L'EXISTENCE DU COMPTE
         if (!User::isEmailExist($email)) {
             $errors['email'] = 'Ce compte n\'existe pas';

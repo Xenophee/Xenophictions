@@ -288,7 +288,6 @@ class User
         $sth = $pdo->prepare($sql);
         $sth->execute([$email]);
         $result = $sth->fetchAll();
-
         return (!empty($result)) ? true : false;
     }
 

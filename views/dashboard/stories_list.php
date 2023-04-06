@@ -58,7 +58,7 @@
                     </table>
 
                     <div class="mt-5">
-                        <h2>Publié sur le site</h2>
+                        <h2>Publiées sur le site</h2>
                     </div>
 
                     <!-- LISTE DES HISTOIRES PUBLIEES -->
