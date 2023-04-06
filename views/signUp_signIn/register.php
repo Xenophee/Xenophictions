@@ -28,35 +28,36 @@
             <div class="row justify-content-center pb-5 mb-lg-5">
                 <div class="col-12 col-sm-11 col-md-9 col-lg-6 col-xxl-5">
                     <div class="blocForm shadow-lg">
-                        <form method="post" novalidate>
+                        <form method="post" id="userForm" novalidate>
                             <fieldset class="py-5 px-2 px-sm-5">
                                 <legend class="text-center mb-5">Créer un compte</legend>
-                                <small class="text-danger fst-italic mb-2"><?= $error['global'] ?? '' ?></small>
+                                <small class="text-danger fst-italic mb-2"><?= $errors['global'] ?? '' ?></small>
                                 <div class="mb-4">
                                     <label for="username" class="form-label">Nom d'utilisateur * :</label>
-                                    <input type="text" class="form-control" id="username" name="username" autocomplete="username" pattern="<?= REGEX_TEXT ?>" value="<?= htmlentities($username ?? '') ?>" required>
-                                    <small class="text-danger fst-italic mt-2"><?= $error['username'] ?? '' ?></small>
+                                    <input type="text" class="form-control" id="username" name="username" autocomplete="username" pattern="<?= REGEX_USER ?>" value="<?= htmlentities($username ?? '') ?>" required>
+                                    <small class="text-danger fst-italic mt-2"><?= $errors['username'] ?? '' ?></small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="email" class="form-label">Adresse mail * :</label>
-                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" autocomplete="email" value="<?= htmlentities($email ?? '') ?>" required>
-                                    <small class="text-danger fst-italic mt-2"><?= $error['email'] ?? '' ?></small>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                        autocomplete="email" value="<?= htmlentities($email ?? '') ?>" required>
+                                    <small class="text-danger fst-italic mt-2"><?= $errors['email'] ?? '' ?></small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="birthdate" class="form-label">Date de naissance * :</label>
                                     <input type="date" class="form-control" id="birthdate" name="birthdate" autocomplete="bday" value="<?= htmlentities($birthdate ?? '') ?>" required>
-                                    <small class="text-danger fst-italic mt-2"><?= $error['birthdate'] ?? '' ?></small>
+                                    <small class="text-danger fst-italic mt-2"><?= $errors['birthdate'] ?? '' ?></small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Mot de passe * :</label>
                                     <input type="password" class="form-control" id="password" name="password" value="<?= htmlentities($password ?? '') ?>" required>
-                                    <small class="text-danger fst-italic mt-2"><?= $error['password'] ?? '' ?></small>
+                                    <small class="text-danger fst-italic password mt-2"><?= $errors['password'] ?? '' ?></small>
                                 </div>
                                 <div class="mb-5">
                                     <label for="confirmPassword" class="form-label">Confirmer le mot de passe *
                                         :</label>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="<?= htmlentities($confirmPassword ?? '') ?>" required>
-                                    <small class="text-danger fst-italic mt-2"><?= $error['confirmPassword'] ?? '' ?></small>
+                                    <small class="text-danger fst-italic password mt-2"><?= $errors['confirmPassword'] ?? '' ?></small>
                                 </div>
 
                                 <div class="mb-4 form-check d-flex align-items-center">
@@ -64,13 +65,13 @@
                                     <label class="form-check-label ps-3" for="cguAcceptation">J'accepte les
                                         conditions générales
                                         d'utilisation *</label>
-                                    <small class="text-danger fst-italic mb-4 mb-lg-0"><?= $error['cgu'] ?? '' ?></small>
+                                    <small class="text-danger fst-italic mb-4 mb-lg-0"><?= $errors['cgu'] ?? '' ?></small>
                                 </div>
                                 <div class="mb-5 form-check d-flex align-items-center">
                                     <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter" value="1" id="newsletter" <?= (isset($newsletter) && $newsletter == 1) ? 'checked' : '' ?>>
                                     <label class="form-check-label ps-3" for="newsletter">Je m'inscris à la
                                         newsletter</label>
-                                    <small class="text-danger fst-italic mb-4 mb-lg-0"><?= $error['newsletter'] ?? '' ?></small>
+                                    <small class="text-danger fst-italic mb-4 mb-lg-0"><?= $errors['newsletter'] ?? '' ?></small>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn px-5 py-2"><i class="bi bi-person-vcard me-3"></i>Soumettre</button>

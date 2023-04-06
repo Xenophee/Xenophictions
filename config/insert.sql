@@ -201,3 +201,8 @@ INSERT INTO `stories_categories` (`id_stories`, `id_categories`)
 -- ASSOCIATION CATEGOIES / HISTOIRES
 INSERT INTO `stories_categories` (`id_stories`, `id_categories`) 
     VALUES (4,14), (4,16);
+
+
+-- C'est l'histoire d'un individu qui décide de prendre en main la lutte contre les criminels de la pensée en ligne. Ce héros anonyme utilise ses compétences informatiques en réseaux sociaux pour traquer les gens qui ne pensent pas comme lui et les exposer publiquement.
+
+-- Le justicier du net opère souvent en meute, avec la complaisance des autorités ou de tout autre groupe de soutien. Il est motivé par une forte conviction personnelle selon laquelle il est de sa responsabilité de protéger la société contre les prédateurs de la pensée unique.

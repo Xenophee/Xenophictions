@@ -256,23 +256,16 @@ class Story
     {
         $pdo = Database::getInstance();
 
-        if (is_null($this->author)) {
-            $sql = 'INSERT INTO `stories` (`title`, `type`, `synopsis`) 
-                VALUES (:title, :type, :synopsis);';
-        } else {
-            $sql = 'INSERT INTO `stories` (`title`, `author`, `type`, `synopsis`) 
+        $sql = 'INSERT INTO `stories` (`title`, `author`, `type`, `synopsis`) 
                     VALUES (:title, :author, :type, :synopsis);';
-        }
+
 
         $sth = $pdo->prepare($sql);
 
         $sth->bindValue(':title', $this->title);
+        $sth->bindValue(':author', $this->author);
         $sth->bindValue(':type', $this->type, PDO::PARAM_INT);
         $sth->bindValue(':synopsis', $this->synopsis);
-
-        if (!is_null($this->author)) {
-            $sth->bindValue(':author', $this->author);
-        }
 
         return $sth->execute();
     }

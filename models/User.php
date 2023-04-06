@@ -369,16 +369,14 @@ class User
         }
     }
 
-    public static function get($value): object|bool
+    public static function get($id): object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT * FROM `users`
-                    WHERE `id_users` = :value;';
+                    WHERE `id_users` = :id;';
 
         $sth = $pdo->prepare($sql);
-
-        // $sth->bindValue(':column', $column);
-        $sth->bindValue(':value', $value);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
         if ($sth->execute()) {
             return $sth->fetch();

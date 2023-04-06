@@ -8,10 +8,13 @@ try {
     // FEUILLE CSS A CHARGER
     $css = CSS['form'];
 
+    // FEUILLE JS A CHARGER
+    $js = JS['register'];
+
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $error = [];
+        $errors = [];
 
         // ---------------------------------------------------------------------------------------------
 
@@ -20,16 +23,20 @@ try {
 
         if (empty($username)) {
             // Pour les champs obligatoires, on retourne une erreur
-            $error['username'] = 'Veuillez saisir un nom d\'utilisateur.';
+            $errors['username'] = 'Veuillez saisir un nom d\'utilisateur.';
         } else {
-            $usernameOk = filter_var($username, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . REGEX_TEXT . '/')));
+
+            $usernameOk = filter_var($username, FILTER_VALIDATE_REGEXP, 
+            array('options' => array('regexp' => '/' . REGEX_USER . '/')));
+            
+            
             // Avec une regex (constante déclarée plus haut), on vérifie si c'est le format attendu 
             if (!$usernameOk) {
-                $error['username'] = 'Le nom d\'utilisateur n\'est pas au bon format.';
+                $errors['username'] = 'Le nom d\'utilisateur n\'est pas au bon format.';
             } else {
                 // Dans ce cas précis, on vérifie aussi la longueur de chaine (on aurait pu le faire aussi direct dans la regex)
                 if (strlen($username) >= 50) {
-                    $error['username'] = 'La longueur du nom d\'utilisateur est trop longue (maximum 50 caractères).';
+                    $errors['username'] = 'La longueur du nom d\'utilisateur est trop longue (maximum 50 caractères).';
                 }
             }
         }
@@ -40,11 +47,11 @@ try {
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
         if (empty($email)) {
-            $error['email'] = 'Veuillez saisir une adresse mail.';
+            $errors['email'] = 'Veuillez saisir une adresse mail.';
         } else {
             $emailOk = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$emailOk) {
-                $error['email'] = 'L\'adresse mail n\'est pas au bon format.';
+                $errors['email'] = 'L\'adresse mail n\'est pas au bon format.';
             }
         }
 
@@ -54,17 +61,17 @@ try {
         $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_SPECIAL_CHARS);
 
         if (empty($birthdate)) {
-            $error['birthdate'] = 'Veuillez saisir une date de naissance.';
+            $errors['birthdate'] = 'Veuillez saisir une date de naissance.';
         } else {
             $birthdateOk = filter_var($birthdate, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/' . REGEX_DATE . '/']]);
             if (!$birthdateOk) {
-                $error['birthdate'] = 'La date n\'est pas au bon format.';
+                $errors['birthdate'] = 'La date n\'est pas au bon format.';
             } else {
                 $birthdateObj = new DateTime($birthdate);
                 $age = date('Y') - $birthdateObj->format('Y');
 
                 if ($age > 120 || $age < 0) {
-                    $error['birthdate'] = 'Votre âge n\'est pas conforme.';
+                    $errors['birthdate'] = 'Votre âge n\'est pas conforme.';
                 }
             }
         }
@@ -76,13 +83,13 @@ try {
         $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
 
         if (empty($password)) {
-            $error['password'] = 'Veuillez saisir un mot de passe.';
+            $errors['password'] = 'Veuillez saisir un mot de passe.';
         } else if (!empty($password) && empty($confirmPassword)) {
-            $error['confirmPassword'] = 'Veuillez confirmer votre mot de passe.';
+            $errors['confirmPassword'] = 'Veuillez confirmer votre mot de passe.';
         } else {
             if ($password != $confirmPassword) {
-                $error['password'] = 'Les mots de passe ne sont pas identiques.';
-                $error['confirmPassword'] = 'Les mots de passe ne sont pas identiques.';
+                $errors['password'] = 'Les mots de passe ne sont pas identiques.';
+                $errors['confirmPassword'] = 'Les mots de passe ne sont pas identiques.';
             }
 
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -94,11 +101,11 @@ try {
         $cgu = intval(filter_input(INPUT_POST, 'cgu', FILTER_SANITIZE_NUMBER_INT));
 
         if (empty($cgu)) {
-            $error['cgu'] = 'Veuillez accepter les conditions générales d\'utilisation.';
+            $errors['cgu'] = 'Veuillez accepter les conditions générales d\'utilisation.';
         } else {
             $cguOk = filter_var($cgu, FILTER_VALIDATE_BOOLEAN);
             if (!$cguOk) {
-                $error['cgu'] = 'Les conditions générales n\'ont pas été correctement acceptées.';
+                $errors['cgu'] = 'Les conditions générales n\'ont pas été correctement acceptées.';
             }
         }
 
@@ -111,22 +118,22 @@ try {
             $newsletterOk = filter_var($newsletter, FILTER_VALIDATE_BOOLEAN);
 
             if (!$newsletterOk) {
-                $error['newsletter'] = 'La newsletter n\'a pas été correctement acceptée.';
+                $errors['newsletter'] = 'La newsletter n\'a pas été correctement acceptée.';
             }
         }
 
 
         // VERIFICATION S'IL N'Y A PAS DE DOUBLON
         if (User::isUsernameExist($username) == true) {
-            $error['username'] = 'Ce nom d\'utilisateur existe déjà';
+            $errors['username'] = 'Ce nom d\'utilisateur existe déjà';
         }
 
         if (User::isEmailExist($email) == true) {
-            $error['email'] = 'Ce mail existe déjà';
+            $errors['email'] = 'Ce mail existe déjà';
         }
 
         // AJOUT DE L'UTILISATEUR SI TOUT EST BON
-        if (empty($error)) {
+        if (empty($errors)) {
 
             $newUser = new User;
             $newUser->setUsername($username);

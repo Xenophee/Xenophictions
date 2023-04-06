@@ -7,7 +7,7 @@ define('DATABASE_PASSWORD', '2E[H3!u01m*Wdhe!');
 
 
 // CONSTANTES REGEX POUR FORMULAIRE
-define('REGEX_TEXT','^[a-zA-ZÀ-ÿ\'\-]{2,}$');
+define('REGEX_USER','^[a-zA-ZÀ-ÿ\'\-]{2,}$');
 define('REGEX_MAIL', '([_A-Za-z0-9-]+)(\.[_A-Za-z0-9-]+)@([A-Za-z0-9]+)(\.[A-Za-z0-9]+)');
 // define('REGEX_DATE','^([0-9]{4})[\/\-]?([0-9]{2})[\/\-]?([0-9]{2})$');
 define('REGEX_DATE',"^\d{4}-\d{2}-\d{1,2}$");
@@ -37,6 +37,7 @@ define('JS', [
     'data' => '../../public/assets/js/data.js',
     'dataSections' => '../../public/assets/js/dataSections.js',
     'summary' => '../../public/assets/js/summary.js',
+    'register' => '../../public/assets/js/register.js',
     'form' => '../../public/assets/js/form.js',
     'script' => '../../public/assets/js/script.js'
 ]);
