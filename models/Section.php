@@ -212,9 +212,9 @@ class Section
         GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_parent` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_parent`,
         GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_child` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_child`
         FROM `chapters`
-        JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-        JOIN `sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
-        JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
+        LEFT JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        LEFT JOIN `sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        LEFT JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
         WHERE `chapters`.`id_stories` = :id
         GROUP BY `chapters`.`id_chapters`
         ORDER BY `chapters`.`index`;';
@@ -261,17 +261,21 @@ class Section
             return ($sth->rowCount() > 0) ? true : false;
         }
     }
+
+    public static function delete(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `sections`
+                    WHERE `id_sections` = :id;';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
+
+    
 }
 
-
-// SELECT MAX(`chapters`.`id_chapters`) AS `id_chapters`, MAX(`chapters`.`title`) AS `chapter_title`, `chapters`.`index`, MAX(`chapters`.`summary`) AS `chapter_summary`, MAX(`chapters`.`id_stories`) AS `id_stories`,
-//     GROUP_CONCAT(DISTINCT `sections`.`title` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR ' | ') AS `section_titles`,
-//     GROUP_CONCAT(DISTINCT `sections`.`id_sections` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR ' | ') AS `id_sections`,
-//     GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_parent` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR ' | ') AS `id_sections_parent`,
-//     GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_child` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR ' | ') AS `id_sections_child`
-//     FROM `chapters`
-//     JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-//     JOIN `sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
-//     JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
-//     WHERE `chapters`.`id_stories` = 1
-//     GROUP BY `chapters`.`index`;

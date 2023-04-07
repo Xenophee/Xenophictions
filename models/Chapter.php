@@ -249,4 +249,46 @@ class Chapter
             return ($sth->rowCount() > 0) ? true : false;
         }
     }
+
+    public static function delete(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `chapters`
+                    WHERE `id_chapters` = :id;';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
+
+    public static function deleteLink(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `chapters` WHERE `id_chapters` IN (
+            SELECT `id_sections` FROM `chapters_sections` WHERE `id_chapters` = :id)';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
+
+    public static function deleteAll(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `chapters` WHERE `id_chapters` IN (
+            SELECT `id_sections` FROM `chapters_sections` WHERE `id_chapters` = :id)';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
 }

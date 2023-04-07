@@ -29,7 +29,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="btn">
-                                <label class="form-label m-1" for="cover">Image de couverture :</label>
+                                <label class="form-label m-1" for="cover">Image de couverture</label>
                                 <input type="file" class="form-control d-none" id="cover" name="cover" accept="image/jpeg" required>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
 
                     <!-- TABLEAU QUI AFFICHE TOUS LES CHAPITRES ET LEURS SECTIONS -->
                     
-                    <?php var_dump($chapters);
+                    <?php 
                     foreach ($chapters as $key => $chapter) { ?>
                         <table class="table align-middle table-striped table-hover my-5">
                             <thead>
@@ -126,8 +126,8 @@
                                         <th scope="col" class="d-flex justify-content-end">
                                             <button type="submit" class="btn edit py-2 px-4 me-3" title="Editer le chapitre"><i class="bi bi-pen"></i></button>
                                             <!-- Bouton supprimer -->
-                                            <a href="" class="btn delete py-2 px-4" title="Supprimer le chapitre et ses sections" data-id="<?= $chapter->id_chapters ?>" data-deleteparam="3" data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i class="bi bi-trash3" data-id="<?= $chapter->id_chapters ?>" data-deleteparam="3"></i>
+                                            <a href="" class="btn delete py-2 px-4" title="Supprimer le chapitre et ses sections" data-id="<?= $chapter->id_chapters ?>" data-deleteparam="5" data-bs-toggle="modal" data-bs-target="#deleteChapterSection">
+                                                <i class="bi bi-trash3" data-id="<?= $chapter->id_chapters ?>" data-deleteparam="5"></i>
                                             </a>
                                         </th>
                                     </tr>
@@ -135,12 +135,11 @@
                             </thead>
 
                             <tbody class="table-group-divider">
-                                <?php
+                                <?php if (!empty($chapter->sections_titles) && !empty($chapter->id_sections)) {
+                                    var_dump($chapter); 
                                 $count = 1;
-                                
                                 $sections = explode('|', $chapter->sections_titles);
                                 $sectionsId = explode('|', $chapter->id_sections);
-                                var_dump($sections);
                                 foreach (array_combine($sectionsId, $sections) as $id => $section) { ?>
                                     <tr>
                                         <th scope="row"><?= $count++ ?></th>
@@ -155,11 +154,11 @@
                                                 <i class="bi bi-pen"></i>
                                             </a>
                                             <!-- Bouton supprimer -->
-                                            <a href="" class="btn delete py-2 px-4" title="Supprimer la section" data-id="<?= $id ?>" data-deleteparam="2" data-bs-toggle="modal" data-bs-target="#deleteSection">
-                                                <i class="bi bi-trash3" data-id="<?= $id ?>" data-deleteparam="2"></i>
-                                            </a>
+                                            <button type="button" class="btn delete py-2 px-4" title="Supprimer la section" data-id="<?= $id ?>" data-deleteparam="6" data-bs-toggle="modal" data-bs-target="#deleteChapterSection">
+                                                <i class="bi bi-trash3" data-id="<?= $id ?>" data-deleteparam="6"></i>
+                                            </button>
                                         </td>
-                                    </tr> <?php } ?>
+                                    </tr> <?php } } ?>
                             </tbody>
                         </table> <?php } ?>
 
@@ -168,3 +167,23 @@
         </div>
     </div>
 </main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteChapterSection" tabindex="-1" aria-labelledby="deleteChapterSection" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteChapterSection">Suppression d'un chapitre / section</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes vous certain de vouloir supprimer ce chapitre ou cette section ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
+                <button type="button" class="btn py-2 px-4"><a class="link-light" id="deleteLink">Valider</a></button>
+            </div>
+        </div>
+    </div>
+</div>

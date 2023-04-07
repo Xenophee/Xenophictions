@@ -162,16 +162,16 @@ CREATE TABLE `chapters_sections`(
    `id_chapters` INT,
    `id_sections` INT,
    PRIMARY KEY(`id_chapters`, `id_sections`),
-   FOREIGN KEY(`id_chapters`) REFERENCES `chapters`(`id_chapters`),
-   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`)
+   FOREIGN KEY(`id_chapters`) REFERENCES `chapters`(`id_chapters`) ON DELETE CASCADE,
+   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 CREATE TABLE `sections_sections`(
    `id_sections_parent` INT,
    `id_sections_child` INT,
    PRIMARY KEY(`id_sections_parent`, `id_sections_child`),
-   FOREIGN KEY(`id_sections_parent`) REFERENCES `sections`(`id_sections`),
-   FOREIGN KEY(`id_sections_child`) REFERENCES `sections`(`id_sections`)
+   FOREIGN KEY(`id_sections_parent`) REFERENCES `sections`(`id_sections`) ON DELETE CASCADE,
+   FOREIGN KEY(`id_sections_child`) REFERENCES `sections`(`id_sections`) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 CREATE TABLE `sections_characters`(

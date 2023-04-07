@@ -70,12 +70,30 @@ try {
                 Flash::setMessage(CODE[7]);
             }
             break;
+        case '5':
+            // SUPPRESSION D'UN CHAPITRE
+            $isDeletedFirst = Chapter::deleteLink($id);
+            $isDeletedSecond = Chapter::delete($id);
+            if ($isDeletedSecond) {
+                Flash::setMessage(CODE[8]);
+            } else {
+                Flash::setMessage(CODE[9]);
+            }
+            break;
+        case '6':
+            // SUPPRESSION D'UNE SECTION
+            $isDeleted = Section::delete($id);
+            if ($isDeleted) {
+                Flash::setMessage(CODE[10]);
+            } else {
+                Flash::setMessage(CODE[11]);
+            }
+            break;
     }
 
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
-
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

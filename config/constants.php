@@ -70,7 +70,12 @@ define('CODE', [
     4 => 'Le thème a été supprimé.',
     5 => 'Une erreur est survenue : le thème n\'a pas été supprimé.',
     6 => 'L\'histoire a été supprimée.',
-    7 => 'Une erreur est survenue : l\'histoire n\'a pas été supprimé.'
+    7 => 'Une erreur est survenue : l\'histoire n\'a pas été supprimé.',
+    8 => 'Le chapitre a été supprimé',
+    9 => 'Une erreur est survenue : le chapitre n\'a pas été supprimé',
+    10 => 'La section a été supprimée',
+    11 => 'Une erreur est survenue : la section n\'a pas été supprimée',
+
 ]);
 
 define('PUBLICATION', [
