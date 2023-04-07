@@ -135,30 +135,28 @@
                             </thead>
 
                             <tbody class="table-group-divider">
-                                <?php if (!empty($chapter->sections_titles) && !empty($chapter->id_sections)) {
-                                    var_dump($chapter); 
+                                <?php 
                                 $count = 1;
-                                $sections = explode('|', $chapter->sections_titles);
-                                $sectionsId = explode('|', $chapter->id_sections);
-                                foreach (array_combine($sectionsId, $sections) as $id => $section) { ?>
+                                $sections = Section_Section::getAll($chapter->id_chapters);
+                                foreach ($sections as $section) { ?>
                                     <tr>
                                         <th scope="row"><?= $count++ ?></th>
                                         <td>
-                                            <h3 class="fs-5"><?= $section ?></h3>
+                                            <h3 class="fs-5"><?= $section->title ?></h3>
                                         </td>
-                                        <td><span><?= $id ?></span></td>
-                                        <td><?= $chapter->id_sections_parent ?></td>
-                                        <td><?= $chapter->id_sections_child ?></td>
+                                        <td><span><?= $section->id_sections ?></span></td>
+                                        <td><?= $section->id_sections_parent ?></td>
+                                        <td><?= $section->id_sections_child ?></td>
                                         <td class="d-flex justify-content-end">
-                                            <a href="../../controllers/sections_update_controller.php?id=<?= $id ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
+                                            <a href="../../controllers/sections_update_controller.php?id=<?= $section->id_sections ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
                                                 <i class="bi bi-pen"></i>
                                             </a>
                                             <!-- Bouton supprimer -->
-                                            <button type="button" class="btn delete py-2 px-4" title="Supprimer la section" data-id="<?= $id ?>" data-deleteparam="6" data-bs-toggle="modal" data-bs-target="#deleteChapterSection">
-                                                <i class="bi bi-trash3" data-id="<?= $id ?>" data-deleteparam="6"></i>
+                                            <button type="button" class="btn delete py-2 px-4" title="Supprimer la section" data-id="<?= $section->id_sections ?>" data-deleteparam="6" data-bs-toggle="modal" data-bs-target="#deleteChapterSection">
+                                                <i class="bi bi-trash3" data-id="<?= $section->id_sections ?>" data-deleteparam="6"></i>
                                             </button>
                                         </td>
-                                    </tr> <?php } } ?>
+                                    </tr> <?php } ?>
                             </tbody>
                         </table> <?php } ?>
 

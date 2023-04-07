@@ -8,6 +8,8 @@ try {
     // FEUILLE CSS A CHARGER
     $css = CSS['form'];
 
+    $titleDoc = 'Se connecter';
+
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../models/Chapter.php');
 require_once(__DIR__ . '/../models/Section.php');
 require_once(__DIR__ . '/../models/Theme_Category.php');
 require_once(__DIR__ . '/../models/Story_Category.php');
+require_once(__DIR__ . '/../models/Section_Section.php');
 
 try {
 
@@ -22,6 +23,9 @@ try {
         die;
     }
 
+    $sections = Section_Section::getAll(4);
+    var_dump($sections);
+
     // FICHIER CSS A CHARGER
     $css = CSS['account'];
     $css2 = CSS['dashboard'];
@@ -29,6 +33,8 @@ try {
 
     // FICHIER CSS A CHARGER
     $js = JS['form'];
+
+    $titleDoc = 'Modifier une histoire';
 
     $idStory = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
     

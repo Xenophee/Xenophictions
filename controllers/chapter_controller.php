@@ -7,6 +7,8 @@ try {
     // FICHIER CSS A CHARGER
     $css = CSS['chapter'];
 
+    $titleDoc = '';
+
     // RECUPERATION DE L'IDENTIFIANT DU CHAPITRE
     $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
 

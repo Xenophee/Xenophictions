@@ -24,6 +24,8 @@ try {
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
 
+    $titleDoc = 'Informations utilisateur';
+
     // RECUPERATION DE L'IDENTIFIANT UTILISATEUR
     $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
     

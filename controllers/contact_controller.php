@@ -7,6 +7,8 @@ try {
     // FICHIER CSS A CHARGER
 $css = CSS['form'];
 
+$titleDoc = 'Contact';
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

@@ -21,6 +21,8 @@ try {
     $css = CSS['account'];
     $css3 = CSS['form'];
 
+    $titleDoc = 'Préférence';
+
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

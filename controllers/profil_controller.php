@@ -22,6 +22,8 @@ try {
     $css = CSS['account'];
     $css2 = CSS['form'];
 
+    $titleDoc = 'Profil';
+
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -36,7 +38,7 @@ try {
             // Pour les champs obligatoires, on retourne une erreur
             $errors['username'] = 'Veuillez saisir un nom d\'utilisateur.';
         } else {
-            $usernameOk = filter_var($username, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . REGEX_TEXT . '/')));
+            $usernameOk = filter_var($username, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . REGEX_USER . '/')));
             // Avec une regex (constante déclarée plus haut), on vérifie si c'est le format attendu 
             if (!$usernameOk) {
                 $errors['username'] = 'Le nom d\'utilisateur n\'est pas au bon format.';

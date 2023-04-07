@@ -45,6 +45,8 @@ try {
     // RECUPERATION DES DONNEES DE L'HISTOIRE
     $story = Story::get($id);
 
+    $titleDoc = 'Sommaire : ' . $story->title;
+
     // DETERMINE SI C'EST LA DATE DE PUBLICATION OU D'ENREGISTREMENT A AFFICHER
     $date = (!is_null($story->published_at)) ? 'Publié le ' . date('d/m/Y', strtotime($story->published_at)) : 'Enregistré le ' . date('d/m/Y', strtotime($story->registered_at));
 

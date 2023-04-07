@@ -16,6 +16,10 @@
 
 .coverImg {
     border: var(--border-dark-double-large);
+    width: 400px;
+    height: 500px;
+
+    object-fit: cover;
     border-top-right-radius: 50% 25%;
     border-top-left-radius: 50% 25%;
     border-bottom-right-radius: 50% 15%;
@@ -67,7 +71,8 @@
     padding: 15px 55px 15px;
 }
 
-#restart, #read {
+#restart,
+#read {
     width: 100%;
     padding: 20px 0px 20px;
 }
@@ -140,7 +145,8 @@
     border-width: 2px;
 }
 
-.ok, .stop {
+.ok,
+.stop {
     padding: 10px 30px 10px;
     width: 100%;
 }
@@ -168,19 +174,21 @@
 
 @media screen and (min-width: 768px) {
 
-    #restart, #read {
+    #restart,
+    #read {
         width: 30%;
         padding: 20px 0px 20px;
     }
-    
-    .ok, .stop {
+
+    .ok,
+    .stop {
         padding: 10px 0px 10px;
         width: 25%;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
-    
+
     .coverImg {
         width: 50%;
     }
@@ -226,10 +234,13 @@
 @media screen and (min-width: 1200px) {
 
     .coverImg {
-        width: 100%;
+        /* width: 100%; */
+        width: 350px;
+        height: 500px;
     }
 
-    #restart, #read {
+    #restart,
+    #read {
         padding: 15px 0px 15px;
     }
 

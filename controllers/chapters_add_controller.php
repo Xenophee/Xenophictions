@@ -24,6 +24,8 @@ try {
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
 
+    $titleDoc = 'Ajouter un chapitre';
+
     // METHODES POUR AFFICHER LES DONNEES DES HISTOIRES
     $stories = Story::getAll();
 

@@ -11,6 +11,8 @@ try {
     // FEUILLE JS A CHARGER
     $js = JS['register'];
 
+    $titleDoc = 'S\'inscrire';
+
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

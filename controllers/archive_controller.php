@@ -20,6 +20,8 @@ try {
     // FICHIERS CSS A CHARGER
     $css = CSS['account'];
 
+    $titleDoc = 'Historique';
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

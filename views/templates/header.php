@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="<?= $css ?? '' ?>">
     <link rel="stylesheet" href="<?= $css2 ?? '' ?>">
     <link rel="stylesheet" href="<?= $css3 ?? '' ?>">
-    <title>S'inscrire sur Xénophictions</title>
+    <link rel="icon" type="image/png" href="../../public/assets/img/Xenophictions_logo.png">
+    <title><?= $titleDoc ?></title>
 </head>
 
 <body>

@@ -28,6 +28,8 @@ try {
     // FICHIER CSS A CHARGER
     $js = JS['form'];
 
+    $titleDoc = 'Ajouter une histoire';
+
     // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
     $themesCategories = Theme_Category::getAll();
 

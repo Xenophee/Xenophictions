@@ -30,6 +30,8 @@ try {
     // FICHIER JS A CHARGER
     $js = JS['dataSections'];
 
+    $titleDoc = 'Ajouter une section';
+
     // METHODES POUR AFFICHER LES DONNEES DES HISTOIRES
     $stories = Story::getAll();
     // $sections = Section::getAll();

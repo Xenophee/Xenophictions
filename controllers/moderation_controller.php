@@ -22,6 +22,8 @@ try {
     $css = CSS['account'];
     $css2 = CSS['dashboard'];
 
+    $titleDoc = 'Modération';
+
     // RECUPERATION DE TOUS LES COMMENTAIRES
     $comments = Comment::getAll();
 

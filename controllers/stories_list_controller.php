@@ -24,6 +24,8 @@ try {
     $css2 = CSS['dashboard'];
     $css3 = CSS['form'];
 
+    $titleDoc = 'Liste des histoires';
+
     // Nettoyage en cas de recherche
     $search = trim((string)filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS));
 

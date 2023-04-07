@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../models/Story.php');
 require_once(__DIR__ . '/../models/Note.php');
 
 try {
+    
     // FICHIER CSS A CHARGER
     $css = CSS['catalog'];
 
@@ -14,6 +15,7 @@ try {
     // DETERMINE L'AFFICHAGE DU TITRE
     if ($type == 1 || $type == 2) {
         $h1 = CATALOG[$type];
+        $titleDoc = CATALOG[$type];
     }
 
     // RECUPERE TOUTES LES HISTOIRES DU CATALOGUE CONCERNE

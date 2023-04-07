@@ -28,6 +28,8 @@ try {
     // FICHIER JS A CHARGER
     $js = JS['dataSections'];
 
+    $titleDoc = 'Modifier une section';
+
     // METHODES POUR AFFICHER LES DONNEES DES HISTOIRES
     $stories = Story::getAll();
 

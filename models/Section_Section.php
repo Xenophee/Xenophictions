@@ -21,6 +21,24 @@ class Section_Section {
         return $this->id_sections_child;
     }
 
+    public static function getAll(int $id): array
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT DISTINCT `sections_sections`.*, `sections`.* 
+        FROM `sections`
+        LEFT JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
+        LEFT JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        WHERE `chapters_sections`.`id_chapters` = :id;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetchAll());
+        } else {
+            return [];
+        }
+    }
+
     public function add(): bool
     {
         $pdo = Database::getInstance();
