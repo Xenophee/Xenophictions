@@ -198,11 +198,10 @@ class Chapter
     public static function getAll(int $id): array
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT DISTINCT `chapters`.* 
+        $sql = 'SELECT `chapters`.* 
         FROM `chapters`
-        LEFT JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-        LEFT JOIN `sections` ON `chapters_sections`.`id_sections` = `sections`.`id_sections`
-        WHERE `chapters`.`id_stories` = :id;';
+        WHERE `chapters`.`id_stories` = :id
+        ORDER BY `chapters`.`index`;';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -264,24 +263,10 @@ class Chapter
         }
     }
 
-    public static function deleteLink(int $id): bool
-    {
-        $pdo = Database::getInstance();
-        $sql = 'DELETE FROM `chapters` WHERE `id_chapters` IN (
-            SELECT `id_sections` FROM `chapters_sections` WHERE `id_chapters` = :id)';
-
-        $sth = $pdo->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
-
-        if ($sth->execute()) {
-            return ($sth->rowCount() > 0) ? true : false;
-        }
-    }
-
     public static function deleteAll(int $id): bool
     {
         $pdo = Database::getInstance();
-        $sql = 'DELETE FROM `chapters` WHERE `id_chapters` IN (
+        $sql = 'DELETE FROM `sections` WHERE `id_sections` IN (
             SELECT `id_sections` FROM `chapters_sections` WHERE `id_chapters` = :id)';
 
         $sth = $pdo->prepare($sql);

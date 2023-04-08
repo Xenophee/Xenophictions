@@ -323,8 +323,9 @@ class Story
     public static function deleteAll(int $id): bool
     {
         $pdo = Database::getInstance();
-        $sql = 'DELETE FROM `categories` WHERE `id_categories` IN (
-            SELECT `id_categories` FROM `themes_categories` WHERE `id_themes` = :id)';
+        $sql = 'DELETE FROM `sections` WHERE `id_sections` IN (SELECT `id_sections` FROM `chapters_sections`
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        WHERE `id_stories` = :id);';
 
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);

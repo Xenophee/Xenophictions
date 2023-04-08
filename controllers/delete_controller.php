@@ -62,7 +62,7 @@ try {
             break;
         case '4':
             // SUPPRESSION D'UNE HISTOIRE
-            // $isDeletedFirst = Theme::deleteAll($id);
+            $isDeletedFirst = Story::deleteAll($id);
             $isDeletedSecond = Story::delete($id);
             if ($isDeletedSecond) {
                 Flash::setMessage(CODE[6]);
@@ -72,7 +72,7 @@ try {
             break;
         case '5':
             // SUPPRESSION D'UN CHAPITRE
-            $isDeletedFirst = Chapter::deleteLink($id);
+            $isDeletedFirst = Chapter::deleteAll($id);
             $isDeletedSecond = Chapter::delete($id);
             if ($isDeletedSecond) {
                 Flash::setMessage(CODE[8]);
@@ -94,6 +94,7 @@ try {
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
+    
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

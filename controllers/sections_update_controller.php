@@ -4,6 +4,8 @@ require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/Story.php');
 require_once(__DIR__ . '/../models/Chapter.php');
 require_once(__DIR__ . '/../models/Section.php');
+require_once(__DIR__ . '/../models/Chapter_Section.php');
+require_once(__DIR__ . '/../models/Section_Section.php');
 
 try {
 
@@ -30,31 +32,22 @@ try {
 
     $titleDoc = 'Modifier une section';
 
-    // METHODES POUR AFFICHER LES DONNEES DES HISTOIRES
-    $stories = Story::getAll();
-
-    // RECUPERATION DE L'IDENTIFIANT DE SECTION ET UTILISATION DE LA METHODE DE RECUPERATION DES INFOS
+    // RECUPERATION DE L'IDENTIFIANT DE SECTION, DE CHAPITRE ET D'HISTOIRE
     $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+    $idChapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
     $idStory = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
-    $section = Section::get($id);
-    var_dump($section);
+    
 
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // RECUPERATION DES DONNEES ENVOYEES
-        $story = intval(filter_input(INPUT_POST, 'story', FILTER_SANITIZE_NUMBER_INT));
         $chapter = intval(filter_input(INPUT_POST, 'chapter', FILTER_SANITIZE_NUMBER_INT));
         $title = trim((string)filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
         $description = trim((string)filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
-        $content = trim(filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS));
+        $content = trim((string)filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS));
         $sectionsLink = filter_input(INPUT_POST, 'sectionsLink', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY) ?? [];
-        
-        
-        // VERIFICATION QU'UNE HISTOIRE A ETE SELECTIONNEE
-        if (empty($story)) {
-            $errors['story'] = 'Veuillez choisir l\'histoire de référence';
-        }
+        $none = intval(filter_input(INPUT_POST, 'none', FILTER_SANITIZE_NUMBER_INT));
 
         // VERIFICATION QU'UN CHAPITRE A ETE SELECTIONNE
         if (empty($chapter)) {
@@ -81,8 +74,8 @@ try {
         }
 
         // VERIFICATION QU'UNE OU PLUSIEURS SECTIONS PARENTES ONT ETE CHOISIES
-        if (empty($sectionsLink)) {
-            $errors['section'] = 'Veuillez choisir la section de référence';
+        if (empty($sectionsLink) && empty($none)) {
+            $errors['section'] = 'Veuillez choisir la section de référence ou préciser qu\'il n\'y en a pas';
         }
 
         // AJOUT DE LA SECTION EN BASE SI TOUT EST BON
@@ -113,22 +106,34 @@ try {
             $isDeleted = Section_Section::delete($id);
 
             // AJOUT DU LIEN SECTION / SECTION A LA BASE
-            foreach($sectionsLink as $sectionLink) {
+            if (!empty($sectionsLink)) {
+                foreach ($sectionsLink as $sectionLink) {
+                    $addSectionSection = new Section_Section;
+                    $addSectionSection->setId_sections_parent($sectionLink);
+                    $addSectionSection->setId_sections_child($id);
+                    $isAddLinkSection[] = $addSectionSection->add();
+                }
+            } else {
                 $addSectionSection = new Section_Section;
-                $addSectionSection->setId_sections_parent($sectionLink);
-                $addSectionSection->setId_sections_child($idSection);
+                // $addSectionSection->setId_sections_parent($sectionLink);
+                $addSectionSection->setId_sections_child($id);
                 $isAddLinkSection[] = $addSectionSection->add();
             }
 
             if ($isUpdate === true && $isAddLink === true && $isDeletedLink === true && $isDeleted === true && !in_array(false, $isAddLinkSection, true)) {
                 $pdo->commit();
-                Flash::setMessage('Le section a été mise à jour.');
+                Flash::setMessage('La section a été mise à jour.');
             } else {
                 $pdo->rollBack();
                 Flash::setMessage('Une erreur est survenue : la section n\'a pas été mise à jour.');
             }
         }
     }
+
+    // RECUPERATION DES INFOS SUR LA SECTION EN COURS ET SES LIENS
+    $section = Section::get($id);
+    $chapters = Chapter::getAll($idStory);
+    $sectionsLink = Section_Section::get($id);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

@@ -23,8 +23,6 @@ try {
         die;
     }
 
-    $sections = Section_Section::getAll(4);
-    var_dump($sections);
 
     // FICHIER CSS A CHARGER
     $css = CSS['account'];
@@ -36,52 +34,54 @@ try {
 
     $titleDoc = 'Modifier une histoire';
 
+    // RECUPERATION DES INFOS SUR L'HISTOIRE A MODIFIER
     $idStory = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
-    
 
+
+    // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $errors = [];
 
-        $title = trim((string)filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
-        $author = trim((string)filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS));
-        $type = intval(filter_input(INPUT_POST, 'type', FILTER_SANITIZE_NUMBER_INT));
-        $themeCategories = filter_input(INPUT_POST, 'themeCategories', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY) ?? [];
-        $synopsis = trim((string)filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_SPECIAL_CHARS));
-
-        $chapterTitle = trim((string)filter_input(INPUT_POST, 'chapterTitle', FILTER_SANITIZE_SPECIAL_CHARS));
-        $index = intval(filter_input(INPUT_POST, 'index', FILTER_SANITIZE_NUMBER_INT));
-        $chapterId = intval(filter_input(INPUT_POST, 'chapterId', FILTER_SANITIZE_NUMBER_INT));
-
-        var_dump($themeCategories);
-
         if (isset($_POST['storyForm'])) {
 
+            // RECUPERATION DES DONNEES EN PROVENANCE DU FORMULAIRE SUR LES INFOS DE BASE DE L'HISTOIRE
+            $title = trim((string)filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
+            $author = trim((string)filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS));
+            $type = intval(filter_input(INPUT_POST, 'type', FILTER_SANITIZE_NUMBER_INT));
+            $themeCategories = filter_input(INPUT_POST, 'themeCategories', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY) ?? [];
+            $synopsis = trim((string)filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_SPECIAL_CHARS));
+
+            // VERIFICATION SUR LE TITRE DE L'HISTOIRE
             if (empty($title)) {
                 $errors['title'] = 'Veuillez saisir un titre';
             } else if (strlen($title) > 150) {
                 $errors['title'] = 'Ce titre est trop long';
             }
 
+            // VERIFICATION SUR LE TYPE
             if (empty($type)) {
                 $errors['type'] = 'Veuillez saisir un type';
             } else if ($type != 1 && $type != 2) {
                 $errors['type'] = 'Veuillez saisir correctement un type';
             }
 
+            // VERIFICATION SUR LE RESUME
             if (empty($synopsis)) {
                 $errors['synopsis'] = 'Veuillez saisir un synopsis';
             } else if (strlen($synopsis) > 1000) {
                 $errors['synopsis'] = 'Ce synopsis est trop long';
             }
 
+            // VERIFICATION SUR LES CATEGORIES
             if (empty($themeCategories)) {
                 $errors['themeCategories'] = 'Veuillez choisir une ou plusieurs catégories';
             }
 
+
             // MODIFICATION DE L'HISTOIRE ET DE SES CATEGORIES SI TOUT EST BON
             if (empty($errors)) {
-                
+
                 $pdo = Database::getInstance();
                 $pdo->beginTransaction();
 
@@ -92,10 +92,6 @@ try {
                 $addStory->setSynopsis($synopsis);
 
                 $isAdd = $addStory->update($idStory);
-                
-
-                // $idStory = $pdo->lastInsertId();
-                // var_dump($idStory);
 
                 if (Story_Category::delete($idStory)) {
 
@@ -107,8 +103,6 @@ try {
                         $storyCategoryAdd->setIdCategories($themeCategory);
                         $isAddLink[] = $storyCategoryAdd->add();
                     }
-
-                    var_dump($isAddLink);
 
                     if (isset($_FILES['cover'])) {
                         $cover = $_FILES['cover'];
@@ -138,15 +132,18 @@ try {
                         $pdo->rollBack();
                         Flash::setMessage('Une erreur est survenue : l\'histoire n\'a pas été modifiée.');
                     }
-
                 } else {
                     $pdo->rollBack();
                     Flash::setMessage('Une erreur est survenue : l\'histoire n\'a pas été modifiée.');
                 }
-
             }
 
         } else {
+
+            // RECUPERATION DES DONNEES EN PROVENANCE DU FORMULAIRE SUR LES CHAPITRES
+            $chapterTitle = trim((string)filter_input(INPUT_POST, 'chapterTitle', FILTER_SANITIZE_SPECIAL_CHARS));
+            $index = intval(filter_input(INPUT_POST, 'index', FILTER_SANITIZE_NUMBER_INT));
+            $chapterId = intval(filter_input(INPUT_POST, 'chapterId', FILTER_SANITIZE_NUMBER_INT));
 
             // MISE A JOUR SI TOUT EST BON
             if (empty($errors)) {
@@ -168,18 +165,15 @@ try {
                     }
                 }
             }
-
         }
     }
 
-    // METHODES POUR RECUPERER LES DONNEES DES THEMES ET DES CATEGORIES
-    
-    $story = Story::get($idStory);
-    var_dump($story);
-    $chapters = Section::getAll($idStory);
+    // METHODES POUR RECUPERER LES DONNEES DES THEMES, DES CATEGORIES, DES CHAPITRES ET DES SECTIONS
     $themesCategories = Theme_Category::getAll();
-
-    
+    $story = Story::get($idStory);
+    $chapters = Chapter::getAll($idStory);
+    $sections = Section_Section::getAll(4);
+    // var_dump($sections);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

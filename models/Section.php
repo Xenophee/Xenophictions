@@ -203,21 +203,38 @@ class Section
         }
     }
 
-    public static function getAll($id)
+    // public static function getAll($id)
+    // {
+    //     $pdo = Database::getInstance();
+    //     $sql = 'SELECT `chapters`.`id_chapters`, `chapters`.`title` AS `chapters_titles`, `chapters`.`index`, `chapters`.`summary` AS `chapter_summary`, `chapters`.`id_stories`,
+    //     GROUP_CONCAT(DISTINCT `sections`.`title` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `sections_titles`,
+    //     GROUP_CONCAT(DISTINCT `sections`.`id_sections` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections`,
+    //     GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_parent` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_parent`,
+    //     GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_child` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_child`
+    //     FROM `chapters`
+    //     LEFT JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+    //     LEFT JOIN `sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+    //     LEFT JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
+    //     WHERE `chapters`.`id_stories` = :id
+    //     GROUP BY `chapters`.`id_chapters`
+    //     ORDER BY `chapters`.`index`;';
+    
+    //     $sth = $pdo->prepare($sql);
+    //     $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+    //     if ($sth->execute()) {
+    //         return ($sth->fetchAll());
+    //     }
+    // }
+
+    public static function getAll(int $id)
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `chapters`.`id_chapters`, `chapters`.`title` AS `chapters_titles`, `chapters`.`index`, `chapters`.`summary` AS `chapter_summary`, `chapters`.`id_stories`,
-        GROUP_CONCAT(DISTINCT `sections`.`title` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `sections_titles`,
-        GROUP_CONCAT(DISTINCT `sections`.`id_sections` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections`,
-        GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_parent` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_parent`,
-        GROUP_CONCAT(DISTINCT `sections_sections`.`id_sections_child` ORDER BY `sections_sections`.`id_sections_parent` SEPARATOR \' | \') AS `id_sections_child`
-        FROM `chapters`
-        LEFT JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-        LEFT JOIN `sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
-        LEFT JOIN `sections_sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
-        WHERE `chapters`.`id_stories` = :id
-        GROUP BY `chapters`.`id_chapters`
-        ORDER BY `chapters`.`index`;';
+        $sql = 'SELECT `sections`.*
+        FROM `sections`
+        LEFT JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        WHERE `chapters_sections`.`id_chapters` = :id
+        ORDER BY `sections`.`id_sections`;';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 

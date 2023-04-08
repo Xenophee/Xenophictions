@@ -107,7 +107,7 @@
                     <!-- TABLEAU QUI AFFICHE TOUS LES CHAPITRES ET LEURS SECTIONS -->
                     
                     <?php 
-                    foreach ($chapters as $key => $chapter) { ?>
+                    foreach ($chapters as $chapter) { ?>
                         <table class="table align-middle table-striped table-hover my-5">
                             <thead>
                                 <form method="POST">
@@ -115,7 +115,7 @@
                                         <th scope="col"><input type="number" class="form-control updateInput indexInput" name="index" value="<?= $chapter->index ?>"></th>
                                         <th scope="col">
                                             <h2>
-                                                <input type="text" class="form-control updateInput fs-3" name="chapterTitle" value="<?= $chapter->chapters_titles ?>">
+                                                <input type="text" class="form-control updateInput fs-3" name="chapterTitle" value="<?= $chapter->title ?>">
                                                 <input type="hidden" name="chapterId" value="<?= $chapter->id_chapters ?>">
                                             </h2>
                                         </th>
@@ -148,7 +148,7 @@
                                         <td><?= $section->id_sections_parent ?></td>
                                         <td><?= $section->id_sections_child ?></td>
                                         <td class="d-flex justify-content-end">
-                                            <a href="../../controllers/sections_update_controller.php?id=<?= $section->id_sections ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
+                                            <a href="../../controllers/sections_update_controller.php?id=<?= $section->id_sections ?>&chapter=<?= $chapter->id_chapters ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
                                                 <i class="bi bi-pen"></i>
                                             </a>
                                             <!-- Bouton supprimer -->
