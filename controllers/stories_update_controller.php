@@ -172,8 +172,6 @@ try {
     $themesCategories = Theme_Category::getAll();
     $story = Story::get($idStory);
     $chapters = Chapter::getAll($idStory);
-    $sections = Section_Section::getAll(4);
-    // var_dump($sections);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

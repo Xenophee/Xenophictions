@@ -239,7 +239,7 @@ class Story
     public static function get(int $id): object|bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories` FROM `stories`
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`id_categories` SEPARATOR \', \') AS `id_categories`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories` FROM `stories`
         LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
         LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
         LEFT JOIN `notes` ON `notes`.`id_stories` = `stories`.`id_stories`

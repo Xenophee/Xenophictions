@@ -78,9 +78,9 @@
                                         $count = 1;
                                         $categories = explode(',', $themeCategory->categories_names);
                                         $categoriesId = explode(',', $themeCategory->id_categories);
-                                        $storyCategories = explode(',', $story->categories);
+                                        $storyCategories = explode(',', $story->id_categories);
                                         foreach (array_combine($categoriesId, $categories) as $id => $category) {
-                                            $isChecked = (in_array($category, $storyCategories)) ? 'checked' : ''; ?>
+                                            $isChecked = (in_array($id, $storyCategories)) ? 'checked' : ''; ?>
                                             <div class="form-check d-flex align-items-center mb-4 mb-lg-2">
                                                 <input class="form-check-input" type="checkbox" name="themeCategories[]" value="<?= $id ?>" id="<?= $category ?>" required <?= $isChecked ?>>
                                                 <label class="form-check-label ms-3" for="<?= $category ?>"><?= $category ?></label>
