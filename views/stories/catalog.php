@@ -59,7 +59,7 @@
                                         <div class="progress-bar" style="width: 25%">25%</div>
                                     </div>
                                     <h3 class="text-center mt-4 mt-lg-3 mb-5 mx-3 mx-md-5 mx-lg-0"><?= $story->title ?></h3>
-                                    <?= $story->synopsis ?>
+                                    <p class="mx-3 mx-md-5 mx-lg-0"><?= $story->synopsis ?></p>
                                     <!-- <p class="mx-3 mx-md-5 mx-lg-0">Lorem ipsum dolor sit
                                 amet. Cum harum quam est voluptas assumenda eum quia atque aut
                                 fugit labore quo pariatur reprehenderit.

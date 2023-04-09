@@ -88,6 +88,18 @@ try {
 
         // ---------------------------------------------------------------------------------------------
 
+        // NEWSLETTERS
+        $newsletter = intval(filter_input(INPUT_POST, 'newsletter', FILTER_SANITIZE_NUMBER_INT));
+
+        $newsletterOk = filter_var($newsletter, FILTER_VALIDATE_BOOLEAN);
+
+        if (!$newsletterOk) {
+            $errors['newsletter'] = 'La newsletter n\'a pas été correctement acceptée.';
+        }
+
+
+        // ---------------------------------------------------------------------------------------------
+
         // MOT DE PASSE
 
         $password = filter_input(INPUT_POST, 'password');
@@ -118,16 +130,18 @@ try {
             if ($username != $user->username && User::isUsernameExist($username)) {
                 $errors['username'] = 'Ce nom d\'utilisateur existe déjà';
             } else {
-                $userUpdate->setUsername($username);
+                $userUpdate->setUsername($usernameOk);
             }
 
             if ($email != $user->email && User::isEmailExist($email)) {
                 $errors['mail'] = 'Ce mail existe déjà';
             } else {
-                $userUpdate->setEmail($email);
+                $userUpdate->setEmail($emailOk);
             }
 
-            $userUpdate->setBirthdate($birthdate);
+            $userUpdate->setBirthdate($birthdateOk);
+
+            $userUpdate->setNewsletter($newsletterOk);
 
             if (empty($errors)) {
                 $isUpdated = $userUpdate->update($user->id_users);
@@ -142,7 +156,6 @@ try {
                     if (isset($_COOKIE['userSession'])) {
                         setcookie('userSession', serialize($userUpdated),  time() + 2592000, '/');
                     }
-
                 } else {
                     Flash::setMessage('Un problème est survenu : vos informations n\'ont été mises à jours.');
                 }

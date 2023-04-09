@@ -1,62 +1,64 @@
 <main>
-        <div class="container-fluid">
-            <div class="row align-items-stretch">
+    <div class="container-fluid">
+        <div class="row align-items-stretch">
             <?php
             include(__DIR__ . '/../templates/profil_navbar.php');
             ?>
 
 
 
-                <div class="col-12 col-xl-10">
-                    <section class="d-flex flex-column px-md-5">
-                        <div class="my-5">
-                            <h1 class="text-center">Historique (à venir)</h1>
-                        </div>
+            <div class="col-12 col-xl-10">
+                <section class="d-flex flex-column px-md-5">
+                    <div class="my-5">
+                        <h1 class="text-center">Historique (à venir)</h1>
+                    </div>
 
-                        <div>
-                            <h2 class="profilTitle mb-4">Lectures en cours</h2>
-                            <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
-                                <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Continuer</a>
-                                </div>
-                                <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Continuer</a>
-                                </div>
-                                <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Continuer</a>
-                                </div>
+                    <div>
+                        <h2 class="profilTitle mb-4">Lectures en cours</h2>
+                        <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+
+                            <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Continuer</a>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Continuer</a>
+                            </div>
+                            <div class="d-flex flex-column align-items-center currentStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Continuer</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mb-5">
-                            <h2 class="profilTitle mt-4 mb-4">Lectures achevées</h2>
-                            <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
-                                <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Relire</a>
-                                </div>
-                                <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Relire</a>
-                                </div>
-                                <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
-                                    <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
-                                    <h3 class="text-center my-4">Titre de l'oeuvre</h3>
-                                    <a href="" class="btn btnRead">Relire</a>
-                                </div>
+                    <div class="mb-5">
+                        <h2 class="profilTitle mt-4 mb-4">Lectures achevées</h2>
+                        <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+                            <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Relire</a>
+                            </div>
+                            <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Relire</a>
+                            </div>
+                            <div class="d-flex flex-column align-items-center ancientStory py-3 me-md-5 mb-3">
+                                <img src="../public/assets/img/coverImgPortrait/dragon.jpg" class="img-fluid coverStory" alt="">
+                                <h3 class="text-center my-4">Titre de l'oeuvre</h3>
+                                <a href="" class="btn btnRead">Relire</a>
                             </div>
                         </div>
-                        
-                    </section>
-                </div>
+                    </div>
+
+                </section>
             </div>
         </div>
-    </main>
+    </div>
+</main>

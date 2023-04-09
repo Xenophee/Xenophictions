@@ -53,6 +53,14 @@
                                 <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= $birthdate ?? $user->birthdate ?>" required>
                                 <div class="text-danger fst-italic mt-2"><?= $errors['birthdate'] ?? '' ?></div>
                             </div>
+
+                            <div class="my-5 form-check d-flex justify-content-center align-items-center">
+                                <?php $isChecked = ($user->newsletter == true) ? 'checked' : ''; ?>
+                                <input type="checkbox" class="form-check-input" id="newsletter" value="1" <?= $isChecked ?>>
+                                <label class="form-check-label ps-3" for="newsletter">Je m'inscris à la
+                                    newsletter</label>
+                            </div>
+
                         </fieldset>
 
                         <hr>
@@ -76,12 +84,6 @@
                                 <div class="text-danger fst-italic mt-2"><?= $errors['confirmPassword'] ?? '' ?></div>
                             </div>
                         </fieldset>
-
-                        <div class="my-5 form-check d-flex justify-content-center align-items-center">
-                            <input type="checkbox" class="form-check-input" id="newsletter">
-                            <label class="form-check-label ps-3" for="newsletter">Je m'inscris à la
-                                newsletter</label>
-                        </div>
 
                         <div class="d-flex justify-content-center my-5">
                             <button type="submit" class="btn px-5 py-2"><i class="bi bi-pencil-fill me-3"></i>Soumettre les modifications</button>

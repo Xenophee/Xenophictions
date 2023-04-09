@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../config/init.php');
+require_once(__DIR__ . '/../models/Save.php');
 
 try {
 
@@ -21,6 +22,9 @@ try {
     $css = CSS['account'];
 
     $titleDoc = 'Historique';
+
+    $sections = Save::get($user->id_users);
+    var_dump($sections);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

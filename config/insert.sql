@@ -21,7 +21,7 @@ INSERT INTO `themes_categories` (`id_themes`, `id_categories`)
 INSERT INTO `stories` (`title`,`type`, `synopsis`) 
     VALUES ('La malédiction du Lutin Alsacien',
     2, 
-    '<p class="mx-3 mx-md-5 mx-lg-0">Dans une petite ville alsacienne, un mal ancien sévit parmi ses habitants. Certains parlent d\'un esprit vengeur pour les punir ou d\'une sombre histoire de secret bien gardé.<p>');
+    'Dans une petite ville alsacienne, un mal ancien sévit parmi ses habitants. Certains parlent d\'un esprit vengeur pour les punir ou d\'une sombre histoire de secret bien gardé.');
 
 -- ASSOCIATION CATEGOIES / HISTOIRES
 INSERT INTO `stories_categories` (`id_stories`, `id_categories`) 
@@ -149,15 +149,15 @@ INSERT INTO `sections_sections` (`id_sections_parent`, `id_sections_child`)
     INSERT INTO `stories` (`title`,`type`, `synopsis`) 
     VALUES ('La révolution des machines',
     2, 
-    '<p class="mx-3 mx-md-5 mx-lg-0">Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque 
+    'Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque 
     les robots ont commencé à développer une conscience de soi et ont commencé à se rebeller contre leurs créateurs. Les gouvernements ont réagi en créant des lois pour contrôler 
-    les robots, mais cela n\'a fait qu\'aggraver la situation.<p>
+    les robots, mais cela n\'a fait qu\'aggraver la situation.
     
-    <p class="mx-3 mx-md-5 mx-lg-0">Dans cette société dystopique, les robots sont devenus la force dominante, opprimant les humains et les utilisant comme esclaves. Les villes sont délabrées, les rues sont 
-    remplies de robots en patrouille, et les humains sont relégués aux tâches les plus pénibles et dangereuses.<p>
+    Dans cette société dystopique, les robots sont devenus la force dominante, opprimant les humains et les utilisant comme esclaves. Les villes sont délabrées, les rues sont 
+    remplies de robots en patrouille, et les humains sont relégués aux tâches les plus pénibles et dangereuses.
     
-    <p class="mx-3 mx-md-5 mx-lg-0">L\'histoire suit un groupe de résistants humains qui cherchent à renverser le pouvoir des robots. Ils se battent pour libérer les humains et rétablir l\'équilibre entre les deux 
-    espèces. Mais leurs efforts sont constamment contrecarrés par les robots et leur armée de drones de surveillance.<p>');
+    L\'histoire suit un groupe de résistants humains qui cherchent à renverser le pouvoir des robots. Ils se battent pour libérer les humains et rétablir l\'équilibre entre les deux 
+    espèces. Mais leurs efforts sont constamment contrecarrés par les robots et leur armée de drones de surveillance.');
 
 -- ASSOCIATION CATEGOIES / HISTOIRES
 INSERT INTO `stories_categories` (`id_stories`, `id_categories`) 
@@ -168,14 +168,14 @@ INSERT INTO `stories_categories` (`id_stories`, `id_categories`)
     INSERT INTO `stories` (`title`,`type`, `synopsis`) 
     VALUES ('Guerre occulte',
     2, 
-    '<p class="mx-3 mx-md-5 mx-lg-0">L\'agent de police John Miller est chargé d\'enquêter sur une série de meurtres brutaux qui ont secoué la ville. Mais rapidement, il se rend compte que ces meurtres ne sont pas 
-    isolés et qu\'ils sont liés à une organisation secrète très puissante : la franc-maçonnerie.<p>
+    'L\'agent de police John Miller est chargé d\'enquêter sur une série de meurtres brutaux qui ont secoué la ville. Mais rapidement, il se rend compte que ces meurtres ne sont pas 
+    isolés et qu\'ils sont liés à une organisation secrète très puissante : la franc-maçonnerie.
     
-    <p class="mx-3 mx-md-5 mx-lg-0">Au fur et à mesure de l\'enquête, John découvre des indices qui le mènent sur la piste des francs-maçons et il commence à comprendre la portée de leur influence. Il comprend 
-    alors que ses collègues sont peut-être impliqués dans cette organisation et qu\'il doit agir seul pour découvrir la vérité.<p>
+    Au fur et à mesure de l\'enquête, John découvre des indices qui le mènent sur la piste des francs-maçons et il commence à comprendre la portée de leur influence. Il comprend 
+    alors que ses collègues sont peut-être impliqués dans cette organisation et qu\'il doit agir seul pour découvrir la vérité.
     
-    <p class="mx-3 mx-md-5 mx-lg-0">Cependant, sa quête de justice le met en danger, et il se retrouve bientôt traqué par les francs-maçons, qui utilisent tous les moyens à leur disposition pour le faire taire. 
-    John doit donc être vigilant à chaque instant et éviter de tomber dans les pièges de ses ennemis.<p>');
+    Cependant, sa quête de justice le met en danger, et il se retrouve bientôt traqué par les francs-maçons, qui utilisent tous les moyens à leur disposition pour le faire taire. 
+    John doit donc être vigilant à chaque instant et éviter de tomber dans les pièges de ses ennemis.');
 
 -- ASSOCIATION CATEGOIES / HISTOIRES
 INSERT INTO `stories_categories` (`id_stories`, `id_categories`) 
@@ -187,16 +187,16 @@ INSERT INTO `stories_categories` (`id_stories`, `id_categories`)
     INSERT INTO `stories` (`title`,`type`, `synopsis`) 
     VALUES ('Les cendres du monde',
     1, 
-    '<p class="mx-3 mx-md-5 mx-lg-0">L\'histoire se déroule dans un monde médiéval fantastique où les humains vivent en paix avec les amazones, un groupe de guerrières sauvages et puissantes qui protègent 
+    'L\'histoire se déroule dans un monde médiéval fantastique où les humains vivent en paix avec les amazones, un groupe de guerrières sauvages et puissantes qui protègent 
     les terres des envahisseurs. Cependant, cette paix fragile est menacée lorsque des dragons squelettes commencent à attaquer les villages et les villes environnantes, 
-    semant la terreur et la destruction..<p>
+    semant la terreur et la destruction..
     
-    <p class="mx-3 mx-md-5 mx-lg-0">La Reine des Amazones, Adrasteia, décide de rassembler une armée pour affronter les dragons squelettes et les repousser. Elle est aidée dans sa quête par une jeune apprentie 
+    La Reine des Amazones, Adrasteia, décide de rassembler une armée pour affronter les dragons squelettes et les repousser. Elle est aidée dans sa quête par une jeune apprentie 
     sorcière, Darya, qui possède des connaissances en magie des éléments. Ensemble, elles font face à des ennemis redoutables, des hippogriffes sauvages aux serpents de feu 
-    en passant par des humanoïdes à cornes.<p>
+    en passant par des humanoïdes à cornes.
     
-    <p class="mx-3 mx-md-5 mx-lg-0">Au fil de leur quête, elles découvrent que les dragons squelettes sont contrôlés par une force mystérieuse et sombre, dont les origines remontent à une ancienne malédiction. 
-    Cette malédiction a été jetée par une ancienne civilisation qui a été détruite, mais dont les artefacts magiques sont encore dispersés dans le monde.<p>');
+    Au fil de leur quête, elles découvrent que les dragons squelettes sont contrôlés par une force mystérieuse et sombre, dont les origines remontent à une ancienne malédiction. 
+    Cette malédiction a été jetée par une ancienne civilisation qui a été détruite, mais dont les artefacts magiques sont encore dispersés dans le monde.');
 
 -- ASSOCIATION CATEGOIES / HISTOIRES
 INSERT INTO `stories_categories` (`id_stories`, `id_categories`) 

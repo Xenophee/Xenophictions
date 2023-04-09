@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/Story.php');
 require_once(__DIR__ . '/../models/Chapter.php');
+require_once(__DIR__ . '/../models/Section.php');
 require_once(__DIR__ . '/../models/Note.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
@@ -10,7 +11,7 @@ try {
 
     // RECUPERATION DE L'IDENTIFIANT DE L'HISTOIRE CONCERNEE
     $id = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
-    
+
     // VERIFICATION QUE LE PARAMETRE EXISTE
     if (!$id) {
         header('location: /404.php');
@@ -62,10 +63,14 @@ try {
 
     // RECUPERATION DES CHAPITRES POUR LE SOMMAIRE
     $chapters = Chapter::getAll($id);
+    $firstChapter = array_shift($chapters);
+    $lastChapter = array_pop($chapters);
+    $firstSection = Section::getFirstSection($firstChapter->id_chapters);
+    $lastSection = Section::getLastSection($lastChapter->id_chapters);
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
     $comments = Comment::getAll($id);
-    // var_dump($comments);
+    // var_dump($firstSection);
 
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;

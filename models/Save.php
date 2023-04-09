@@ -45,14 +45,18 @@ class Save {
     public static function get(int $id)
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT *
-        FROM `sections_sections`
-        WHERE `id_sections_child` = :id';
+        $sql = 'SELECT `chapters`.`id_stories`, `chapters`.`id_chapters`, `saves`.`id_sections`
+        FROM `saves`
+        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections`
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        WHERE `saves`.`id_users` = :id
+        ORDER BY `read_at` DESC;';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
         if ($sth->execute()) {
-            return ($sth->fetchAll());
+            return ($sth->fetch());
         }
     }
 
@@ -64,7 +68,7 @@ class Save {
         JOIN `saves` ON `sections`.`id_sections` = `saves`.`id_sections`
         JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
         JOIN `chapters` ON `chapters_sections`.`id_chapters` = `chapters`.`id_chapters`
-        JOIN stories ON `stories`.`id_stories` = `chapters`.`id_stories`
+        JOIN `stories` ON `stories`.`id_stories` = `chapters`.`id_stories`
         WHERE `saves`.`id_users` = :id_users AND `chapters`.`id_chapters` = :id_chapters
         ORDER BY `saves`.`read_at`;';
         $sth = $pdo->prepare($sql);

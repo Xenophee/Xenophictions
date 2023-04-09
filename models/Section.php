@@ -188,13 +188,30 @@ class Section
         }
     }
 
-    public static function getbyChapter($id)
+    public static function getFirstSection($id)
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `id_sections`, `title`, `description`, `content`
+        $sql = 'SELECT `sections`.`id_sections`
         FROM `sections`
+        JOIN `chapters_sections` ON `chapters_sections`.`id_sections` = `sections`.`id_sections`
         WHERE `id_chapters` = :id
-        ORDER BY registered_at ASC';
+        ORDER BY `sections`.`id_sections` ASC';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
+    public static function getLastSection($id)
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `sections`.`id_sections`
+        FROM `sections`
+        JOIN `chapters_sections` ON `chapters_sections`.`id_sections` = `sections`.`id_sections`
+        WHERE `id_chapters` = :id
+        ORDER BY `sections`.`id_sections` DESC';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 

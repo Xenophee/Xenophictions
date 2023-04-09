@@ -23,7 +23,22 @@ class Section_Section {
         return $this->id_sections_child;
     }
 
-    public static function get(int $id)
+    public static function getSectionParent(int $id)
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `sections`.*
+        FROM `sections_sections`
+        JOIN `sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_parent`
+        WHERE `id_sections_child` = :id';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
+    public static function getSectionChild(int $id)
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*
