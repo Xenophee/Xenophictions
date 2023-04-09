@@ -1,0 +1,81 @@
+@import url('variablesLight.css');
+
+p {
+    line-height: 40px;
+}
+
+.col {
+    padding: 0;
+}
+
+.bi-arrow-left, .bi-arrow-up {
+    font-size: 2.5rem;
+    color: var(--dark-color);
+}
+
+.btn {
+    padding: 1%;
+    width: 20%;
+}
+
+.btnDiv {
+    width: 100%;
+}
+
+.btnCharacters {
+    width: 75%;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+/* .btnSummary {
+    width: auto;
+} */
+
+.coverImg {
+    height: 40vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.bottomNav {
+    width: 50%;
+}
+
+.btnChoice {
+    width: auto;
+    padding: 7px 35px 7px;
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    
+    .btnCharacters {
+        width: 30%;
+    }
+
+    .btnChoice {
+        width: auto;
+        padding: 10px 35px 10px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .btnCharacters {
+        width: 30%;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    .btnCharacters {
+        width: 15%;
+    }
+
+    .btnChoice {
+        width: 50%;
+        padding: 15px 50px 15px;
+    }
+}

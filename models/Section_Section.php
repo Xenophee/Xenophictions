@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/../helpers/Database.php');
+
 class Section_Section {
 
     private ?int $id_sections_parent = null;
@@ -24,9 +26,10 @@ class Section_Section {
     public static function get(int $id)
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT *
+        $sql = 'SELECT `sections`.*
         FROM `sections_sections`
-        WHERE `id_sections_child` = :id';
+        JOIN `sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_child`
+        WHERE `id_sections_parent` = :id';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 

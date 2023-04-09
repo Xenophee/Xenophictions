@@ -26,6 +26,7 @@ define('CSS', [
     'account' =>'../../public/assets/css/account.css',
     'catalog' =>'../../public/assets/css/catalog.css',
     'chapter' =>'../../public/assets/css/chapter.css',
+    'section' =>'../../public/assets/css/section.css',
     'dashboard' =>'../../public/assets/css/dashboard.css',
     'form' =>'../../public/assets/css/form.css',
     'home' =>'../../public/assets/css/home.css',

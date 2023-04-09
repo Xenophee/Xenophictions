@@ -195,6 +195,22 @@ class Chapter
         return $this->id_stories;
     }
 
+    public static function get(int $idStory, int $idChapter): object
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `chapters`.`title` AS `chapter_title`, `stories`.`title` AS `story_title` 
+        FROM `chapters`
+        JOIN `stories` ON `stories`.`id_stories` = `chapters`.`id_stories`
+        WHERE `chapters`.`id_stories` = :id_stories AND `chapters`.`id_chapters` = :id_chapters;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
+        $sth->bindValue(':id_chapters', $idChapter, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
     public static function getAll(int $id): array
     {
         $pdo = Database::getInstance();

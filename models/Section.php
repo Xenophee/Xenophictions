@@ -174,7 +174,7 @@ class Section
         return $this->deleted_at;
     }
 
-    public static function get($id)
+    public static function get(int $id):object
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT *
@@ -226,6 +226,7 @@ class Section
     //         return ($sth->fetchAll());
     //     }
     // }
+
 
     public static function getAll(int $id)
     {

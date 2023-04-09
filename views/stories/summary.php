@@ -15,7 +15,8 @@
 
                         <!-- CATEGORIES -->
                         <div class="d-flex justify-content-center flex-wrap">
-                        <?php $categories = explode(',', $story->categories);
+                        <?php 
+                        $categories = explode(',', $story->categories);
                                 foreach($categories as $category) { ?>
                             <span class="badge categoryInfo my-2 mx-2"><?= $category ?></span> <?php } ?>
                         </div>
@@ -88,7 +89,7 @@
                                 <div
                                     class="col-12 col-md-11 col-lg-10 col-xl-7 progressionSection d-flex flex-column flex-md-row justify-content-between align-items-center py-2 px-4">
                                     <h3><?= $chapter->title ?></h3>
-                                    <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>" class="btn btnReading mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
+                                    <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
                                 </div>
                             </div>
                         </article> <?php } ?>

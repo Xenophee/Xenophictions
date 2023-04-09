@@ -7,6 +7,17 @@ require_once(__DIR__ . '/../models/Note.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
 try {
+
+    // RECUPERATION DE L'IDENTIFIANT DE L'HISTOIRE CONCERNEE
+    $id = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
+    
+    // VERIFICATION QUE LE PARAMETRE EXISTE
+    if (!$id) {
+        header('location: /404.php');
+        die;
+    }
+
+
     // FICHIER CSS A CHARGER
     $css = CSS['summary'];
 
@@ -20,8 +31,6 @@ try {
         $user = $_SESSION['user'];
     }
 
-    // RECUPERATION DE L'IDENTIFIANT DE L'HISTOIRE CONCERNEE
-    $id = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
 
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
