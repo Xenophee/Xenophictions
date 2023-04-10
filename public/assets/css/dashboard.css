@@ -139,7 +139,12 @@ span {
 
 /* GENERAL */
 
-
+.coverLandscape {
+    height: 500px;
+    width: 1000px;
+    object-fit: cover;
+    border: var(--border-dark-double);
+}
 
 
 /* ----------------------------------------------------------------------------------------------------------------- */

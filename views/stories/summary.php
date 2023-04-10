@@ -58,7 +58,7 @@
                             <a href="../../controllers/delete_user_controller.php?id=<?= $save->id_stories ?>&delete=4" class="btn" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
                             <a href="../../controllers/section_controller.php?section=<?= $save->id_sections ?>&chapter=<?= $save->id_chapters ?>&story=<?= $save->id_stories ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Continuer</a>
                         <?php } else { ?>
-                            <p>Il n'y a rien à lire pour le moment</p>
+                            <p><span>Il n'y a rien à lire pour le moment</span></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -70,6 +70,17 @@
                 <hr class="my-5">
             </div>
         </div>
+
+        <?php if (Flash::isExist()) { ?>
+            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center alert alert-dismissible fade show w-50 mt-5" role="alert">
+                <strong><?php echo Flash::getMessage();
+                        ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            </div>
+            
+        <?php } ?>
 
         <!-- NAVIGATION SOMMAIRE / COMMENTAIRES -->
         <section class="mb-5">
@@ -141,13 +152,7 @@
             <div class="row justify-content-center d-none" id="comments">
                 <div class="col-11 col-lg-10 col-xl-7">
 
-                    <?php if (Flash::isExist()) { ?>
-                        <div class="alert alert-dismissible fade show w-100 mt-5" role="alert">
-                            <strong><?php echo Flash::getMessage();
-                                    ?></strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php } ?>
+
 
                     <?php if (!empty($user)) { ?>
                         <div class="comment py-4 px-4">

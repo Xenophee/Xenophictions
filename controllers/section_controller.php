@@ -26,6 +26,8 @@ try {
         $user = unserialize($_COOKIE['userSession']);
     } else if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
+    } else {
+        $user = null;
     }
 
     // FICHIER CSS A CHARGER
@@ -40,7 +42,7 @@ try {
     // $sectionsParent = Section_Section::getSectionParent($idSection);
 
     // SAUVEGARDE DE LA PROGRESSION DES UTILISATEURS
-    if ($user) {
+    if (!is_null($user)) {
         $save = new Save;
         $save->setId_users($user->id_users);
         $save->setId_sections($idSection);

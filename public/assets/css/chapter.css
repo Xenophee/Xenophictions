@@ -1,5 +1,9 @@
 @import url('variablesLight.css');
 
+.col {
+    padding: 0;
+}
+
 .coverImg {
     height: 40vh;
     width: 100%;

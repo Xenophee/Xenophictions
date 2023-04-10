@@ -11,7 +11,6 @@
                 <section class="d-flex flex-column align-items-center px-5">
                     <div>
                         <h1 class="text-center mt-5">Liste des histoires</h1>
-                        <h2 class="text-center mt-5">En attente de publication</h2>
                     </div>
 
                     <!-- <form class="d-flex" role="search">
@@ -28,41 +27,45 @@
                     <?php } ?>
 
                     <!-- LISTE DES HISTOIRES EN ATTENTE DE PUBLICATION -->
-                    <table class="table align-middle table-striped table-hover mt-5">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Date d'enregistrement</th>
-                                <th scope="col">Thème</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <?php foreach($stories as $key => $story) {
-                                if (is_null($story->published_at)) { ?>
-                            <tr>
-                                <th scope="row"><?= $key +1 ?></th>
-                                <td><?= $story->title ?></td>
-                                <td><?php echo ($story->type == 1) ? 'Linéaire' : 'Interactif'; ?></td>
-                                <td><?= date('d/m/Y à H:i', strtotime($story->registered_at)) ?></td>
-                                <td><?= $story->theme_name ?></td>
-                                <td class="d-flex justify-content-end">
-                                    <a href="../../controllers/publication_controller.php?id=<?= $story->id_stories ?>&publish=1" class="btn view py-2 px-4 me-3" title="Publier l'histoire"><i class="bi bi-check2-circle"></i></a>
-                                    <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn edit py-2 px-4 me-3" title="Editer l'histoire"><i class="bi bi-pen"></i></a>
-                                    <a href="" class="btn delete py-2 px-4" title="Supprimer l'histoire" data-id="<?= $story->id_stories ?>" data-deleteparam="4" data-bs-toggle="modal" data-bs-target="#deleteStory"><i class="bi bi-trash3" data-id="<?= $story->id_stories ?>" data-deleteparam="4"></i></a>
-                                </td>
-                            </tr> <?php } } ?>
-                        </tbody>
-                    </table>
+                    <?php if (!empty($unpublishedStories)) { ?>
+                        <div class="pt-5 mt-5">
+                            <h2>En attente de publication</h2>
+                        </div>
 
-                    <div class="mt-5">
+                        <table class="table align-middle table-striped table-hover mt-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Date d'enregistrement</th>
+                                    <th scope="col">Thème</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <?php foreach ($unpublishedStories as $key => $story) { ?>
+                                    <tr>
+                                        <th scope="row"><?= $key + 1 ?></th>
+                                        <td><?= $story->title ?></td>
+                                        <td><?php echo ($story->type == 1) ? 'Linéaire' : 'Interactif'; ?></td>
+                                        <td><?= date('d/m/Y à H:i', strtotime($story->registered_at)) ?></td>
+                                        <td><?= $story->theme_name ?></td>
+                                        <td class="d-flex justify-content-end">
+                                            <a href="../../controllers/publication_controller.php?id=<?= $story->id_stories ?>&publish=1" class="btn view py-2 px-4 me-3" title="Publier l'histoire"><i class="bi bi-check2-circle"></i></a>
+                                            <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn edit py-2 px-4 me-3" title="Editer l'histoire"><i class="bi bi-pen"></i></a>
+                                            <a href="" class="btn delete py-2 px-4" title="Supprimer l'histoire" data-id="<?= $story->id_stories ?>" data-deleteparam="4" data-bs-toggle="modal" data-bs-target="#deleteStory"><i class="bi bi-trash3" data-id="<?= $story->id_stories ?>" data-deleteparam="4"></i></a>
+                                        </td>
+                                    </tr> <?php } ?>
+                            </tbody>
+                        </table> <?php } ?>
+
+                    <div class="pt-5 mt-5">
                         <h2>Publiées sur le site</h2>
                     </div>
 
                     <!-- LISTE DES HISTOIRES PUBLIEES -->
-                    <table class="table align-middle table-striped table-hover mt-5">
+                    <table class="table align-middle table-striped table-hover mt-5 mb-5">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -74,20 +77,19 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <?php foreach($stories as $key => $story) {
-                                if (!is_null($story->published_at)) { ?>
-                            <tr>
-                                <th scope="row"><?= $key +1 ?></th>
-                                <td><?= $story->title ?></td>
-                                <td><?php echo ($story->type == 1) ? 'Linéaire' : 'Interactif'; ?></td>
-                                <td><?= date('d/m/Y à H:i', strtotime($story->published_at)) ?></td>
-                                <td><?= $story->theme_name ?></td>
-                                <td class="d-flex justify-content-end">
-                                    <!-- <a href="../../controllers/stories_update_controller.php?id=" class="btn view py-2 px-4 me-3" title="Consulter les détails"><i class="bi bi-eye"></i></a> -->
-                                    <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn edit py-2 px-4 me-3" title="Editer l'histoire"><i class="bi bi-pen"></i></a>
-                                    <button type="button" class="btn delete py-2 px-4" title="Supprimer l'histoire" data-id="<?= $story->id_stories ?>" data-deleteparam="4" data-bs-toggle="modal" data-bs-target="#deleteStory"><i class="bi bi-trash3" data-id="<?= $story->id_stories ?>" data-deleteparam="4"></i></button>
-                                </td>
-                            </tr> <?php } } ?>
+                            <?php foreach ($publishedStories as $key => $story) { ?>
+                                <tr>
+                                    <th scope="row"><?= $key + 1 ?></th>
+                                    <td><?= $story->title ?></td>
+                                    <td><?php echo ($story->type == 1) ? 'Linéaire' : 'Interactif'; ?></td>
+                                    <td><?= date('d/m/Y à H:i', strtotime($story->published_at)) ?></td>
+                                    <td><?= $story->theme_name ?></td>
+                                    <td class="d-flex justify-content-end">
+                                        <!-- <a href="../../controllers/stories_update_controller.php?id=" class="btn view py-2 px-4 me-3" title="Consulter les détails"><i class="bi bi-eye"></i></a> -->
+                                        <a href="../../controllers/stories_update_controller.php?id=<?= $story->id_stories ?>" class="btn edit py-2 px-4 me-3" title="Editer l'histoire"><i class="bi bi-pen"></i></a>
+                                        <button type="button" class="btn delete py-2 px-4" title="Supprimer l'histoire" data-id="<?= $story->id_stories ?>" data-deleteparam="4" data-bs-toggle="modal" data-bs-target="#deleteStory"><i class="bi bi-trash3" data-id="<?= $story->id_stories ?>" data-deleteparam="4"></i></button>
+                                    </td>
+                                </tr> <?php } ?>
                         </tbody>
                     </table>
 

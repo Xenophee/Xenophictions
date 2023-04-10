@@ -53,7 +53,7 @@ define('CATALOG', [
 
 // ICONES DE THEME
 define('THEME_ICON', [
-    1 => '../public/assets/img/others/homme-invisible.png',
+    1 => '../public/assets/img/others/invisible-man.png',
     2 => '../public/assets/img/others/cyborg.png',
     3 => '../public/assets/img/others/sorcier.png',
 ]);
@@ -76,7 +76,8 @@ define('CODE', [
     9 => 'Une erreur est survenue : le chapitre n\'a pas été supprimé',
     10 => 'La section a été supprimée',
     11 => 'Une erreur est survenue : la section n\'a pas été supprimée',
-
+    12 => 'Le commentaire a été supprimé',
+    13 => 'Une erreur est survenue : le commentaire n\'a pas été supprimé.'
 ]);
 
 define('PUBLICATION', [

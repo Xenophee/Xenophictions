@@ -82,7 +82,12 @@ try {
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;
 
-    $save = Save::get($user->id_users, $id);
+    if (isset($user)) {
+        $save = Save::get($user->id_users, $id);
+    } else {
+        $save = false;
+    }
+    
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

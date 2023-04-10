@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col">
                 <div>
-                    <img src="../public/assets/img/originImg/01.jpg" alt="" class="img-fluid coverImg">
+                    <img src="../public/uploads/stories/<?= $story ?>.jpg" alt="" class="img-fluid coverImg">
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
         <div class="row justify-content-around mt-4">
             <div class="col-11 d-flex justify-content-between align-items-center">
                 <a href="../../controllers/summary_controller.php?story=<?= $story ?>" class="btn btnCharacters">Sommaire</a>
-                <a href="" class="btn btnCharacters">Personnages</a>
+                <a href="" class="btn btnCharacters disabled">Personnages</a>
             </div>
         </div>
 

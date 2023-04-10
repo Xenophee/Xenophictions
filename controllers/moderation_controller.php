@@ -27,6 +27,13 @@ try {
     // RECUPERATION DE TOUS LES COMMENTAIRES
     $comments = Comment::getAll();
 
+    foreach ($comments as $comment) {
+        if (is_null($comment->published_at)) {
+            $unpublishedComments[] = $comment;
+        }
+    }
+
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

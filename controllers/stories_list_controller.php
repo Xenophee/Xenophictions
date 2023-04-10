@@ -45,7 +45,7 @@ try {
     if ($currentPage <= 0 || $currentPage > $nbPages) {
         $currentPage = 1;
     }
-    
+
     // Définit à partir de quel enregistrement positionner le curseur (l'offset) dans la requête
     $offset = ($currentPage - 1) * $limit;
 
@@ -54,7 +54,18 @@ try {
 
     // Appel à la méthode statique permettant de récupérer les utilisateurs selon la recherche et la pagination
     $stories = Story::getAll($type, $theme, $limit, $offset);
-    
+
+    $publishedStories = [];
+    $unpublishedStories = [];
+
+    foreach ($stories as $story) {
+        if (!is_null($story->published_at)) {
+            $publishedStories[] = $story;
+        } else {
+            $unpublishedStories[] = $story;
+        }
+    }
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

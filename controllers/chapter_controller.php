@@ -10,9 +10,13 @@ try {
     // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
     if (isset($_COOKIE['userSession'])) {
         $user = unserialize($_COOKIE['userSession']);
-    } else {
+    } else if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
+    } else {
+        $user = null;
     }
+
+
     // FICHIER CSS A CHARGER
     $css = CSS['chapter'];
 
@@ -23,8 +27,10 @@ try {
     $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
 
     $informations = Chapter::get($story, $chapter);
-    $sections = Save::getAll($user->id_users, $chapter);
 
+    if (!is_null($user)) {
+    $sections = Save::getAll($user->id_users, $chapter);
+    }
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

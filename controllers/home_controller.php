@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../config/init.php');
-
+require_once(__DIR__ . '/../models/Story.php');
 
 try {
 
@@ -16,6 +16,9 @@ try {
     $css = CSS['home'];
 
     $titleDoc = 'Accueil';
+
+    $lastPublication = Story::getLastPublish();
+    $mostPopular = Story::getMostPopular();
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

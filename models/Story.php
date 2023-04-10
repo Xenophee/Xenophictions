@@ -260,6 +260,48 @@ class Story
         }
     }
 
+
+    public static function getLastPublish(): object|bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
+        FROM `stories`
+        LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
+        LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
+        LEFT JOIN `themes_categories` ON `stories_categories`.`id_categories` = `themes_categories`.`id_categories`
+        LEFT JOIN `themes` ON `themes_categories`.`id_themes` = `themes`.`id_themes`
+        LEFT JOIN `notes` ON `notes`.`id_stories` = `stories`.`id_stories`
+        GROUP BY `stories`.`id_stories`
+        ORDER BY `stories`.`published_at` DESC';
+
+        $sth = $pdo->prepare($sql);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
+    public static function getMostPopular(): array|bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
+        FROM `stories`
+        LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
+        LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
+        LEFT JOIN `themes_categories` ON `stories_categories`.`id_categories` = `themes_categories`.`id_categories`
+        LEFT JOIN `themes` ON `themes_categories`.`id_themes` = `themes`.`id_themes`
+        LEFT JOIN `notes` ON `notes`.`id_stories` = `stories`.`id_stories`
+        GROUP BY `stories`.`id_stories`
+        ORDER BY AVG(`note`) DESC
+        LIMIT 3';
+
+        $sth = $pdo->prepare($sql);
+
+        if ($sth->execute()) {
+            return ($sth->fetchAll());
+        }
+    }
+
     public function add(): bool
     {
         $pdo = Database::getInstance();

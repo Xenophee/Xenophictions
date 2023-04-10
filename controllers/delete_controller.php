@@ -89,12 +89,20 @@ try {
                 Flash::setMessage(CODE[11]);
             }
             break;
+        case '7':
+            // SUPPRESSION D'UNE COMMENTAIRE
+            $isDeleted = Comment::deleteAdmin($id);
+            if ($isDeleted) {
+                Flash::setMessage(CODE[12]);
+            } else {
+                Flash::setMessage(CODE[13]);
+            }
+            break;
     }
 
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
-    
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

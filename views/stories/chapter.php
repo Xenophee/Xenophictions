@@ -16,7 +16,7 @@
             <div class="row justify-content-around mt-4">
                 <div class="col-11 d-flex justify-content-between align-items-center">
                     <a href="../../controllers/summary_controller.php?story=<?= $story ?>" title="Revenir au sommaire"><i class="bi bi-arrow-left"></i></a>
-                    <a href="" class="btn btnCharacters">Personnages</a>
+                    <a href="" class="btn btnCharacters disabled">Personnages</a>
                 </div>
             </div>
 

@@ -226,6 +226,20 @@ class Comment
         }
     }
 
+    public static function deleteAdmin(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'DELETE FROM `comments`
+                    WHERE `id_comments` = :id;';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->rowCount() > 0) ? true : false;
+        }
+    }
+
     public static function publish(int $id): bool
     {
         $pdo = Database::getInstance();
