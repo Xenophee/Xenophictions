@@ -64,17 +64,31 @@ try {
 
     // RECUPERATION DES CHAPITRES POUR LE SOMMAIRE
     $chapters = Chapter::getAll($id);
+    // var_dump($chapters);
     $firstChapter = array_shift($chapters);
-    $lastChapter = array_pop($chapters);
+
+    $isEpilogue = false;
+    foreach ($chapters as $chapter) {
+        if (strpos($chapter->title, 'Epilogue') !== false) {
+            $isEpilogue = true;
+            break;
+        }
+    }
+
+    if ($isEpilogue == true) {
+        $lastChapter = array_pop($chapters);
+    }
+    // $lastChapter = array_pop($chapters);
+    // var_dump($isEpilogue);
 
     if (!is_null($firstChapter)) {
         $firstSection = Section::getFirstSection($firstChapter->id_chapters);
     }
 
-    if (!is_null($lastChapter)) {
+    if (isset($lastChapter)) {
         $lastSection = Section::getLastSection($lastChapter->id_chapters);
     }
-    
+
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
     $comments = Comment::getAll($id);
@@ -87,8 +101,6 @@ try {
     } else {
         $save = false;
     }
-    
-
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

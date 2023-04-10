@@ -33,9 +33,9 @@ try {
             if ($user->id_users == $id) {
                 $isDeleted = User::delete($id);
                 if ($isDeleted) {
-                    Flash::setMessage(CODE[0]);
+                    Flash::setMessage(USER_MESSAGES['ACCOUNT_DELETED']);
                 } else {
-                    Flash::setMessage(CODE[1]);
+                    Flash::setMessage(USER_MESSAGES['ACCOUNT_NOT_DELETED']);
                 }
                 header('location: /controllers/deconnection_controller.php');
                 die;
@@ -43,11 +43,11 @@ try {
             break;
         case '2':
             // SUPPRESSION D'UNE COMMENTAIRE
-            // $isDeleted = Comment::delete($id);
+            $isDeleted = Comment::delete($user->id_users, $id);
             if ($isDeleted) {
-                Flash::setMessage(CODE[2]);
+                Flash::setMessage(USER_MESSAGES['COMMENT_DELETED']);
             } else {
-                Flash::setMessage(CODE[3]);
+                Flash::setMessage(USER_MESSAGES['COMMENT_NOT_DELETED']);
             }
             break;
         case '3':
@@ -55,18 +55,18 @@ try {
             // $isDeletedFirst = Note::deleteAll($id);
             // $isDeletedSecond = Note::delete($id);
             if ($isDeletedSecond) {
-                Flash::setMessage(CODE[4]);
+                Flash::setMessage(USER_MESSAGES[4]);
             } else {
-                Flash::setMessage(CODE[5]);
+                Flash::setMessage(USER_MESSAGES[5]);
             }
             break;
         case '4':
             // SUPPRESSION D'UNE SAUVEGARDE
             $isDeleted = Save::delete($user->id_users, $id);
             // if ($isDeleted) { 
-            //     Flash::setMessage(CODE[4]);
+            //     Flash::setMessage(USER_MESSAGES[4]);
             // } else {
-            //     Flash::setMessage(CODE[5]);
+            //     Flash::setMessage(USER_MESSAGES[5]);
             // }
             break;
     }

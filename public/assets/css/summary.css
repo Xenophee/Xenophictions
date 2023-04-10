@@ -4,14 +4,23 @@
     background-color: #5f2823;
 }
 
-.coverSection {
+/* .coverSection {
     background-color: #f1f1e79e;
     border: var(--border-dark-dotted);
     box-shadow: rgba(0, 0, 0, 0.06) 2px 4px 8px 0px inset;
+} */
+
+#informations {
+    background-position: center;
+    background-size: cover;
+    min-height: 70vh;
 }
 
-.coverCard {
-    position: relative;
+.infoDiv {
+    background-color: #f1f1e7b2;
+    border: var(--border-dark-dotted);
+    box-shadow: rgba(0, 0, 0, 0.06) 2px 4px 8px 0px inset;
+    backdrop-filter: blur(4px);
 }
 
 .coverImg {
@@ -28,17 +37,17 @@
 }
 
 .note {
-    height: 90px;
-    width: 90px;
+    height: 110px;
+    width: 110px;
     border-radius: 50%;
     font-size: 1.5rem;
     background-color: var(--light-color);
     color: var(--dark-color);
     border: var(--border-dark-double);
-    position: absolute;
+    /* position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
     box-shadow: rgba(32, 3, 5, 0.25) 0px 13px 27px -5px, rgba(32, 3, 5, 0.3) 0px 8px 16px -8px;
     cursor: pointer;
     transition: 1.5s;
@@ -49,6 +58,10 @@
     color: var(--light-color);
     border: var(--border-light-double);
     transition: 1.5s;
+}
+
+.littleInfo {
+    background-color: #f1f1e742;
 }
 
 .categoryInfo {
@@ -247,5 +260,10 @@
     .navStory {
         width: 35%;
         height: 7vh;
+    }
+
+    .note {
+        height: 130px;
+        width: 130px;
     }
 }

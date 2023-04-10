@@ -23,8 +23,8 @@ try {
 
     $titleDoc = 'Historique';
 
-    $sections = Save::get($user->id_users);
-    var_dump($sections);
+    // $sections = Save::get($user->id_users);
+    // var_dump($sections);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

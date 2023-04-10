@@ -33,13 +33,15 @@ try {
     // FICHIER CSS A CHARGER
     $css = CSS['section'];
 
-    $titleDoc = '';
+    
 
     // RECUPERATION DES INFORMATIONS POUR L'AFFICHAGE
     $informations = Chapter::get($story, $chapter);
     $section = Section::get($idSection);
     $sectionsChild = Section_Section::getSectionChild($idSection);
     // $sectionsParent = Section_Section::getSectionParent($idSection);
+
+    $titleDoc = 'Section du ' . $informations->chapter_title;
 
     // SAUVEGARDE DE LA PROGRESSION DES UTILISATEURS
     if (!is_null($user)) {

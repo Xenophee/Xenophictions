@@ -77,7 +77,7 @@
                 </div>
 
                 <!-- PRESENTATION TEXTUELLE DE L'OEUVRE -->
-                <div class="col-12 col-lg-5 order-2 order-lg-1">
+                <div class="col-12 col-lg-5 order-2 order-lg-1 mt-xl-5">
                     <div class=" py-5 px-3 px-md-5 px-lg-0">
                         <div class="describePart px-3 px-lg-5 py-5">
                             <h3 class="text-center mb-5 pb-4"><?= $lastPublication->title ?></h3>
@@ -104,57 +104,6 @@
 
             </div>
         </section>
-
-        <!-- PARTIE DERNIERE PUBLICATION -->
-        <!-- <section id="lastPublication">
-                <div class="row justify-content-evenly align-items-center filterColor">
-
-                    <h2 class="text-center my-5">Dernière publication</h2>
-                    <div class="lastPublicationBanner d-flex justify-content-center align-items-center">
-                        <h3 class="text-center">Récit interactif</h3>
-                    </div> -->
-
-        <!-- PRESENTATION TEXTUELLE DE L'OEUVRE -->
-        <!-- <div class="col-12 col-lg-5 order-2 order-lg-1">
-                        <div class="py-5 px-3 px-md-5 px-lg-0">
-                            <div class="d-flex flex-wrap flex-lg-nowrap justify-content-center justify-content-lg-start align-items-center infoType mt-lg-5">
-                                <img src="./public/assets/img/others/sorcier.png" class="img-fluid me-lg-5" alt="">
-                                <div
-                                    class="d-flex flex-wrap justify-content-center justify-content-lg-start categories mt-3">
-                                    <span class="badge mb-2 ms-2 ms-lg-3">Fantastique</span>
-                                    <span class="badge mb-2 ms-2 ms-lg-3">Mystère</span>
-                                    <span class="badge mb-2 ms-2 ms-lg-3">Mystique</span>
-                                </div>
-                            </div>
-                            <h3 class="text-center my-5 pb-4">Titre de l'oeuvre</h3>
-                            <p>Lorem ipsum dolor sit amet. Sed obcaecati pariatur et numquam laboriosam sed debitis
-                                rerum quo praesentium rerum est
-                                nulla molestiae est quos omnis. Et autem quam et fugit quos aut alias quia a fuga
-                                cupiditate qui doloremque quae et
-                                aperiam omnis. In dignissimos labore vel necessitatibus internos et nisi velit ex
-                                galisum quasi aut maiores autem in
-                                quas enim non corporis voluptas. Ab tempora quae ab delectus illum aut itaque doloribus.
-                            </p>
-                            <p>Eos necessitatibus esse est quasi autem qui architecto ipsum quo tempora quis ea dolores
-                                consectetur.
-                                Hic laborum facere quo suscipit tenetur qui culpa velit aut expedita fugiat. Aut dolore
-                                tempore eos voluptatem
-                                nihil et repellat velit est quidem quia qui illum veritatis in possimus veritatis.</p>
-                            <div class="d-flex justify-content-center justify-content-lg-end mt-5 my-lg-5">
-                                <a href="" class="btn btnNew">Découvrir</a>
-                            </div>
-                        </div>
-                    </div> -->
-
-        <!-- IMAGE DE COUVERTURE -->
-        <!-- <div class="col-12 col-lg-4 col-xl-4 d-flex align-items-center justify-content-center order-1 order-lg-2 mt-5 mt-lg-0">
-                        <div class="d-flex justify-content-center imgDiv py-0">
-                            <img src="./public/assets/img/coverImgPortrait/dragon.jpg"
-                                class="img-fluid img-lastPublication" alt="">
-                        </div>
-                    </div>
-                </div>
-            </section> -->
 
 
         <!-- PARTIE RECOMMENDATIONS -->
@@ -202,7 +151,7 @@
                                             <div class="card-body d-flex flex-column justify-content-between px-lg-5 mx-lg-5 mt-5 mt-lg-0 textContent">
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <small>Publiée le <?= date('d/m/Y', strtotime($story->published_at)) ?></small>
-                                                    <img src="<?= THEME_ICON[$story->id_theme] ?>" alt="" class="img-fluid themeIcone">
+                                                    <img src="<?= THEME_ICON[$story->id_theme] ?>" alt="Icone du thème <?= $story->theme_name ?>" title="Thème <?= $story->theme_name ?>" class="img-fluid themeIcone">
                                                 </div>
                                                 <div class="banner text-center mt-3 mb-5"><?= ($story->type == 1) ? 'Récit linéaire' : 'Récit interactif'; ?></div>
                                                 <h3 class="card-title text-center mt-4 mt-lg-3 mb-5"><?= $story->title ?>
@@ -213,8 +162,6 @@
                                                     <?php $categories = explode(',', $story->categories);
                                                     foreach ($categories as $category) { ?>
                                                         <span class="badge mb-2 me-md-2"><?= $category ?></span> <?php } ?>
-                                                    <!-- <span class="badge mb-2 me-md-2">Mystère</span>
-                                                    <span class="badge mb-2 me-md-2">Mystique</span> -->
                                                 </div>
                                                 <div class="d-flex justify-content-center justify-content-lg-end pt-xxl-4 mt-4 mb-3">
                                                     <a href="../controllers/summary_controller.php?story=<?= $story->id_stories ?>" class="btn btnCarousel">Découvrir</a>

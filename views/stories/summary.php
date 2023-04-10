@@ -1,69 +1,53 @@
 <main>
     <div class="container-fluid">
         <!-- SECTION GENERALE -->
-        <section>
-            <div class="row justify-content-evenly mt-5 pt-5">
-                <div class="col-12 col-lg-10 col-xl-4 coverSection py-5 px-5">
+        <section id="informations" class="d-flex justify-content-center" style="background-image: url('../public/uploads/stories/<?= $id ?>.jpg')">
+            <div class="row justify-content-evenly w-100 py-5">
+                <div class="col-12 col-lg-10 col-xl-3 d-flex flex-column justify-content-center align-items-center coverSection order-2 order-lg-1 py-5 px-5">
                     <!-- IMAGE DE COUVERTURE -->
                     <div class="d-flex justify-content-center coverCard mb-5">
-                        <img src="../public/uploads/stories/<?= $id ?>.jpg" class="coverImg img-fluid" alt="">
                         <div class="d-flex justify-content-center align-items-center note"><?= $note ?>/10</div>
                     </div>
 
-                    <!-- DATE DE PUBLICATION -->
-                    <div class="ref text-center pt-4 mb-4"><?= $date ?></div>
+                    <div class="littleInfo px-4">
+                        <!-- DATE DE PUBLICATION -->
+                        <div class="ref text-center py-4 mb-4"><span><?= $date ?></span></div>
 
-                    <!-- CATEGORIES -->
-                    <div class="d-flex justify-content-center flex-wrap">
-                        <?php
-                        $categories = explode(',', $story->categories);
-                        foreach ($categories as $category) { ?>
-                            <span class="badge categoryInfo my-2 mx-2"><?= $category ?></span> <?php } ?>
+                        <!-- CATEGORIES -->
+                        <div class="d-flex justify-content-center flex-wrap pb-4">
+                            <?php
+                            $categories = explode(',', $story->categories);
+                            foreach ($categories as $category) { ?>
+                                <span class="badge categoryInfo my-2 mx-2"><?= $category ?></span> <?php } ?>
+                        </div>
                     </div>
                 </div>
 
                 <!-- TITRE ET RESUME -->
-                <div class="col-12 col-lg-10 col-xl-6 d-flex flex-column justify-content-around">
-                    <div class="text-center mt-5 mt-xl-0 mb-5">
-                        <h1><?= $story->title ?></h1>
-                    </div>
-                    <div class="mx-3">
-                        <?= $story->synopsis ?>
-                        <!-- <p>Lorem ipsum dolor sit amet. Non eius illum 33 animi dolorem est obcaecati debitis hic
-                                dignissimos aliquid ut
-                                voluptatibus quod aut nemo ipsam et quisquam nisi! Sed culpa amet in voluptate nobis qui
-                                esse laudantium ut
-                                autem quaerat et tempore sunt.</p>
-                            <p>Est cupiditate blanditiis sit quis error ut maxime impedit et fuga quibusdam et
-                                cupiditate
-                                nisi. Ut nihil eaque
-                                qui alias quia eum deserunt doloremque ut rerum consequatur non expedita dicta non
-                                laboriosam unde est dolorem
-                                delectus.</p>
-                            <p>Ut quis cupiditate sed quibusdam quae sed numquam vero ut corrupti consectetur sit velit
-                                explicabo eum corrupti
-                                sapiente. Aut nihil internos qui voluptas ducimus eum cupiditate quod est velit
-                                architecto.
-                                Et earum sunt eos
-                                modi vitae quo explicabo voluptas non ipsum eligendi et molestiae aliquam ab incidunt
-                                sequi.
-                                Ab vitae molestiae
-                                et nulla galisum et commodi repellat?</p> -->
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4 mt-xl-0">
-                        <?php if (!$save && $firstChapter) { ?>
-                            <a href="" class="btn disabled" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
-                            <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Lire</a>
-                        <?php } else if ($save) { ?>
-                            <a href="../../controllers/delete_user_controller.php?id=<?= $save->id_stories ?>&delete=4" class="btn" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
-                            <a href="../../controllers/section_controller.php?section=<?= $save->id_sections ?>&chapter=<?= $save->id_chapters ?>&story=<?= $save->id_stories ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Continuer</a>
-                        <?php } else { ?>
-                            <p><span>Il n'y a rien à lire pour le moment</span></p>
-                        <?php } ?>
+                <div class="col-12 col-lg-10 col-xl-6 d-flex flex-column justify-content-around order-1 order-lg-2 my-5">
+                    <div class="infoDiv align-items-center py-5">
+                        <div class="text-center mt-5 mt-xl-0 mb-5">
+                            <h1><?= $story->title ?></h1>
+                        </div>
+                        <div class="mx-3 mx-lg-5">
+                            <p><?= $story->synopsis ?></p>
+                        </div>
+                        <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4 mt-xl-5">
+                            <?php if (!$save && $firstChapter) { ?>
+                                <a href="" class="btn disabled" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
+                                <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Lire</a>
+                            <?php } else if ($save) { ?>
+                                <a href="../../controllers/delete_user_controller.php?id=<?= $save->id_stories ?>&delete=4" class="btn" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
+                                <a href="../../controllers/section_controller.php?section=<?= $save->id_sections ?>&chapter=<?= $save->id_chapters ?>&story=<?= $save->id_stories ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Continuer</a>
+                            <?php } else { ?>
+                                <p><span>Il n'y a rien à lire pour le moment</span></p>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <div class="row justify-content-center">
             <div class="col-10">
@@ -73,13 +57,13 @@
 
         <?php if (Flash::isExist()) { ?>
             <div class="d-flex justify-content-center">
-            <div class="d-flex justify-content-center alert alert-dismissible fade show w-50 mt-5" role="alert">
-                <strong><?php echo Flash::getMessage();
-                        ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="d-flex justify-content-center alert alert-dismissible fade show w-50 mt-5" role="alert">
+                    <strong><?php echo Flash::getMessage();
+                            ?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-            </div>
-            
+
         <?php } ?>
 
         <!-- NAVIGATION SOMMAIRE / COMMENTAIRES -->
@@ -122,7 +106,7 @@
                         </article> <?php } ?>
 
 
-                    <?php if (!is_null($lastChapter)) { ?>
+                    <?php if (isset($lastChapter)) { ?>
                         <article>
                             <div class="row justify-content-center my-4">
                                 <div class="col-12 col-md-11 col-lg-10 col-xl-7 progressionSection d-flex flex-column flex-md-row justify-content-between align-items-center py-2 px-4">
@@ -192,8 +176,9 @@
                                     </div>
 
                                     <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
-                                        <!-- <button type="reset" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
-                                        class="bi bi-dash-circle me-3"></i>Supprimer</button> -->
+                                        <?php if($comment->id_users == $user->id_users) { ?>
+                                        <a href="../../controllers/delete_user_controller.php?id=<?= $comment->id_comments ?>&delete=2" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
+                                        class="bi bi-dash-circle me-3"></i>Supprimer</a> <?php } ?>
                                         <!-- <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button> -->
                                     </div>
                                 </form>

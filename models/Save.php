@@ -84,6 +84,24 @@ class Save {
         }
     }
 
+    public static function getSaves(int $idUser):object|bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `chapters`.`id_stories`, `chapters`.`id_chapters`, `saves`.`id_sections`
+        FROM `saves`
+        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections`
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        WHERE `saves`.`id_users` = :id_users
+        ORDER BY `saves`.`id_sections` DESC;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
     public function add(): bool
     {
         $pdo = Database::getInstance();

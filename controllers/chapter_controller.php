@@ -20,13 +20,14 @@ try {
     // FICHIER CSS A CHARGER
     $css = CSS['chapter'];
 
-    $titleDoc = '';
 
     // RECUPERATION DE L'IDENTIFIANT DU CHAPITRE
     $story = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
     $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
 
     $informations = Chapter::get($story, $chapter);
+
+    $titleDoc = 'Sommaire du ' . $informations->chapter_title;
 
     if (!is_null($user)) {
     $sections = Save::getAll($user->id_users, $chapter);

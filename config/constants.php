@@ -87,3 +87,10 @@ define('PUBLICATION', [
     'COMMENT_NOT_PUBLISHED' => 'Une erreur est survenue : le commentaire n\'a pas été publié'
 ]);
 
+define('USER_MESSAGES', [
+    'ACCOUNT_DELETED' => 'Votre compte a été supprimé',
+    'ACCOUNT_NOT_DELETED' => 'Une erreur est survenue : votre compte n\'a pas été supprimé',
+    'COMMENT_DELETED' => 'Votre commentaire a été supprimé',
+    'COMMENT_NOT_DELETED' => 'Une erreur est survenue : votre commentaire n\'a pas été supprimé'
+]);
+

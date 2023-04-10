@@ -76,6 +76,7 @@
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    min-height: 100vh;
 }
 
 #lastPublication h2 {

@@ -212,14 +212,15 @@ class Comment
         return $sth->execute();
     }
 
-    public static function delete(int $id): bool
+    public static function delete(int $idUser, int $idComment): bool
     {
         $pdo = Database::getInstance();
         $sql = 'DELETE FROM `comments`
-                    WHERE `id_users` = :id;';
+                    WHERE `id_users` = :id_users AND `id_comments` = :id_comments;';
 
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+        $sth->bindValue(':id_comments', $idComment, PDO::PARAM_INT);
 
         if ($sth->execute()) {
             return ($sth->rowCount() > 0) ? true : false;
