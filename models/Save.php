@@ -42,7 +42,7 @@ class Save {
         return $this->read_at;
     }
 
-    public static function get(int $id)
+    public static function get(int $idUser, int $idStory):object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `chapters`.`id_stories`, `chapters`.`id_chapters`, `saves`.`id_sections`
@@ -50,10 +50,11 @@ class Save {
         JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections`
         JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
         JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-        WHERE `saves`.`id_users` = :id
-        ORDER BY `read_at` DESC;';
+        WHERE `saves`.`id_users` = :id_users AND `chapters`.`id_stories` = :id_stories
+        ORDER BY `saves`.`id_sections` DESC;';
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
 
         if ($sth->execute()) {
             return ($sth->fetch());
@@ -70,7 +71,8 @@ class Save {
         JOIN `chapters` ON `chapters_sections`.`id_chapters` = `chapters`.`id_chapters`
         JOIN `stories` ON `stories`.`id_stories` = `chapters`.`id_stories`
         WHERE `saves`.`id_users` = :id_users AND `chapters`.`id_chapters` = :id_chapters
-        ORDER BY `saves`.`read_at`;';
+        GROUP BY `sections`.`id_sections`
+        ORDER BY `sections`.`id_sections`;';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
         $sth->bindValue(':id_chapters', $idChapter, PDO::PARAM_INT);
@@ -95,14 +97,18 @@ class Save {
         return $sth->execute();
     }
 
-    public static function delete(int $id): bool
+    public static function delete(int $idUser, int $idStory): bool
     {
         $pdo = Database::getInstance();
-        $sql = 'DELETE FROM `sections_sections`
-                    WHERE `id_sections_child` = :id;';
+        $sql = 'DELETE `saves` FROM `saves`
+        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections`
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        WHERE `id_users` = :id_users AND `chapters`.`id_stories` = :id_stories;';
 
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
 
         if ($sth->execute()) {
             return ($sth->rowCount() > 0) ? true : false;

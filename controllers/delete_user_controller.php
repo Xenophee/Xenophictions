@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/User.php');
 require_once(__DIR__ . '/../models/Note.php');
+require_once(__DIR__ . '/../models/Save.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
 
@@ -42,7 +43,7 @@ try {
             break;
         case '2':
             // SUPPRESSION D'UNE COMMENTAIRE
-            $isDeleted = Category::delete($id);
+            // $isDeleted = Comment::delete($id);
             if ($isDeleted) {
                 Flash::setMessage(CODE[2]);
             } else {
@@ -51,20 +52,28 @@ try {
             break;
         case '3':
             // SUPPRESSION D'UNE NOTE
-            $isDeletedFirst = Theme::deleteAll($id);
-            $isDeletedSecond = Theme::delete($id);
+            // $isDeletedFirst = Note::deleteAll($id);
+            // $isDeletedSecond = Note::delete($id);
             if ($isDeletedSecond) {
                 Flash::setMessage(CODE[4]);
             } else {
                 Flash::setMessage(CODE[5]);
             }
             break;
+        case '4':
+            // SUPPRESSION D'UNE SAUVEGARDE
+            $isDeleted = Save::delete($user->id_users, $id);
+            // if ($isDeleted) { 
+            //     Flash::setMessage(CODE[4]);
+            // } else {
+            //     Flash::setMessage(CODE[5]);
+            // }
+            break;
     }
 
     // REDIRECTION VERS LA PAGE PRECEDENTE
     header('location: ' . $_SERVER['HTTP_REFERER']);
     die;
-    
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

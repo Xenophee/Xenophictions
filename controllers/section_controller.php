@@ -12,31 +12,8 @@ try {
     $idSection = intval(filter_input(INPUT_GET, 'section', FILTER_SANITIZE_NUMBER_INT));
     $story = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
     $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
-    $allSectionsId = $_SESSION['allSectionsId'] ?? [];
-    $allSectionsId[] = $idSection;
 
-    if (!in_array($idSection, $allSectionsId)) {
-        $allSectionsId[] = $idSection;
-    }
 
-    if (end($allSectionsId) == $idSection) {
-        array_pop($allSectionsId);
-    }
-
-    $_SESSION['allSectionsId'] = $allSectionsId;
-    // $beforeLastSectionId = $allSectionsId[count($allSectionsId) - 2];
-    // var_dump($beforeLastSectionId);
-    var_dump($_SESSION['allSectionsId']);
-    var_dump(end($_SESSION['allSectionsId']));
-
-    if (count($allSectionsId) >= 2) {
-        $previousSectionsId = array_slice($allSectionsId, 1);
-        // var_dump($previousSectionId);
-        $previousSectionId = end($previousSectionsId);
-        // var_dump($previousSectionId);
-    } else {
-        $previousSectionId = null;
-    }
 
     // VERIFICATION QUE LES PARAMETRES EXISTENT
     if (!$idSection || !$story || !$chapter) {
@@ -56,16 +33,20 @@ try {
 
     $titleDoc = '';
 
+    // RECUPERATION DES INFORMATIONS POUR L'AFFICHAGE
     $informations = Chapter::get($story, $chapter);
     $section = Section::get($idSection);
     $sectionsChild = Section_Section::getSectionChild($idSection);
-    $sectionsParent = Section_Section::getSectionParent($idSection);
+    // $sectionsParent = Section_Section::getSectionParent($idSection);
 
-    // $save = new Save;
-    // $save->setId_users($user->id_users);
-    // $save->setId_sections($sectionsParent->id_sections);
-
-    // $allSectionsId[] = $idSection;
+    // SAUVEGARDE DE LA PROGRESSION DES UTILISATEURS
+    if ($user) {
+        $save = new Save;
+        $save->setId_users($user->id_users);
+        $save->setId_sections($idSection);
+        $isAdded = $save->add();
+    }
+    
     
     
 } catch (\Throwable $th) {

@@ -196,7 +196,7 @@ class Story
     }
 
 
-    public static function getAll(int $type = null, int $limit = null, int $offset = 0): array
+    public static function getAll(int $type = null, int $theme = null, int $limit = null, int $offset = 0): array
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
@@ -207,8 +207,12 @@ class Story
         LEFT JOIN `themes` ON `themes_categories`.`id_themes` = `themes`.`id_themes`
         LEFT JOIN `notes` ON `notes`.`id_stories` = `stories`.`id_stories`';
 
-        if (!is_null($type)) {
+        if (!is_null($type) && is_null($theme)) {
             $sql .= ' WHERE `stories`.`type` = :type';
+        }
+
+        if (!is_null($theme)) {
+            $sql .= ' WHERE `stories`.`type` = :type AND `themes_categories`.`id_themes` = :theme';
         }
 
         $sql .= ' GROUP BY `stories`.`id_stories`';
@@ -222,6 +226,10 @@ class Story
 
         if (!is_null($type)) {
             $sth->bindValue(':type', $type, PDO::PARAM_INT);
+        }
+
+        if (!is_null($theme)) {
+            $sth->bindValue(':theme', $theme, PDO::PARAM_INT);
         }
 
         if (!is_null($limit)) {

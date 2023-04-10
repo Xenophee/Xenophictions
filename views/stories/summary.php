@@ -51,8 +51,15 @@
                                 et nulla galisum et commodi repellat?</p> -->
                     </div>
                     <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4 mt-xl-0">
-                        <a href="" class="btn" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
-                        <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Continuer</a>
+                        <?php if (!$save && $firstChapter) { ?>
+                            <a href="" class="btn disabled" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
+                            <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Lire</a>
+                        <?php } else if ($save) { ?>
+                            <a href="../../controllers/delete_user_controller.php?id=<?= $save->id_stories ?>&delete=4" class="btn" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
+                            <a href="../../controllers/section_controller.php?section=<?= $save->id_sections ?>&chapter=<?= $save->id_chapters ?>&story=<?= $save->id_stories ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Continuer</a>
+                        <?php } else { ?>
+                            <p>Il n'y a rien à lire pour le moment</p>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

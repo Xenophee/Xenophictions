@@ -6,21 +6,45 @@ h3 {
 }
 
 .fantasticTheme {
-    background-image: url(../../assets/img/fantastique.png);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url(../img/fantastic.png);
 }
 
 .scienceFictionTheme {
-    background-image: url(../../assets/img/sf.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url(../img/sf.jpg);
 }
 
 .fantasyTheme {
-    background-image: url(../../assets/img/fantasy.jpg);
+    background-image: url(../img/fantasy.jpg);
+}
+
+.themeAll {
+    background-image: url(../img/all.jpg);
+}
+
+.theme {
+    height: 60vh;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.theme {
+    color: var(--light-color);
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.theme h1 {
+    backdrop-filter: blur(10px);
+    border: var(--border-dark-dotted);
+}
+
+.themeChoice form {
+    width: 100%;
+}
+
+.btnChooseTheme {
+    width: 60% !important;
 }
 
 article {
@@ -136,6 +160,14 @@ article {
         width: 30%;
         padding: 2%;
     }
+
+    .themeChoice form {
+        width: 50%;
+    }
+
+    .btnChooseTheme {
+        width: 70% !important;
+    }
 }
 
 
@@ -166,6 +198,14 @@ article {
     .btn {
         width: 55%;
         padding: 3%;
+    }
+
+    .themeChoice form {
+        width: 20%;
+    }
+    
+    .btnChooseTheme {
+        width: 80% !important;
     }
 }
 

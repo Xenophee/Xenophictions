@@ -50,9 +50,10 @@ try {
     $offset = ($currentPage - 1) * $limit;
 
     $type = null;
+    $theme = null;
 
     // Appel à la méthode statique permettant de récupérer les utilisateurs selon la recherche et la pagination
-    $stories = Story::getAll($type, $limit, $offset);
+    $stories = Story::getAll($type, $theme, $limit, $offset);
     
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

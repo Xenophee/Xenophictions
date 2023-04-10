@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../models/Story.php');
 require_once(__DIR__ . '/../models/Chapter.php');
 require_once(__DIR__ . '/../models/Section.php');
 require_once(__DIR__ . '/../models/Note.php');
+require_once(__DIR__ . '/../models/Save.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
 try {
@@ -65,17 +66,23 @@ try {
     $chapters = Chapter::getAll($id);
     $firstChapter = array_shift($chapters);
     $lastChapter = array_pop($chapters);
-    $firstSection = Section::getFirstSection($firstChapter->id_chapters);
-    $lastSection = Section::getLastSection($lastChapter->id_chapters);
+
+    if (!is_null($firstChapter)) {
+        $firstSection = Section::getFirstSection($firstChapter->id_chapters);
+    }
+
+    if (!is_null($lastChapter)) {
+        $lastSection = Section::getLastSection($lastChapter->id_chapters);
+    }
+    
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
     $comments = Comment::getAll($id);
-    // var_dump($firstSection);
 
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;
 
-    // var_dump($story);
+    $save = Save::get($user->id_users, $id);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
