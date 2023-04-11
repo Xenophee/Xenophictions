@@ -22,7 +22,7 @@ h3 {
 }
 
 .theme {
-    height: 60vh;
+    min-height: 60vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -54,7 +54,7 @@ article {
 .story {
     background-color: var(--lighter-color);
     border: var(--border-dark-double);
-    outline: var(--border-dark-double);
+    /* outline: var(--border-dark-double); */
     outline-offset: -20px;
     width: 100%;
     min-height: 75vh;
@@ -173,6 +173,9 @@ article {
 
 @media screen and (min-width: 992px) {
 
+    .story {
+        outline: var(--border-dark-double);
+    }
     
     .coverImg {
         object-fit: cover;

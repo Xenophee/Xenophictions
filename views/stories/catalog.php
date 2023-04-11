@@ -6,8 +6,8 @@
                 <div class="d-flex justify-content-center mt-5 pt-5">
                     <h1 class="text-center px-4 py-2"><?= $h1 ?? '' ?></h1>
                 </div>
-                <div class="d-flex justify-content-center mt-5 pt-5">
-                    <h2><?= $themeTitle ?? '' ?></h2>
+                <div class="d-flex justify-content-center mt-5 py-5">
+                    <h2 class="text-center"><?= $themeTitle ?? '' ?></h2>
                 </div>
             </div>
         </div>

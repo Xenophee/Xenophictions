@@ -76,6 +76,10 @@ nav img {
     color: var(--lighter-color) !important;
 }
 
+.bi-box-arrow-in-right {
+    font-size: 2rem;
+}
+
 
 /* ------------------------------------------------------------------------------------------------- */
 

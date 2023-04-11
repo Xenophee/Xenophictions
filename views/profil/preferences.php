@@ -13,7 +13,12 @@
                             <h1 class="text-center">Préférences (à venir)</h1>
                         </div>
 
-                        
+                        <div class="py-5">
+                        <p class="text-center">Des fonctionnalités seront mises en place prochainement pour vous permettre de changer le thème du site,
+                            de modifier l'affichage du texte des histoires tel que la taille de l'interlignage, la taille de la police, etc.
+                        </p>
+                        <p class="text-center">Un mode dysléxique pourrait voir le jour également.</p>
+                        </div>
                         
                     </section>
                 </div>

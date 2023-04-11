@@ -41,9 +41,10 @@ class Section_Section {
     public static function getSectionChild(int $id)
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `sections`.*
+        $sql = 'SELECT `sections`.*, `chapters_sections`.`id_chapters`
         FROM `sections_sections`
         JOIN `sections` ON `sections`.`id_sections` = `sections_sections`.`id_sections_child`
+        JOIN `chapters_sections` ON `chapters_sections`.`id_sections` = `sections`.`id_sections`
         WHERE `id_sections_parent` = :id';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
