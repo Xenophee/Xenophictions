@@ -53,6 +53,7 @@ INSERT INTO `sections` (`title`, `description`, `content`)
     VALUES ('Explorer de jour', 'Vous décidez que c\'est plus prudent d\'explorer la ville de jour', 'Vous décidez d\'explorer la ville de jour en compagnie d\'un habitant local. 
     Au cours de la visite, vous découvrez des lieux magnifiques et des histoires fascinantes sur la ville et ses légendes, y compris l\'histoire du lutin maléfique qui hante les rues. 
     Vous réalisez rapidement que les légendes locales sont prises au sérieux par les habitants et que personne ne veut parler du lutin de peur de l\'attirer.'),
+
     ('Explorer de nuit', 'Vous décidez que vous aurez plus d\'info en explorant la ville de nuit', 'Vous décidez d\'explorer la ville la nuit, seul. Vous entendez des bruits étranges 
     et voyez des ombres qui semblent vous suivre. Vous ressentez la présence d\'un esprit maléfique et commencez à craindre pour votre vie. Vous réalisez que vous avez peut-être 
     sous-estimé les légendes locales et décidez de rentrer chez vous avant qu\'il ne soit trop tard.');
@@ -77,6 +78,7 @@ INSERT INTO `sections` (`title`, `description`, `content`)
     VALUES ('Chercher de l\'aide', 'Vous décidez que recourir à un spécialiste serait plus efficace', 'Vous décidez de chercher de l\'aide auprès d\'un spécialiste en paranormal. 
     Vous trouvez un expert qui vous dit qu\'il peut vous aider à briser la malédiction, mais vous devez le suivre dans une aventure dangereuse à travers les bois. 
     Vous acceptez à contrecœur et vous vous retrouvez à affronter des créatures surnaturelles et des esprits maléfiques tout en essayant de trouver la clé pour briser la malédiction.'),
+   
     ('Chercher des informations supplémentaires', 'Vous décidez d\'aller à la bibliothèque pour trouver des infos', 'Vous décidez de chercher des informations supplémentaires sur le lutin alsacien. 
     Vous trouvez un vieux livre dans la bibliothèque locale qui parle de l\'histoire du lutin alsacien et de ses pouvoirs maléfiques. Le livre mentionne également qu\'il existe 
     un rituel qui peut être utilisé pour briser la malédiction du lutin. Vous décidez de rassembler les ingrédients nécessaires et de suivre les instructions du rituel. 
@@ -100,6 +102,7 @@ INSERT INTO `sections` (`title`, `description`, `content`)
     VALUES ('Piéger le lutin', 'Vous décidez de piéger le lutin', 'Vous décidez de piéger le lutin en utilisant une ancienne amulette qui le 
     rendra vulnérable pendant un court laps de temps. Vous le traquez la nuit et attendez le moment opportun pour l\'attaquer. Le lutin est affaibli par l\'amulette, mais il est 
     toujours un adversaire redoutable. Vous devez utiliser toutes vos compétences et vos ressources pour le vaincre et briser la malédiction, mais vous mourrez dans d\'atroce souffrance'),
+    
     ('Obtenir l\'aide des habitants', 'Vous décidez de recourir à l\'aide des habitants', 'Vous décidez d\'utiliser la force de la communauté pour vaincre 
     le lutin. Vous parlez aux habitants de la ville de votre plan et rassemblez une équipe de personnes courageuses pour vous aider à affronter le lutin. Ensemble, 
     vous élaborez un plan et attendez le moment opportun pour l\'attaquer. Le lutin est puissant, mais avec l\'aide de la communauté, vous parvenez à le vaincre et à briser 
