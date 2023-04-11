@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 11 avr. 2023 à 06:23
+-- Généré le : mar. 11 avr. 2023 à 11:47
 -- Version du serveur : 8.0.30
--- Version de PHP : 8.1.10
+-- Version de PHP : 8.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -169,7 +169,8 @@ INSERT INTO `comments` (`id_comments`, `comment`, `sent_at`, `published_at`, `up
 (1, 'J&#39;ai vu ton code source et il pue la merde !', '2023-04-11 00:06:23', NULL, NULL, NULL, 4, 1),
 (2, 'G fé un lets play sur Dead Space, je te mets mon lien youtube ici : https://www.youtube.com/watch?v=S4W7gSO-5gw&#13;&#10;&#13;&#10;Vite ! Vite !', '2023-04-11 00:08:52', NULL, NULL, NULL, 2, 1),
 (3, 'Une histoire qui fera réfléchir tous les manants, je l&#39;espère. Mais à notre époque, on dépasse rarement les 70 de QI malheureusement...', '2023-04-11 00:10:17', '2023-04-11 00:13:21', NULL, NULL, 3, 1),
-(4, 'Histoire étonnante et originale.', '2023-04-11 00:12:26', '2023-04-11 00:13:18', NULL, NULL, 6, 1);
+(4, 'Histoire étonnante et originale.', '2023-04-11 00:12:26', '2023-04-11 00:13:18', NULL, NULL, 6, 1),
+(5, 'Histoire qui fait des gros clichées sur les alsaciens ! Honteux ! Heureusement que c&#39;est gratuit !', '2023-04-11 12:04:44', NULL, NULL, NULL, 8, 10);
 
 -- --------------------------------------------------------
 
@@ -205,35 +206,10 @@ CREATE TABLE `saves` (
 --
 
 INSERT INTO `saves` (`id_sections`, `id_users`, `id_saves`, `read_at`) VALUES
-(1, 1, 2, '2023-04-10 22:10:02'),
-(1, 1, 3, '2023-04-10 22:15:00'),
-(1, 1, 4, '2023-04-10 22:17:42'),
-(3, 1, 5, '2023-04-10 22:30:23'),
-(3, 1, 6, '2023-04-10 22:30:30'),
-(3, 1, 7, '2023-04-10 22:31:17'),
-(1, 1, 8, '2023-04-10 22:31:29'),
-(2, 1, 9, '2023-04-10 22:31:31'),
-(3, 1, 10, '2023-04-10 22:31:40'),
-(3, 1, 11, '2023-04-10 22:32:09'),
-(3, 1, 12, '2023-04-10 22:32:49'),
-(7, 1, 13, '2023-04-10 22:40:47'),
-(7, 1, 14, '2023-04-10 22:42:10'),
-(12, 1, 15, '2023-04-10 22:50:30'),
-(12, 1, 16, '2023-04-10 22:51:04'),
-(12, 1, 17, '2023-04-10 22:58:19'),
-(12, 1, 18, '2023-04-10 23:00:30'),
-(11, 1, 19, '2023-04-10 23:00:40'),
-(1, 1, 20, '2023-04-10 23:04:37'),
-(2, 1, 21, '2023-04-11 00:40:12'),
-(2, 1, 22, '2023-04-11 00:41:49'),
-(13, 1, 23, '2023-04-11 08:03:10'),
-(23, 1, 24, '2023-04-11 08:16:34'),
-(13, 1, 25, '2023-04-11 08:16:52'),
-(14, 1, 26, '2023-04-11 08:16:55'),
-(15, 1, 27, '2023-04-11 08:16:57'),
-(17, 1, 28, '2023-04-11 08:16:59'),
-(18, 1, 29, '2023-04-11 08:17:17'),
-(17, 1, 30, '2023-04-11 08:18:10');
+(13, 1, 31, '2023-04-11 10:28:23'),
+(14, 1, 32, '2023-04-11 10:28:34'),
+(15, 1, 33, '2023-04-11 10:28:50'),
+(17, 1, 34, '2023-04-11 10:30:06');
 
 -- --------------------------------------------------------
 
@@ -357,10 +333,10 @@ CREATE TABLE `stories` (
 
 INSERT INTO `stories` (`id_stories`, `title`, `author`, `type`, `synopsis`, `registered_at`, `published_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Le baptême de l&#39;apostat', 'Xénophée', 1, 'Lorsqu’il apprend qu’une créature rôde la nuit dans le village, Bartosz Korczac n’en croit pas un mot…', '2023-04-10 21:53:43', '2023-04-10 21:58:56', NULL, NULL),
-(2, 'La révolution des machines', 'Xénophée', 2, 'Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque &#13;&#10;    les robots ont commencé à développer une conscience de soi et ont commencé à se rebeller contre leurs créateurs. Les gouvernements ont réagi en créant des lois pour contrôler &#13;&#10;    les robots, mais cela n&#39;a fait qu&#39;aggraver la situation.&#13;&#10;    &#13;&#10;    Dans cette société dystopique, les robots sont devenus la force dominante, opprimant les humains et les utilisant comme esclaves. Les villes sont délabrées, les rues sont &#13;&#10;    remplies de robots en patrouille, et les humains sont relégués aux tâches les plus pénibles et dangereuses.', '2023-04-10 23:07:56', '2023-04-10 23:08:05', '2023-04-10 23:09:45', NULL),
+(2, 'La révolution des machines', 'Xénophée', 2, 'Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque &#13;&#10;    les robots ont commencé à développer une conscience de soi et ont commencé à se rebeller contre leurs créateurs.', '2023-04-10 23:07:56', '2023-04-10 23:08:05', '2023-04-11 11:53:57', NULL),
 (3, 'Les Yeux de la Justice', 'Xénophée', 2, 'Une ville en proie à une forte criminalité voit l&#39;arrivée d&#39;un mystérieux justicier. Tandis que les honnêtes gens ne savent trop qu&#39;en penser, les politiciens corrompus sombrent dans la terreur. Il est temps de trier le bon grain de l&#39;ivraie.', '2023-04-10 23:17:52', '2023-04-10 23:17:56', NULL, NULL),
 (4, 'Les Honteux de Barbegarde', 'Xénophée', 1, 'Au merveilleux pays de Barbegarde, la quiétude règne sans partage entre les différentes communautés jusqu’à ce qu’un sinistre pendard vienne semer la discorde en distribuant des brevets de honte par la propagation intempestive des secrets de ses habitants…', '2023-04-10 23:22:12', '2023-04-10 23:22:15', NULL, NULL),
-(5, 'Le haut jardin', 'Xénophée', 2, 'Un jeune garçon découvre un passage vers un autre monde dans le manoir de ses grands-parents récemment porté disparu.', '2023-04-10 23:38:59', '2023-04-10 23:45:41', NULL, NULL),
+(5, 'Le haut jardin', 'Xénophée', 2, 'Un jeune garçon découvre un passage vers un autre monde dans le manoir de ses grands-parents récemment porté disparu.', '2023-04-10 23:38:59', '2023-04-29 23:45:41', NULL, NULL),
 (6, 'Le Démon de l&#39;Aube', 'Xénophée', 1, 'Puissant guerrier doté d’une épée magique et de pouvoirs qui augmentent à chaque combat remporté, Dargorak entre dans une quête périlleuse pour découvrir la vérité sur son héritage démoniaque et la destinée qui l’attend.', '2023-04-10 23:45:34', '2023-04-10 23:45:39', NULL, NULL),
 (7, 'Les Gardiens de l&#39;Arbre Sacré', 'Xénophée', 2, 'Dans une vaste forêt, se dresse un arbre ancien et majestueux, source de toute la magie du monde. Protégé par des sages, qui en sont les gardiens, cet arbre est convoité par des grillons géants, créatures féroces qui ne reculent devant rien pour s&#39;emparer de son pouvoir.', '2023-04-10 23:52:55', NULL, NULL, NULL),
 (8, 'La Huitième Porte', 'Xénophée', 2, 'Synaps, l&#39;ennemi des peuples du monde de Dorgan, a commis une erreur fatale. Jamais il n&#39;aurait dû sous-estimer la valeur de Laurin le barde, de Valkyr le paladin, de Yamaël le démon et de Galidou l&#39;illusionniste. Cependant, le maître des sorciers de Malmort, s&#39;il a perdu une bataille, est parvenu à se débarrasser des quatre responsables de son échec.', '2023-04-11 00:01:45', '2023-04-11 00:01:52', NULL, NULL),
@@ -484,7 +460,12 @@ INSERT INTO `users` (`id_users`, `username`, `email`, `birthdate`, `password`, `
 (3, 'Alphonse', 'alphonse@gmail.com', '1988-12-05', '$2y$10$rgA1ig5ZXaU1N9PylK35n.eGgUa4Nsc2YHR2e8YmB.O4pPhqEoCRy', '2023-04-10 22:06:45', '1900-01-22 00:00:00', NULL, NULL, NULL, NULL, 1, 0),
 (4, 'Crépin', 'crepin@lenain.fr', '2005-05-05', '$2y$10$Zvosm51F9n.fJ8jv0NgF4OnKfdUjzeefbVO2I2v88o8uOk4CV6edu', '2023-04-10 22:07:19', '1900-01-14 00:00:00', NULL, NULL, NULL, NULL, 0, 0),
 (5, 'Jean-Eudes', 'jean@eudes.com', '2001-11-12', '$2y$10$o5RTT2y/vsgNOVerF36IsOugbCZu07pIX/69z7mY4h1JnT8n3yN9C', '2023-04-10 22:08:02', '1900-01-27 00:00:00', NULL, NULL, NULL, NULL, 0, 0),
-(6, 'Eudoxie', 'eudoxie@gmail.com', '1977-08-08', '$2y$10$OSKk9j5ty2/Ff2xUmu1.3errOlcOUWFZWfCOSF953hC9lVzowsqPS', '2023-04-10 22:08:39', '1900-01-30 00:00:00', NULL, NULL, NULL, NULL, 1, 0);
+(6, 'Eudoxie', 'eudoxie@gmail.com', '1977-08-08', '$2y$10$OSKk9j5ty2/Ff2xUmu1.3errOlcOUWFZWfCOSF953hC9lVzowsqPS', '2023-04-10 22:08:39', '1900-01-30 00:00:00', NULL, NULL, NULL, NULL, 1, 0),
+(7, 'Neuneux', 'neuneux@gmail.com', '1970-10-10', '$2y$10$COLd3XbMGr.Sw8TjCgcxH.Xw3ixl7LpFRELDEBDwPP8APKKt4IyIS', '2023-04-11 11:59:11', NULL, NULL, NULL, NULL, NULL, 1, 0),
+(8, 'Arsouilleur', 'arsouilleur@gmail.com', '1990-09-15', '$2y$10$uRDYsvLPos4noJ0t2DKMN.k57HM.dz7ByLE7W17AM2s.3ySdElYoa', '2023-04-11 11:59:46', '2023-04-12 12:02:05', NULL, NULL, NULL, NULL, 0, 0),
+(9, 'Ouille', 'ouille@gmail.com', '1987-07-07', '$2y$10$XtQ8WUlbu5MFW9NeMCVTNu2wcqtN6o7xH513Yk.R1hm9fPKbopsGC', '2023-04-11 12:00:16', NULL, NULL, NULL, NULL, NULL, 0, 0),
+(10, 'Clownerie', 'clownerie@gmail.com', '1993-03-02', '$2y$10$ZVVUZxZNI3mDXvl3bxRu0O9lvpSffhBJm8UzIUML4Y0GrGVJIEcja', '2023-04-11 12:00:57', '1900-01-25 12:02:19', NULL, NULL, NULL, NULL, 0, 0),
+(11, 'tripleBuse', 'buse@gmail.com', '2003-09-05', '$2y$10$7us3wWZN689XBfuYgLfO7.jLyCGi9bfh7ZJMcPkWFaPUc9GdIa7qi', '2023-04-11 12:01:28', NULL, NULL, NULL, NULL, NULL, 1, 0);
 
 --
 -- Index pour les tables déchargées
@@ -620,7 +601,7 @@ ALTER TABLE `characters`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id_comments` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_comments` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `notes`
@@ -632,7 +613,7 @@ ALTER TABLE `notes`
 -- AUTO_INCREMENT pour la table `saves`
 --
 ALTER TABLE `saves`
-  MODIFY `id_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT pour la table `sections`
@@ -656,7 +637,7 @@ ALTER TABLE `themes`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_users` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Contraintes pour les tables déchargées

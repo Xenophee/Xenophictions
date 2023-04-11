@@ -176,9 +176,10 @@
                                     </div>
 
                                     <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
-                                        <?php if($comment->id_users == $user->id_users) { ?>
+                                        <?php if (isset($user)) {
+                                            if($comment->id_users == $user->id_users) { ?>
                                         <a href="../../controllers/delete_user_controller.php?id=<?= $comment->id_comments ?>&delete=2" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
-                                        class="bi bi-dash-circle me-3"></i>Supprimer</a> <?php } ?>
+                                        class="bi bi-dash-circle me-3"></i>Supprimer</a> <?php } } ?>
                                         <!-- <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button> -->
                                     </div>
                                 </form>

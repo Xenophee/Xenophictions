@@ -34,7 +34,7 @@
                             <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'catalog_controller.php' && isset($_GET['type']) && $_GET['type'] == 1) echo ' active'; ?>" href="../../controllers/catalog_controller.php?type=1">Récits linéaires</a>
                         </li>
                         <li class="nav-item mx-xl-4 mx-xxl-5 mb-4 mb-xl-0">
-                            <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'catalog_controller.php' && isset($_GET['type']) && $_GET['type'] == 2) echo ' active'; ?>" href="../../controllers/catalog_controller.php?type=2">Récits intéractifs</a>
+                            <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'catalog_controller.php' && isset($_GET['type']) && $_GET['type'] == 2) echo ' active'; ?>" href="../../controllers/catalog_controller.php?type=2">Récits interactifs</a>
                         </li>
                     </ul>
 
