@@ -13,7 +13,7 @@ try {
     $story = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
     $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
 
-
+    $idParentChild[] = $idSection;
 
     // VERIFICATION QUE LES PARAMETRES EXISTENT
     if (!$idSection || !$story || !$chapter) {
@@ -30,16 +30,37 @@ try {
         $user = null;
     }
 
+    // RECUPERATION DE L'IDENTIFIANT DU PROLOGUE, SEULE SECTION AUTORISEE PAR DEFAUT
+    $permission = Chapter::getPrologue($story);
+
+    // SI L'UTILISATEUR EXISTE ET QUE L'ID DE SECTION EST DIFFERENT DE CELUI DU PROLOGUE, ON VERIFIE DANS LA SAUVEGARDE
+    if (!is_null($user) && $idSection != $permission->id_sections) {
+        $sectionsParent = Section_Section::getSectionsParent($idSection);
+        $verificationFirst = Save::isSaveExist($idSection);
+        foreach ($sectionsParent as $sectionParent) {
+            $verificationSecond = Save::isSaveExist($sectionParent->id_sections);
+        }
+        
+
+        // S'IL N'Y A PAS DE SAUVEGARDE DE LA SECTION EN COURS, ON EXPULSE L'UTILISATEUR
+        if (!$verificationFirst && !$verificationSecond) {
+            Flash::setMessage('Vous n\'avez pas accès à cette section pour le moment');
+            header('location: /controllers/summary_controller.php?story=' . $story);
+            die;
+        }
+    }
+
     // FICHIER CSS A CHARGER
     $css = CSS['section'];
 
-    
+
 
     // RECUPERATION DES INFORMATIONS POUR L'AFFICHAGE
     $informations = Chapter::get($story, $chapter);
     $section = Section::get($idSection);
-    $sectionsChild = Section_Section::getSectionChild($idSection);
-    // $sectionsParent = Section_Section::getSectionParent($idSection);
+    $sectionsChild = Section_Section::getSectionsChild($idSection);
+    
+    // var_dump($sectionsParent);
 
     $titleDoc = 'Section du ' . $informations->chapter_title;
 
@@ -50,9 +71,6 @@ try {
         $save->setId_sections($idSection);
         $isAdded = $save->add();
     }
-    
-    
-    
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

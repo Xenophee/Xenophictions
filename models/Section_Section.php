@@ -23,7 +23,7 @@ class Section_Section {
         return $this->id_sections_child;
     }
 
-    public static function getSectionParent(int $id)
+    public static function getSectionsParent(int $id)
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*
@@ -34,11 +34,11 @@ class Section_Section {
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
         if ($sth->execute()) {
-            return ($sth->fetch());
+            return ($sth->fetchAll());
         }
     }
 
-    public static function getSectionChild(int $id)
+    public static function getSectionsChild(int $id)
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*, `chapters_sections`.`id_chapters`

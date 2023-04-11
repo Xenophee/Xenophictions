@@ -19,7 +19,6 @@ try {
         die;
     }
 
-
     // FICHIER CSS A CHARGER
     $css = CSS['summary'];
 
@@ -64,30 +63,18 @@ try {
 
     // RECUPERATION DES CHAPITRES POUR LE SOMMAIRE
     $chapters = Chapter::getAll($id);
-    // var_dump($chapters);
-    $firstChapter = array_shift($chapters);
+    
+    // RECUPERATION DU PROLOGUE
+    if (!empty($chapters)) {
+        $firstChapter = $chapters[0];
 
-    $isEpilogue = false;
-    foreach ($chapters as $chapter) {
-        if (strpos($chapter->title, 'Epilogue') !== false) {
-            $isEpilogue = true;
-            break;
-        }
-    }
-
-    if ($isEpilogue == true) {
-        $lastChapter = array_pop($chapters);
-    }
-    // $lastChapter = array_pop($chapters);
-    // var_dump($isEpilogue);
-
+        // VERIFICATION S'IL Y A BIEN DES CHAPITRES DANS L'HISTOIRE
     if (!is_null($firstChapter)) {
         $firstSection = Section::getFirstSection($firstChapter->id_chapters);
     }
-
-    if (isset($lastChapter)) {
-        $lastSection = Section::getLastSection($lastChapter->id_chapters);
     }
+
+    
 
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
@@ -96,11 +83,16 @@ try {
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
     $note = (is_null($story->note)) ? '-' : $story->note;
 
+    // RECUPERATION DE LA SAUVEGARDE DE L'UTILISATEUR
     if (isset($user)) {
         $save = Save::get($user->id_users, $id);
+        // var_dump($save);
     } else {
         $save = false;
     }
+
+    
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

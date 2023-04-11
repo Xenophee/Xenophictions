@@ -128,7 +128,7 @@
             <div class="col-11 col-md-8 d-flex flex-column align-items-center">
                 <h4 class="mb-4"><?= (empty($sectionsChild)) ? 'Histoire terminée' : 'Quelle sera la suite ?';?></h4>
                 <?php foreach($sectionsChild as $sectionChild) { ?>
-                <a href="../../controllers/section_controller.php?section=<?= $sectionChild->id_sections ?>&chapter=<?= $sectionChild->id_chapters?>&story=<?= $story ?>" class="btn btnChoice my-3"><?= $sectionChild->description ?></a>
+                <a href="../../controllers/section_controller.php?section=<?= $sectionChild->id_sections ?>&chapter=<?= $sectionChild->id_chapters?>&story=<?= $story ?>&back=<?= $idSection ?>" class="btn btnChoice my-3"><?= $sectionChild->description ?></a>
                 <?php } ?>
             </div>
         </div>

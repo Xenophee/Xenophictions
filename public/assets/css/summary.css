@@ -123,6 +123,12 @@
     padding: 10px 35px 10px;
 }
 
+.btnReading.disabled {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border: var(--border-light-double);
+}
+
 .avatar {
     width: 70px;
     height: 70px;

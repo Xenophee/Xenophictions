@@ -176,8 +176,9 @@ class Comment
     public static function getAll(int $id = null): array
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `comments`.*, `users`.`username` FROM `comments`
-        LEFT JOIN `users` ON `users`.`id_users` = `comments`.`id_users`';
+        $sql = 'SELECT `comments`.*, `users`.`username`, `stories`.`title` FROM `comments`
+        LEFT JOIN `users` ON `users`.`id_users` = `comments`.`id_users`
+        LEFT JOIN `stories` ON `comments`.`id_stories` = `stories`.`id_stories`';
 
         if (!is_null($id)) {
             $sql .= 'WHERE `comments`.`id_stories` = :id_stories';

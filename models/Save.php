@@ -102,6 +102,16 @@ class Save {
         }
     }
 
+    public static function isSaveExist(int $id): bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `id_users` FROM `saves` WHERE `id_sections` = ?;';
+        $sth = $pdo->prepare($sql);
+        $sth->execute([$id]);
+        $result = $sth->fetch();
+        return (!empty($result)) ? true : false;
+    }
+
     public function add(): bool
     {
         $pdo = Database::getInstance();

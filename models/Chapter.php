@@ -211,6 +211,24 @@ class Chapter
         }
     }
 
+    public static function getPrologue(int $idStory): object|bool
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT `chapters_sections`.`id_sections`
+        FROM `chapters_sections`
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        JOIN `stories` ON `stories`.`id_stories` = `chapters`.`id_stories`
+        WHERE `chapters`.`id_stories` = :id_stories 
+        ORDER BY `chapters_sections`.`id_sections`;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
+        // $sth->bindValue(':id_chapters', $idChapter, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
     public static function getAll(int $id): array
     {
         $pdo = Database::getInstance();
@@ -225,6 +243,23 @@ class Chapter
             return ($sth->fetchAll());
         } else {
             return [];
+        }
+    }
+
+    public static function countSections(int $idStory, int $idChapter): object
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT COUNT(`chapters_sections`.`id_sections`) AS `sections_number`
+        FROM `chapters`
+        JOIN `chapters_sections` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
+        WHERE `chapters`.`id_stories` = :id_stories AND `chapters`.`id_chapters` = :id_chapters
+        GROUP BY `chapters`.`id_chapters`;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
+        $sth->bindValue(':id_chapters', $idChapter, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
         }
     }
 

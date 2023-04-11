@@ -22,6 +22,7 @@
                     <?php if (!empty($unpublishedComments)) {
                     foreach ($unpublishedComments as $comment) {
                         $username = (!is_null($comment->username)) ? $comment->username : 'un Gobelin'; ?>
+                        <h2 class="my-4"><?= $comment->title ?></h2>
                         <div class="comment py-4 px-4 mb-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../public/assets/img/others/avatar2.jpg" class="userAvatar mb-3 mb-md-0 me-md-3" alt="">

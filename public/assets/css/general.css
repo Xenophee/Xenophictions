@@ -2,7 +2,37 @@
 
 @import url('variablesLight.css');
 
+
+/* MISE EN PAGE DU SCROLL */
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--special-color);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: var(--dark-color);
+  }
+
+  ::-ms-scrollbar-thumb {
+    background-color: var(--special-color);
+  }
+  
+  ::-ms-scrollbar-track {
+    background-color: var(--dark-color);
+  }
+
+  html {
+    scrollbar-color: var(--darker-color) var(--dark-color);
+    /* scrollbar-width: thin; */
+}
+
+
+/* ------------------------------------------------------------------------ */
+
+
 /* MISE EN PAGE DU HEADER */
+
+
 
 .deco {
     width: 100%;

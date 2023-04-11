@@ -33,7 +33,7 @@
                             <p><?= $story->synopsis ?></p>
                         </div>
                         <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4 mt-xl-5">
-                            <?php if (!$save && $firstChapter) { ?>
+                            <?php if (!$save && isset($firstChapter)) { ?>
                                 <a href="" class="btn disabled" id="restart"><i class="bi bi-arrow-counterclockwise me-3"></i>Recommencer</a>
                                 <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn mt-4 mt-md-0" id="read"><i class="bi bi-book-half me-3"></i>Lire</a>
                             <?php } else if ($save) { ?>
@@ -83,35 +83,24 @@
             <div class="row" id="summary">
                 <div class="col d-flex flex-column justify-content-center">
 
-                    <?php if (!is_null($firstChapter)) { ?>
-                        <article>
-                            <div class="row justify-content-center my-4">
-                                <div class="col-12 col-md-11 col-lg-10 col-xl-7 progressionSection d-flex flex-column flex-md-row justify-content-between align-items-center py-2 px-4">
-                                    <h3><?= $firstChapter->title ?></h3>
-                                    <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $firstChapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
-                                </div>
-                            </div>
-                        </article> <?php } ?>
-
-
                     <!-- CHAPITRES -->
                     <?php foreach ($chapters as $chapter) { ?>
                         <article>
                             <div class="row justify-content-center my-4">
                                 <div class="col-12 col-md-11 col-lg-10 col-xl-7 progressionSection d-flex flex-column flex-md-row justify-content-between align-items-center py-2 px-4">
                                     <h3><?= $chapter->title ?></h3>
-                                    <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
-                                </div>
-                            </div>
-                        </article> <?php } ?>
-
-
-                    <?php if (isset($lastChapter)) { ?>
-                        <article>
-                            <div class="row justify-content-center my-4">
-                                <div class="col-12 col-md-11 col-lg-10 col-xl-7 progressionSection d-flex flex-column flex-md-row justify-content-between align-items-center py-2 px-4">
-                                    <h3><?= $lastChapter->title ?></h3>
-                                    <a href="../../controllers/section_controller.php?section=<?= $lastSection->id_sections ?>&chapter=<?= $lastChapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
+                                    <?php $countSections = Chapter::countSections($id, $chapter->id_chapters);
+                                    if (!$save) {
+                                        $isDisabled = ($chapter->id_chapters > $chapters[0]->id_chapters) ? 'disabled' : '';
+                                    } else {
+                                        $isDisabled = ($chapter->id_chapters > $save->id_chapters) ? 'disabled' : '';
+                                    }
+                                    if ($countSections->sections_number > 1) { ?>
+                                    <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading <?= $isDisabled ?> mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
+                                    <?php } else { 
+                                        $firstSection = Section::getFirstSection($chapter->id_chapters); ?>
+                                        <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>&chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading <?= $isDisabled ?> mt-3 mt-md-0"><i class="bi bi-book-fill me-3"></i>Lire</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </article> <?php } ?>
