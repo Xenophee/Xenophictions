@@ -33,17 +33,20 @@ try {
     // RECUPERATION DE L'IDENTIFIANT DU PROLOGUE, SEULE SECTION AUTORISEE PAR DEFAUT
     $permission = Chapter::getPrologue($story);
 
+    
+
     // SI L'UTILISATEUR EXISTE ET QUE L'ID DE SECTION EST DIFFERENT DE CELUI DU PROLOGUE, ON VERIFIE DANS LA SAUVEGARDE
     if (!is_null($user) && $idSection != $permission->id_sections) {
         $sectionsParent = Section_Section::getSectionsParent($idSection);
         $verificationFirst = Save::isSaveExist($idSection);
+        var_dump($verificationFirst);
         foreach ($sectionsParent as $sectionParent) {
-            $verificationSecond = Save::isSaveExist($sectionParent->id_sections);
+            $verificationSecond[] = Save::isSaveExist($sectionParent->id_sections);
+            var_dump($verificationSecond);
         }
         
-
         // S'IL N'Y A PAS DE SAUVEGARDE DE LA SECTION EN COURS, ON EXPULSE L'UTILISATEUR
-        if (!$verificationFirst && !$verificationSecond) {
+        if (!$verificationFirst || in_array(false, $verificationSecond)) {
             Flash::setMessage('Vous n\'avez pas accès à cette section pour le moment');
             header('location: /controllers/summary_controller.php?story=' . $story);
             die;
@@ -52,7 +55,6 @@ try {
 
     // FICHIER CSS A CHARGER
     $css = CSS['section'];
-
 
 
     // RECUPERATION DES INFORMATIONS POUR L'AFFICHAGE
@@ -71,6 +73,7 @@ try {
         $save->setId_sections($idSection);
         $isAdded = $save->add();
     }
+
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

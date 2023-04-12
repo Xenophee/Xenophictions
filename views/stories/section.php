@@ -127,9 +127,11 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-11 col-md-8 d-flex flex-column align-items-center">
                 <h4 class="mb-4"><?= (empty($sectionsChild)) ? 'Histoire terminée' : 'Quelle sera la suite ?';?></h4>
-                <?php foreach($sectionsChild as $sectionChild) { ?>
-                <a href="../../controllers/section_controller.php?section=<?= $sectionChild->id_sections ?>&chapter=<?= $sectionChild->id_chapters?>&story=<?= $story ?>&back=<?= $idSection ?>" class="btn btnChoice my-3"><?= $sectionChild->description ?></a>
+                <?php foreach($sectionsChild as $sectionChild) {
+                    $isDisabled = (!isset($user)) ? 'disabled' : ''; ?>
+                <a href="../../controllers/section_controller.php?section=<?= $sectionChild->id_sections ?>&chapter=<?= $sectionChild->id_chapters?>&story=<?= $story ?>&back=<?= $idSection ?>" class="btn btnChoice <?= $isDisabled ?> my-3"><?= $sectionChild->description ?></a>
                 <?php } ?>
+                <?= (!is_null($user)) ? '' : '<p class="text-center avert mt-4"><em>Pour lire la suite, veuillez vous inscrire et/ou vous connecter.</em></p>'; ?>
             </div>
         </div>
 

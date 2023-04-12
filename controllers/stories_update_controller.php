@@ -52,6 +52,27 @@ try {
             $themeCategories = filter_input(INPUT_POST, 'themeCategories', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY) ?? [];
             $synopsis = trim((string)filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_SPECIAL_CHARS));
 
+            if (isset($_FILES['cover'])) {
+                $cover = $_FILES['cover'];
+                if (!empty($cover['tmp_name'])) {
+                    if ($cover['error'] > 0) {
+                        $error['cover'] = 'Erreur survenue durant le transfert du fichier';
+                    } else {
+                        if (!in_array($cover['type'], AUTHORIZED_IMAGE_FORMAT)) {
+                            $error['cover'] = 'Ce type de fichier n\'est pas accepté';
+                        } else if ($_FILES['cover']['size'] > MAX_FILE_SIZE) {
+                            $error['cover'] = 'Poids de l\'image trop élevé';
+                        } else {
+                            $extension = pathinfo($cover['name'], PATHINFO_EXTENSION);
+                            $from = $cover['tmp_name'];
+                            $fileName = $idStory . '.' . $extension;
+                            $to = LOCATION_STORIES . $fileName;
+                            move_uploaded_file($from, $to);
+                        }
+                    }
+                }
+            }
+
             // VERIFICATION SUR LE TITRE DE L'HISTOIRE
             if (empty($title)) {
                 $errors['title'] = 'Veuillez saisir un titre';
@@ -102,27 +123,6 @@ try {
                         $storyCategoryAdd->setIdStories($idStory);
                         $storyCategoryAdd->setIdCategories($themeCategory);
                         $isAddLink[] = $storyCategoryAdd->add();
-                    }
-
-                    if (isset($_FILES['cover'])) {
-                        $cover = $_FILES['cover'];
-                        if (!empty($cover['tmp_name'])) {
-                            if ($cover['error'] > 0) {
-                                $error['cover'] = 'Erreur survenue durant le transfert du fichier';
-                            } else {
-                                if (!in_array($cover['type'], AUTHORIZED_IMAGE_FORMAT)) {
-                                    $error['cover'] = 'Ce type de fichier n\'est pas accepté';
-                                } else if ($_FILES['cover']['size'] > MAX_FILE_SIZE) {
-                                    $error['cover'] = 'Poids de l\'image trop élevé';
-                                } else {
-                                    $extension = pathinfo($cover['name'], PATHINFO_EXTENSION);
-                                    $from = $cover['tmp_name'];
-                                    $fileName = $idStory . '.' . $extension;
-                                    $to = LOCATION_STORIES . $fileName;
-                                    move_uploaded_file($from, $to);
-                                }
-                            }
-                        }
                     }
 
                     if ($isAdd === true && !in_array(false, $isAddLink, true)) {
