@@ -94,6 +94,11 @@ class Save {
         JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
         WHERE `saves`.`id_users` = :id_users
         ORDER BY `saves`.`id_sections` DESC;';
+
+// SELECT `chapters`.`id_stories`, MAX(`saves`.`id_sections`) FROM `saves` JOIN `sections` ON 
+// `sections`.`id_sections` = `saves`.`id_sections` JOIN `chapters_sections` 
+// ON `sections`.`id_sections` = `chapters_sections`.`id_sections` JOIN `chapters` 
+// ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters` WHERE `saves`.`id_users` = 1 GROUP BY chapters.id_stories
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
 

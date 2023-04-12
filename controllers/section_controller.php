@@ -10,13 +10,9 @@ try {
 
     // RECUPERATION DE L'IDENTIFIANT DE SECTION, DU CHAPITRE ET DE L'HISTOIRE
     $idSection = intval(filter_input(INPUT_GET, 'section', FILTER_SANITIZE_NUMBER_INT));
-    $story = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
-    $chapter = intval(filter_input(INPUT_GET, 'chapter', FILTER_SANITIZE_NUMBER_INT));
-
-    $idParentChild[] = $idSection;
 
     // VERIFICATION QUE LES PARAMETRES EXISTENT
-    if (!$idSection || !$story || !$chapter) {
+    if (empty($idSection)) {
         header('location: /404.php');
         die;
     }
@@ -30,25 +26,29 @@ try {
         $user = null;
     }
 
-    // RECUPERATION DE L'IDENTIFIANT DU PROLOGUE, SEULE SECTION AUTORISEE PAR DEFAUT
-    $permission = Chapter::getPrologue($story);
+    // RECUPERATION DES INFORMATIONS SUR LA SECTION EN COURS
+    $section = Section::get($idSection);
 
-    
+    // RECUPERATION DE L'IDENTIFIANT DU PROLOGUE, SEULE SECTION AUTORISEE PAR DEFAUT
+    $permission = Chapter::getPrologue($section->id_stories);
+
+    // EJECTION DES NON INSCRIT SI L'ID DE SECTION EST DIFFERENT DU PROLOGUE
+    if (is_null($user) && $idSection != $permission->id_sections) {
+        header('location: /404.php');
+        die;
+    }
 
     // SI L'UTILISATEUR EXISTE ET QUE L'ID DE SECTION EST DIFFERENT DE CELUI DU PROLOGUE, ON VERIFIE DANS LA SAUVEGARDE
     if (!is_null($user) && $idSection != $permission->id_sections) {
         $sectionsParent = Section_Section::getSectionsParent($idSection);
-        $verificationFirst = Save::isSaveExist($idSection);
-        var_dump($verificationFirst);
         foreach ($sectionsParent as $sectionParent) {
             $verificationSecond[] = Save::isSaveExist($sectionParent->id_sections);
-            var_dump($verificationSecond);
         }
         
-        // S'IL N'Y A PAS DE SAUVEGARDE DE LA SECTION EN COURS, ON EXPULSE L'UTILISATEUR
-        if (!$verificationFirst || in_array(false, $verificationSecond)) {
+        // S'IL N'Y A PAS DE SAUVEGARDE SUR UNE SECTION PARENTE, ON EXPULSE L'UTILISATEUR
+        if (!in_array(true, $verificationSecond, true)) {
             Flash::setMessage('Vous n\'avez pas accès à cette section pour le moment');
-            header('location: /controllers/summary_controller.php?story=' . $story);
+            header('location: /controllers/summary_controller.php?story=' . $section->id_stories);
             die;
         }
     }
@@ -56,15 +56,16 @@ try {
     // FICHIER CSS A CHARGER
     $css = CSS['section'];
 
-
-    // RECUPERATION DES INFORMATIONS POUR L'AFFICHAGE
-    $informations = Chapter::get($story, $chapter);
-    $section = Section::get($idSection);
+    // RECUPERATION DES INFORMATIONS POUR ACCEDER A LA SECTION SUIVANTE
     $sectionsChild = Section_Section::getSectionsChild($idSection);
-    
-    // var_dump($sectionsParent);
+    var_dump($sectionsChild);
 
-    $titleDoc = 'Section du ' . $informations->chapter_title;
+    foreach($sectionsChild as $sectionChild) {
+        $result[] = Save::isSaveExist($sectionChild->id_sections);
+    }
+
+    // TITRE DU DOCUMENT
+    $titleDoc = 'Section du ' . $section->chapter_title;
 
     // SAUVEGARDE DE LA PROGRESSION DES UTILISATEURS
     if (!is_null($user)) {

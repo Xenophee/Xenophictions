@@ -133,7 +133,7 @@ try {
     // RECUPERATION DES INFOS SUR LA SECTION EN COURS ET SES LIENS
     $section = Section::get($id);
     $chapters = Chapter::getAll($idStory);
-    $sectionsLink = Section_Section::get($id);
+    $sectionsLink = Section_Section::getAll($id);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

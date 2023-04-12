@@ -177,9 +177,13 @@ class Section
     public static function get(int $id):object
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT *
+        $sql = 'SELECT `sections`.*, `chapters`.`title` AS `chapter_title`, `stories`.`title` AS `story_title`,
+        `chapters`.`id_chapters`, `stories`.`id_stories`
         FROM `sections`
-        WHERE `id_sections` = :id';
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
+        JOIN `chapters` ON `chapters_sections`.`id_chapters` = `chapters`.`id_chapters`
+        JOIN `stories` ON `stories`.`id_stories` = `chapters`.`id_stories`
+        WHERE `sections`.`id_sections` = :id';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -309,8 +313,6 @@ class Section
         if ($sth->execute()) {
             return ($sth->rowCount() > 0) ? true : false;
         }
-    }
-
-    
+    }  
 }
 
