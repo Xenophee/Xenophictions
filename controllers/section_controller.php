@@ -42,11 +42,11 @@ try {
     if (!is_null($user) && $idSection != $permission->id_sections) {
         $sectionsParent = Section_Section::getSectionsParent($idSection);
         foreach ($sectionsParent as $sectionParent) {
-            $verificationSecond[] = Save::isSaveExist($sectionParent->id_sections);
+            $verificationParents[] = Save::isSaveExist($sectionParent->id_sections);
         }
         
         // S'IL N'Y A PAS DE SAUVEGARDE SUR UNE SECTION PARENTE, ON EXPULSE L'UTILISATEUR
-        if (!in_array(true, $verificationSecond, true)) {
+        if (!in_array(true, $verificationParents, true)) {
             Flash::setMessage('Vous n\'avez pas accès à cette section pour le moment');
             header('location: /controllers/summary_controller.php?story=' . $section->id_stories);
             die;
@@ -58,10 +58,10 @@ try {
 
     // RECUPERATION DES INFORMATIONS POUR ACCEDER A LA SECTION SUIVANTE
     $sectionsChild = Section_Section::getSectionsChild($idSection);
-    var_dump($sectionsChild);
 
+    // VERIFICATION DE LA SAUVEGARDE SUR LES ENFANTS POUR L'AFFICHAGE OU NON DES BOUTONS DE CHOIX
     foreach($sectionsChild as $sectionChild) {
-        $result[] = Save::isSaveExist($sectionChild->id_sections);
+        $verificationChilds[] = Save::isSaveExist($sectionChild->id_sections);
     }
 
     // TITRE DU DOCUMENT

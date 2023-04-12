@@ -118,8 +118,8 @@ CREATE TABLE `saves`(
    `id_saves` INT AUTO_INCREMENT,
    `read_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY(`id_saves`, `id_sections`, `id_users`),
-   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`),
-   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`)
+   FOREIGN KEY(`id_sections`) REFERENCES `sections`(`id_sections`) ON DELETE CASCADE,
+   FOREIGN KEY(`id_users`) REFERENCES `users`(`id_users`) ON DELETE CASCADE
 );
 
 

@@ -265,6 +265,10 @@ class Section
         }
     }
 
+    /**
+     * Permet d'ajouter une section
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -281,6 +285,12 @@ class Section
         return $sth->execute();
     }
 
+    /**
+     * Permet de mettre à jour une section
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function update(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -301,6 +311,12 @@ class Section
         }
     }
 
+    /**
+     * Permet de supprimer une section
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();

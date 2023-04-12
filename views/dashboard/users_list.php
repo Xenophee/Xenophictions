@@ -47,7 +47,7 @@
                                     <td><?php echo (!is_null($user->validated_at)) ? 'Oui' : 'Non'; ?></td>
                                     <td><?php echo ($user->newsletter) ? 'Oui' : 'Non'; ?></td>
                                     <td class="d-flex justify-content-end">
-                                        <a href="../../controllers/user_informations_controller.php?id=<?= $user->id_users ?>" class="btn view py-2 px-4 me-3" title="Consulter le profil"><i class="bi bi-eye"></i></a>
+                                        <a href="../../controllers/user_informations_controller.php?id=<?= $user->id_users ?>" class="btn view py-2 px-4 me-3" title="Consulter le profil"><i class="bi bi-info-circle"></i></a>
                                         <!-- <a href="" class="btn edit py-2 px-4 me-3" title="Editer le profil"><i class="bi bi-pen"></i></a> -->
                                         <!-- Bouton supprimer -->
                                         <button type="button" class="btn delete py-2 px-4" title="Supprimer l'utilisateur" data-id="<?= $user->id_users ?>" data-deleteparam="1" data-bs-toggle="modal" data-bs-target="#deleteUser">
