@@ -136,13 +136,7 @@
                                         <div class="col-12 col-lg-5 col-xl-5 coverCard">
                                             <img src="../public/uploads/stories/<?= $story->id_stories ?>.jpg" class="img-fluid coverImg" alt="...">
                                             <div class="d-flex justify-content-center align-items-center note"><?php
-                                                                                                                if (!is_null($story->note)) {
-                                                                                                                    // Arrondir le nombre à un chiffre après la virgule
-                                                                                                                    $note = round($story->note * 2) / 2;
-                                                                                                                    $note = number_format($note, 1, ',');
-                                                                                                                } else {
-                                                                                                                    $note = '-';
-                                                                                                                }
+                                                                                                                $note = (is_null($story->note)) ? '-' : ceil($story->note);
 
                                                                                                                 echo $note ?>/10
                                             </div>

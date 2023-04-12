@@ -126,11 +126,11 @@ try {
 
 
         // VERIFICATION S'IL N'Y A PAS DE DOUBLON
-        if (User::isUsernameExist($username) == true) {
+        if (User::isUsernameExist($usernameOk) == true) {
             $errors['username'] = 'Ce nom d\'utilisateur existe déjà';
         }
 
-        if (User::isEmailExist($email) == true) {
+        if (User::isEmailExist($emailOk) == true) {
             $errors['email'] = 'Ce mail existe déjà';
         }
 
@@ -138,11 +138,11 @@ try {
         if (empty($errors)) {
 
             $newUser = new User;
-            $newUser->setUsername($username);
-            $newUser->setEmail($email);
-            $newUser->setBirthdate($birthdate);
+            $newUser->setUsername($usernameOk);
+            $newUser->setEmail($emailOk);
+            $newUser->setBirthdate($birthdateOk);
             $newUser->setPassword($passwordHash);
-            $newUser->setNewsletter($newsletter);
+            $newUser->setNewsletter($newsletterOk);
 
             $isAdd = $newUser->add();
 

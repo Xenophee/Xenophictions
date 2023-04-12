@@ -2,11 +2,20 @@
 
 require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/Story.php');
+require_once(__DIR__ . '/../models/Chapter.php');
 require_once(__DIR__ . '/../models/Note.php');
+require_once(__DIR__ . '/../models/Save.php');
 
 try {
 
-    
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    } else {
+        $user = null;
+    }
 
     // FICHIER CSS A CHARGER
     $css = CSS['catalog'];
@@ -60,9 +69,6 @@ try {
     } else {
         $stories = Story::getAll($type, $theme);
     }
-
-
-    // var_dump($stories);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');

@@ -246,6 +246,20 @@ class Chapter
         }
     }
 
+    public static function countChapters(int $idStory): object
+    {
+        $pdo = Database::getInstance();
+        $sql = 'SELECT COUNT(`chapters`.`id_chapters`) AS `chapters_number`
+        FROM `chapters`
+        WHERE `chapters`.`id_stories` = :id_stories;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_stories', $idStory, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetch());
+        }
+    }
+
     public static function countSections(int $idStory, int $idChapter): object
     {
         $pdo = Database::getInstance();

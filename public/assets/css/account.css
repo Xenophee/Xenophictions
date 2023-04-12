@@ -103,12 +103,15 @@ section {
 
 .currentStory {
     width: 90%;
+    min-height: 60vh;
     background-color: var(--lighter-color);
-    border: var(--border-lighter-double);
+    border: var(--border-light-double);
 }
 
 .coverStory {
     width: 90%;
+    height: 100%;
+    object-fit: cover;
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 

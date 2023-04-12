@@ -6,7 +6,7 @@
                 <div class="col-12 col-lg-10 col-xl-3 d-flex flex-column justify-content-center align-items-center coverSection order-2 order-lg-1 py-5 px-5">
                     <!-- IMAGE DE COUVERTURE -->
                     <div class="d-flex justify-content-center coverCard mb-5">
-                        <div class="d-flex justify-content-center align-items-center note"><?= $note ?>/10</div>
+                        <div class="d-flex justify-content-center align-items-center note" data-bs-toggle="modal" data-bs-target="#addNote"><?= $note ?>/10</div>
                     </div>
 
                     <div class="littleInfo px-4">
@@ -96,8 +96,8 @@
                                         $isDisabled = ($chapter->id_chapters > $save->id_chapters) ? 'disabled' : '';
                                     }
                                     if ($countSections->sections_number > 1) { ?>
-                                    <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading <?= $isDisabled ?> mt-3 mt-md-0"><i class="bi bi-book me-3"></i>Lire</a>
-                                    <?php } else { 
+                                        <a href="../../controllers/chapter_controller.php?chapter=<?= $chapter->id_chapters ?>&story=<?= $id ?>" class="btn btnReading <?= $isDisabled ?> mt-3 mt-md-0"><i class="bi bi-book me-3"></i>Lire</a>
+                                    <?php } else {
                                         $firstSection = Section::getFirstSection($chapter->id_chapters); ?>
                                         <a href="../../controllers/section_controller.php?section=<?= $firstSection->id_sections ?>" class="btn btnReading <?= $isDisabled ?> mt-3 mt-md-0"><i class="bi bi-book me-3"></i>Lire</a>
                                     <?php } ?>
@@ -166,9 +166,9 @@
 
                                     <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
                                         <?php if (isset($user)) {
-                                            if($comment->id_users == $user->id_users) { ?>
-                                        <a href="../../controllers/delete_user_controller.php?id=<?= $comment->id_comments ?>&delete=2" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i
-                                        class="bi bi-dash-circle me-3"></i>Supprimer</a> <?php } } ?>
+                                            if ($comment->id_users == $user->id_users) { ?>
+                                                <a href="../../controllers/delete_user_controller.php?id=<?= $comment->id_comments ?>&delete=2" class="btn stop mb-3 mb-md-0 me-3" id="cancel"><i class="bi bi-dash-circle me-3"></i>Supprimer</a> <?php }
+                                                                                                                                                                                                                                            } ?>
                                         <!-- <button type="submit" class="btn ok" id="send"><i class="bi bi-pen me-3"></i>Modifier</button> -->
                                     </div>
                                 </form>
@@ -184,7 +184,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="giveNote" tabindex="-1" aria-labelledby="giveNoteToStory" aria-hidden="true">
+<div class="modal fade" id="addNote" tabindex="-1" aria-labelledby="giveNoteToStory" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -192,11 +192,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Quelle note souhaitez vous attribuer ?</p>
+                <?php if (is_null($user)) { ?>
+                    <p class="text-center">La notation est réservée aux lecteurs inscrits.</p>
+                <?php } else { ?>
+                    <p class="text-center">Quelle note souhaitez vous attribuer ?</p>
+                    <p class="text-center">Note actuelle : <?= $userNote->note ?></p>
+                    <form method="POST">
+                        <label for="note" class="form-label mb-2">Note (sur 10) :</label>
+                        <input type="number" class="form-control inputNote" id="note" name="note" value="">
+                        <small class="text-danger fst-italic mt-2"><?= $errors['note'] ?? '' ?></small>
+                    
+                <?php } ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn py-2 px-4 me-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
-                <button type="button" class="btn py-2 px-4"><a class="link-light" id="deleteLink">Valider</a></button>
+                <?php echo (is_null($user)) ? '' : '<button type="submit" name="submitNote" class="btn py-2 px-4 me-4"><a class="link-light" id="deleteLink">Valider</a></button>'; ?>
+                </form>
+                <button type="button" class="btn py-2 px-4" data-bs-dismiss="modal" id="resetBtn">Annuler</button>
+
             </div>
         </div>
     </div>

@@ -121,8 +121,8 @@
                                         </th>
                                         
                                         <th scope="col">id de section</th>
-                                        <th scope="col">sections parentes</th>
-                                        <th scope="col">sections enfants</th>
+                                        <!-- <th scope="col">sections parentes</th>
+                                        <th scope="col">sections enfants</th> -->
                                         <th scope="col" class="d-flex justify-content-end">
                                             <button type="submit" class="btn edit py-2 px-4 me-3" title="Editer le chapitre"><i class="bi bi-pen"></i></button>
                                             <!-- Bouton supprimer -->
@@ -145,8 +145,8 @@
                                             <h3 class="fs-5"><?= $section->title ?></h3>
                                         </td>
                                         <td><span><?= $section->id_sections ?></span></td>
-                                        <td><?= $section->id_sections_parent ?></td>
-                                        <td><?= $section->id_sections_child ?></td>
+                                        <!-- <td></td>
+                                        <td></td> -->
                                         <td class="d-flex justify-content-end">
                                             <a href="../../controllers/sections_update_controller.php?id=<?= $section->id_sections ?>&chapter=<?= $chapter->id_chapters ?>&story=<?= $idStory ?>" class="btn edit py-2 px-4 me-3" title="Editer la section">
                                                 <i class="bi bi-pen"></i>

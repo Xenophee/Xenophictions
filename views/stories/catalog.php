@@ -55,13 +55,7 @@
                             <div class="col-12 col-lg-5 col-xl-4 coverCard">
                                 <img src="../public/uploads/stories/<?= $story->id_stories ?>.jpg" class="img-fluid coverImg" alt="...">
                                 <div class="d-flex justify-content-center align-items-center note"><?php
-                                                                                                    if (!is_null($story->note)) {
-                                                                                                        // Arrondir le nombre à un chiffre après la virgule
-                                                                                                        $note = round($story->note * 2) / 2;
-                                                                                                        $note = number_format($note, 1, ',');
-                                                                                                    } else {
-                                                                                                        $note = '-';
-                                                                                                    }
+                                                                                                    $note = (is_null($story->note)) ? '-' : ceil($story->note);
 
                                                                                                     echo $note ?>/10</div>
                             </div>
@@ -71,9 +65,17 @@
                                         <small>Publié le <?= date('d/m/Y', strtotime($story->registered_at)) ?></small>
                                         <img src="<?= THEME_ICON[$story->id_theme] ?>" alt="Icone du thème <?= $story->theme_name ?>" title="Thème <?= $story->theme_name ?>" class="img-fluid themeIcone">
                                     </div>
-                                    <div class="progress mx-2 mx-md-5 mx-lg-0 mt-4 mb-5" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar" style="width: 25%">25%</div>
-                                    </div>
+                                    <?php if (!is_null($user)) {
+                                        $progression = Chapter::countChapters($story->id_stories);
+                                        $save = Save::getChapterIndex($user->id_users, $story->id_stories);
+                                        $progression = ($save) ? ($save->last_chapter / $progression->chapters_number) * 100 : 0; ?>
+                                        <div class="progress mx-2 mx-md-5 mx-lg-0 mt-4 mb-5" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar" style="width: <?= $progression ?>%"><?= $progression ?> %</div>
+                                        </div> <?php } else { ?>
+                                            <div class="progress mx-2 mx-md-5 mx-lg-0 mt-4 mb-5" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar" style="width: 0%">0 %</div>
+                                        </div>
+                                        <?php } ?>
                                     <h3 class="text-center mt-4 mt-lg-3 mb-5 mx-3 mx-md-5 mx-lg-0"><?= $story->title ?></h3>
                                     <p class="mx-3 mx-md-5 mx-lg-0"><?= $story->synopsis ?></p>
                                     <div class="d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-lg-end mt-4 mt-lg-5">
@@ -90,9 +92,9 @@
                     </article> <?php }
                         } ?>
 
-                        <?php if (empty($stories)) { ?>
-                            <p class="text-center pb-5">Il n'y a pas d'histoires dans ce thème pour le moment.</p>
-                        <?php } ?>
+            <?php if (empty($stories)) { ?>
+                <p class="text-center pb-5">Il n'y a pas d'histoires dans ce thème pour le moment.</p>
+            <?php } ?>
 
         </section>
 

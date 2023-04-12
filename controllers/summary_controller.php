@@ -10,6 +10,15 @@ require_once(__DIR__ . '/../models/Comment.php');
 
 try {
 
+    // RECUPERATION DES INFOS UTILISATEUR EN FONCTION DU COOKIE OU DE LA SESSION
+    if (isset($_COOKIE['userSession'])) {
+        $user = unserialize($_COOKIE['userSession']);
+    } else if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    } else {
+        $user = null;
+    }
+
     // RECUPERATION DE L'IDENTIFIANT DE L'HISTOIRE CONCERNEE
     $id = intval(filter_input(INPUT_GET, 'story', FILTER_SANITIZE_NUMBER_INT));
 
@@ -36,24 +45,75 @@ try {
     // TRAITEMENT EN CAS D'ENVOI DE DONNEES
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $commentary = trim((string)filter_input(INPUT_POST, 'commentary', FILTER_SANITIZE_SPECIAL_CHARS));
+        $errors = [];
 
-        $newComment = new Comment;
-        $newComment->setComment($commentary);
-        $newComment->setId_stories($id);
-        $newComment->setId_users($user->id_users);
+        if (isset($_POST['submitNote'])) {
 
-        $isAdd = $newComment->add();
+            $note = intval(filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT));
 
-        if ($isAdd) {
-            Flash::setMessage('Le commentaire a été envoyé et est en attente de validation.');
+            if ($note < 0 || $note > 10) {
+                $errors['note'] = 'Veuillez saisir une note entre un et dix.';
+            }
+
+            if (empty($errors)) {
+
+                $isNoteExist = Note::isNoteExist($user->id_users, $id);
+
+                if (!$isNoteExist) {
+                    $newNote = new Note;
+                    $newNote->setNote($note);
+                    $newNote->setId_Users($user->id_users);
+                    $newNote->setId_stories($id);
+
+                    $isNoteAdd = $newNote->add();
+                } else {
+
+                    $newNote = new Note;
+                    $newNote->setNote($note);
+                    $newNote->setId_Users($user->id_users);
+                    $newNote->setId_stories($id);
+
+                    $isNoteAdd = $newNote->update();
+                }
+
+
+                if ($isNoteAdd) {
+                    Flash::setMessage('La note a été prise en compte.');
+                } else {
+                    Flash::setMessage('Une erreur est survenue : le note n\'a pas pu être enregistrée.');
+                }
+            }
         } else {
-            Flash::setMessage('Une erreur est survenue : le commentaire n\'a pas pu être envoyé.');
+
+            $commentary = trim((string)filter_input(INPUT_POST, 'commentary', FILTER_SANITIZE_SPECIAL_CHARS));
+
+            if (empty($commentary)) {
+                $errors['commentary'] = 'Vous devez écrire un commentaire avant d\'envoyer.';
+            }
+
+            if (empty($errors)) {
+                $newComment = new Comment;
+                $newComment->setComment($commentary);
+                $newComment->setId_stories($id);
+                $newComment->setId_users($user->id_users);
+
+                $isAdd = $newComment->add();
+
+                if ($isAdd) {
+                    Flash::setMessage('Le commentaire a été envoyé et est en attente de validation.');
+                } else {
+                    Flash::setMessage('Une erreur est survenue : le commentaire n\'a pas pu être envoyé.');
+                }
+            }
         }
     }
 
     // RECUPERATION DES DONNEES DE L'HISTOIRE
     $story = Story::get($id);
+
+    if (!is_null($user)) {
+        $userNote = Note::get($user->id_users, $id);
+    }
 
     $titleDoc = 'Sommaire : ' . $story->title;
 
@@ -63,36 +123,30 @@ try {
 
     // RECUPERATION DES CHAPITRES POUR LE SOMMAIRE
     $chapters = Chapter::getAll($id);
-    
+
     // RECUPERATION DU PROLOGUE
     if (!empty($chapters)) {
         $firstChapter = $chapters[0];
 
         // VERIFICATION S'IL Y A BIEN DES CHAPITRES DANS L'HISTOIRE
-    if (!is_null($firstChapter)) {
-        $firstSection = Section::getFirstSection($firstChapter->id_chapters);
+        if (!is_null($firstChapter)) {
+            $firstSection = Section::getFirstSection($firstChapter->id_chapters);
+        }
     }
-    }
-
-    
 
 
     // RECUPERATION DES COMMENTAIRES DE L'HISTOIRE
     $comments = Comment::getAll($id);
 
     // GESTION DE L'AFFICHAGE DE LA MOYENNE DES NOTES UTILISATEURS
-    $note = (is_null($story->note)) ? '-' : $story->note;
+    $note = (is_null($story->note)) ? '-' : ceil($story->note);
 
     // RECUPERATION DE LA SAUVEGARDE DE L'UTILISATEUR
     if (isset($user)) {
         $save = Save::get($user->id_users, $id);
-        // var_dump($save);
     } else {
         $save = false;
     }
-
-    
-
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/error.php');

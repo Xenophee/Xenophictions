@@ -84,23 +84,39 @@ class Save {
         }
     }
 
-    public static function getSaves(int $idUser):object|bool
+    public static function getSaves(int $idUser):array|bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `chapters`.`id_stories`, `chapters`.`id_chapters`, `saves`.`id_sections`
-        FROM `saves`
-        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections`
-        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections`
-        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters`
-        WHERE `saves`.`id_users` = :id_users
-        ORDER BY `saves`.`id_sections` DESC;';
 
-// SELECT `chapters`.`id_stories`, MAX(`saves`.`id_sections`) FROM `saves` JOIN `sections` ON 
-// `sections`.`id_sections` = `saves`.`id_sections` JOIN `chapters_sections` 
-// ON `sections`.`id_sections` = `chapters_sections`.`id_sections` JOIN `chapters` 
-// ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters` WHERE `saves`.`id_users` = 1 GROUP BY chapters.id_stories
+        $sql = 'SELECT `chapters`.`id_stories`, MAX(`saves`.`id_sections`) AS `last_section`, MAX(`chapters`.`id_chapters`) AS `last_chapter`  FROM `saves` 
+        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections` 
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections` 
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters` 
+        WHERE `saves`.`id_users` = :id_users
+        GROUP BY `chapters`.`id_stories`;';
+
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+
+        if ($sth->execute()) {
+            return ($sth->fetchAll());
+        }
+    }
+
+    public static function getChapterIndex(int $idUser, int $idStory):object|bool
+    {
+        $pdo = Database::getInstance();
+
+        $sql = 'SELECT `chapters`.`id_stories`, MAX(`saves`.`id_sections`) AS `last_section`, MAX(`chapters`.`index`) AS `last_chapter`  FROM `saves` 
+        JOIN `sections` ON `sections`.`id_sections` = `saves`.`id_sections` 
+        JOIN `chapters_sections` ON `sections`.`id_sections` = `chapters_sections`.`id_sections` 
+        JOIN `chapters` ON `chapters`.`id_chapters` = `chapters_sections`.`id_chapters` 
+        WHERE `saves`.`id_users` = :id_users AND `chapters`.`id_stories` = :id_story
+        GROUP BY `chapters`.`id_stories`;';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_users', $idUser, PDO::PARAM_INT);
+        $sth->bindValue(':id_story', $idStory, PDO::PARAM_INT);
 
         if ($sth->execute()) {
             return ($sth->fetch());

@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/../config/init.php');
 require_once(__DIR__ . '/../models/Save.php');
+require_once(__DIR__ . '/../models/Story.php');
 
 try {
 
@@ -23,8 +24,7 @@ try {
 
     $titleDoc = 'Historique';
 
-    $sections = Save::getSaves($user->id_users);
-    var_dump($sections);
+    $saves = Save::getSaves($user->id_users);
 
 } catch (\Throwable $th) {
     include_once(__DIR__ . '/../views/templates/header.php');
