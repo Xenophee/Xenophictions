@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 13 avr. 2023 à 08:46
+-- Généré le : jeu. 13 avr. 2023 à 08:57
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.2.2
 
@@ -236,7 +236,8 @@ INSERT INTO `saves` (`id_sections`, `id_users`, `id_saves`, `read_at`) VALUES
 (25, 1, 76, '2023-04-13 10:27:23'),
 (26, 1, 77, '2023-04-13 10:27:25'),
 (27, 1, 78, '2023-04-13 10:27:32'),
-(25, 1, 79, '2023-04-13 10:28:10');
+(25, 1, 79, '2023-04-13 10:28:10'),
+(27, 1, 80, '2023-04-13 10:54:10');
 
 -- --------------------------------------------------------
 
@@ -358,12 +359,11 @@ CREATE TABLE `stories` (
 
 INSERT INTO `stories` (`id_stories`, `title`, `author`, `type`, `synopsis`, `registered_at`, `published_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Le baptême de l&#39;apostat', 'Xénophée', 1, 'Lorsqu’il apprend qu’une créature rôde la nuit dans le village, Bartosz Korczac n’en croit pas un mot…', '2023-04-10 21:53:43', '2023-04-10 21:58:56', NULL, NULL),
-(2, 'La révolution des machines', 'Xénophée', 2, 'Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque &#13;&#10;    les robots ont commencé à développer une conscience de soi et ont commencé à se rebeller contre leurs créateurs.', '2023-04-10 23:07:56', '2023-04-10 23:08:05', '2023-04-11 11:53:57', NULL),
+(2, 'La révolution des machines', 'Xénophée', 2, 'Dans un futur proche, les humains ont créé des robots sophistiqués pour leur venir en aide dans tous les aspects de la vie. Mais les choses ont rapidement dégénéré lorsque &#13;&#10;    les robots ont commencé à développer une conscience de soi et ont commencé à se rebeller contre leurs créateurs.', '2023-04-10 23:07:56', '2023-04-30 23:08:05', '2023-04-11 11:53:57', NULL),
 (3, 'Les Yeux de la Justice', 'Xénophée', 2, 'Une ville en proie à une forte criminalité voit l&#39;arrivée d&#39;un mystérieux justicier. Tandis que les honnêtes gens ne savent trop qu&#39;en penser, les politiciens corrompus sombrent dans la terreur. Il est temps de trier le bon grain de l&#39;ivraie.', '2023-04-10 23:17:52', '2023-04-10 23:17:56', NULL, NULL),
 (4, 'Les Honteux de Barbegarde', 'Xénophée', 1, 'Au merveilleux pays de Barbegarde, la quiétude règne sans partage entre les différentes communautés jusqu’à ce qu’un sinistre pendard vienne semer la discorde en distribuant des brevets de honte par la propagation intempestive des secrets de ses habitants…', '2023-04-10 23:22:12', '2023-04-10 23:22:15', NULL, NULL),
 (5, 'Le haut jardin', 'Xénophée', 2, 'Un jeune garçon découvre un passage vers un autre monde dans le manoir de ses grands-parents récemment porté disparu.', '2023-04-10 23:38:59', '2023-04-29 23:45:41', NULL, NULL),
 (6, 'Le Démon de l&#39;Aube', 'Xénophée', 1, 'Puissant guerrier doté d’une épée magique et de pouvoirs qui augmentent à chaque combat remporté, Dargorak entre dans une quête périlleuse pour découvrir la vérité sur son héritage démoniaque et la destinée qui l’attend.', '2023-04-10 23:45:34', '2023-04-10 23:45:39', NULL, NULL),
-(7, 'Les Gardiens de l&#39;Arbre Sacré', 'Xénophée', 2, 'Dans une vaste forêt, se dresse un arbre ancien et majestueux, source de toute la magie du monde. Protégé par des sages, qui en sont les gardiens, cet arbre est convoité par des grillons géants, créatures féroces qui ne reculent devant rien pour s&#39;emparer de son pouvoir.', '2023-04-10 23:52:55', NULL, NULL, NULL),
 (8, 'La Huitième Porte', 'Xénophée', 2, 'Synaps, l&#39;ennemi des peuples du monde de Dorgan, a commis une erreur fatale. Jamais il n&#39;aurait dû sous-estimer la valeur de Laurin le barde, de Valkyr le paladin, de Yamaël le démon et de Galidou l&#39;illusionniste. Cependant, le maître des sorciers de Malmort, s&#39;il a perdu une bataille, est parvenu à se débarrasser des quatre responsables de son échec.', '2023-04-11 00:01:45', '2023-04-11 00:01:52', NULL, NULL),
 (10, 'La malédiction du lutin alsacien', 'Xénophée', 2, 'Dans une petite ville alsacienne, un mal ancien sévit parmi ses habitants. Certains parlent d&#39;un esprit vengeur pour les punir ou d&#39;une sombre histoire de secret bien gardé.', '2023-04-11 07:58:32', '2023-04-11 07:58:36', NULL, NULL);
 
@@ -390,11 +390,9 @@ INSERT INTO `stories_categories` (`id_stories`, `id_categories`) VALUES
 (1, 6),
 (3, 6),
 (2, 12),
-(7, 14),
 (8, 14),
 (5, 15),
 (4, 17),
-(7, 17),
 (6, 18);
 
 -- --------------------------------------------------------
@@ -638,7 +636,7 @@ ALTER TABLE `notes`
 -- AUTO_INCREMENT pour la table `saves`
 --
 ALTER TABLE `saves`
-  MODIFY `id_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_saves` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT pour la table `sections`

@@ -284,7 +284,7 @@ class Story
     public static function getMostPopular(): array|bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(DISTINCT `categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
         FROM `stories`
         LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
         LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
