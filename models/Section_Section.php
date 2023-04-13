@@ -7,23 +7,50 @@ class Section_Section {
     private ?int $id_sections_parent = null;
     private ?int $id_sections_child = null;
 
+    /**
+     * Permet de définir l'id de la section parente
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_sections_parent (int $value):void {
         $this->id_sections_parent = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de la section parente
+     * @return int
+     */
     public function getId_sections_parent ():int {
         return $this->id_sections_parent;
     }
 
+    /**
+     * Permet de définir l'id de la section enfant
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_sections_child (int $value):void {
         $this->id_sections_child = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de la section enfant
+     * @return int
+     */
     public function getId_sections_child ():int {
         return $this->id_sections_child;
     }
 
-    public static function getSectionsParent(int $id)
+    
+    /**
+     * Permet de récupérer les sections parentes à une autre section en particulier
+     * @param int $id
+     * 
+     * @return array
+     */
+    public static function getSectionsParent(int $id):array
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*
@@ -35,9 +62,17 @@ class Section_Section {
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
+        } else {
+            return [];
         }
     }
 
+    /**
+     * Permet de récupérer les sections enfants à une autre section en particulier
+     * @param int $id
+     * 
+     * @return array
+     */
     public static function getSectionsChild(int $id)
     {
         $pdo = Database::getInstance();
@@ -51,6 +86,8 @@ class Section_Section {
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
+        } else {
+            return [];
         }
     }
 
@@ -76,6 +113,10 @@ class Section_Section {
         }
     }
 
+    /**
+     * Permet d'ajouter les liens entre sections
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -89,6 +130,12 @@ class Section_Section {
         return $sth->execute();
     }
 
+    /**
+     * Permet de supprimer les liens entre sections en fonction de la section enfant
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();

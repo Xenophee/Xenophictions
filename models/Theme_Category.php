@@ -8,21 +8,45 @@ class Theme_Category
     private int $id_themes;
     private int $id_categories;
 
+    /**
+     * Permet de définir l'id du thème concerné
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setIdThemes(int $value): void
     {
         $this->id_themes = $value;
     }
 
+    /**
+     * Permet de récupérer l'id du thème concerné
+     * @param string $value
+     * 
+     * @return void
+     */
     public function getIdThemes(): int
     {
         return $this->id_themes;
     }
 
+    /**
+     * Permet de définir l'id de la catégorie concernée
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setIdCategories(int $value): void
     {
         $this->id_categories = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de la catégorie concernée
+     * @param string $value
+     * 
+     * @return void
+     */
     public function getIdCategories(): int
     {
         return $this->id_categories;
@@ -58,14 +82,15 @@ class Theme_Category
         }
     }
 
+    /**
+     * Permet d'ajouter des catégories à un thème
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
         $sql = 'INSERT INTO `themes_categories` (`id_themes`, `id_categories`) 
                 VALUES (:id_themes, :id_categories);';
-
-        // $sql = 'INSERT INTO `themes_categories` (`id_themes`, `id_categories`)
-        // VALUES (:id_themes, LAST_INSERT_ID())';
 
         $sth = $pdo->prepare($sql);
 

@@ -123,6 +123,13 @@ class Save {
         }
     }
 
+    /**
+     * Permet de vérifier si une sauvegarde existe selon la section et l'utilisateur
+     * @param int $idSection
+     * @param int $idUser
+     * 
+     * @return bool
+     */
     public static function isSaveExist(int $idSection, int $idUser): bool
     {
         $pdo = Database::getInstance();
@@ -133,6 +140,10 @@ class Save {
         return (!empty($result)) ? true : false;
     }
 
+    /**
+     * Permet d'ajouter une sauvegarde sur une section pour un utilisateur donné
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -146,6 +157,13 @@ class Save {
         return $sth->execute();
     }
 
+    /**
+     * Permet de supprimer l'ensemble des sauvegardes d'un utilisateur sur une histoire donnée
+     * @param int $idUser
+     * @param int $idStory
+     * 
+     * @return bool
+     */
     public static function delete(int $idUser, int $idStory): bool
     {
         $pdo = Database::getInstance();

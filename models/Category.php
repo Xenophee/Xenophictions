@@ -72,6 +72,10 @@ class Category {
         }
     }
 
+    /**
+     * Ajoute une nouvelle catégorie
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -85,6 +89,12 @@ class Category {
         return $sth->execute();
     }
 
+    /**
+     * Mets à jour une catégorie
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function update(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -102,6 +112,12 @@ class Category {
         }
     }
     
+    /**
+     * Supprime une catégorie
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();

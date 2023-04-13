@@ -5,22 +5,46 @@ class Chapter_Section {
     private int $id_chapters;
     private int $id_sections;
 
+    /**
+     * Permet de définir quel id de chapitre est concerné
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_chapters (int $value):void {
         $this->id_chapters = $value;
     }
 
+    /**
+     * Permet de récupérer l'id du chapitre concerné
+     * @return int
+     */
     public function getId_chapters ():int {
         return $this->id_chapters;
     }
 
+    /**
+     * Permet de définir quel id de section est concerné
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_sections (int $value):void {
         $this->id_sections = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de section concerné
+     * @return int
+     */
     public function getId_sections ():int {
         return $this->id_sections;
     }
 
+    /**
+     * Ajoute une liaison entre chapitre et liaison
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -34,6 +58,12 @@ class Chapter_Section {
         return $sth->execute();
     }
 
+    /**
+     * Supprime une liaison entre chapitre et section
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();

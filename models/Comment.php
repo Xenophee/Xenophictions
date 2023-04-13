@@ -173,6 +173,12 @@ class Comment
         return $this->id_stories;
     }
 
+    /**
+     * Permet de récupérer tous les commentaires du site ou selon une histoire spécifique
+     * @param int|null $id
+     * 
+     * @return array
+     */
     public static function getAll(int $id = null): array
     {
         $pdo = Database::getInstance();
@@ -197,6 +203,10 @@ class Comment
         }
     }
 
+    /**
+     * Permet d'ajouter un commentaire
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -213,6 +223,13 @@ class Comment
         return $sth->execute();
     }
 
+    /**
+     * Permet de supprimer un commentaire selon l'utilisateur
+     * @param int $idUser
+     * @param int $idComment
+     * 
+     * @return bool
+     */
     public static function delete(int $idUser, int $idComment): bool
     {
         $pdo = Database::getInstance();
@@ -228,6 +245,12 @@ class Comment
         }
     }
 
+    /**
+     * Permet de supprimer un commentaire en tant qu'admin
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function deleteAdmin(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -242,6 +265,12 @@ class Comment
         }
     }
 
+    /**
+     * Permet de publier un commentaire sur le site
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function publish(int $id): bool
     {
         $pdo = Database::getInstance();

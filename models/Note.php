@@ -111,28 +111,54 @@ class Note
         return $this->deleted_at;
     }
 
+    /**
+     * Permet de définir l'id de l'utilisateur concerné
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_Users(int $value): void
     {
         $this->id_users = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de l'utilisateur concerné
+     * @return int
+     */
     public function getId_Users(): int
     {
         return $this->id_users;
     }
 
+    /**
+     * Permet de définir l'id de l'histoire concernée
+     * @param int $value
+     * 
+     * @return void
+     */
     public function setId_stories(int $value): void
     {
         $this->id_stories = $value;
     }
 
+    /**
+     * Permet de récupérer l'id de l'histoire concernée
+     * @return int
+     */
     public function getId_stories(): int
     {
         return $this->id_stories;
     }
 
 
-    public static function getAverageNote($id)
+    /**
+     * Permet de récupérer la note moyenne d'une histoire
+     * @param int $id
+     * 
+     * @return object
+     */
+    public static function getAverageNote(int $id):object
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT AVG(`note`) AS `note` FROM `notes`
@@ -145,6 +171,13 @@ class Note
         }
     }
 
+    /**
+     * Permet de récupérer la note d'un utilisateur sur une histoire
+     * @param int $idUser
+     * @param int $idStory
+     * 
+     * @return object
+     */
     public static function get(int $idUser, int $idStory):object|bool
     {
         $pdo = Database::getInstance();
@@ -171,6 +204,10 @@ class Note
         return (!empty($result)) ? true : false;
     }
 
+    /**
+     * Permet d'ajouter une note à une histoire
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -187,6 +224,10 @@ class Note
         return $sth->execute();
     }
 
+    /**
+     * Permet de mettre à jour une note sur une histoire
+     * @return bool
+     */
     public function update(): bool
     {
         $pdo = Database::getInstance();
@@ -204,6 +245,12 @@ class Note
         }
     }
 
+    /**
+     * Permet de supprimer une note
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -217,6 +264,4 @@ class Note
             return ($sth->rowCount() > 0) ? true : false;
         }
     }
-
-    // INSERT INTO `notes` (`id_notes`, `note`, `noted_at`, `updated_at`, `deleted_at`, `id_users`, `id_stories`) VALUES (NULL, '5', CURRENT_TIMESTAMP, NULL, NULL, '1', '1');
 }

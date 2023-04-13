@@ -196,6 +196,16 @@ class Story
     }
 
 
+    /**
+     * Permet de récupérer toutes les informations de toutes les histoires du site par défaut.
+     * Possibilité de préciser par type, par thème et de donner une limite
+     * @param int|null $type
+     * @param int|null $theme
+     * @param int|null $limit
+     * @param int $offset
+     * 
+     * @return array
+     */
     public static function getAll(int $type = null, int $theme = null, int $limit = null, int $offset = 0): array
     {
         $pdo = Database::getInstance();
@@ -244,6 +254,12 @@ class Story
         }
     }
 
+    /**
+     * Permet de récupérer toutes les informations d'une histoire en particulier
+     * @param int $id
+     * 
+     * @return object
+     */
     public static function get(int $id): object|bool
     {
         $pdo = Database::getInstance();
@@ -261,6 +277,10 @@ class Story
     }
 
 
+    /**
+     * Permet de récupérer toutes les informations sur la dernière histoire publiée
+     * @return object
+     */
     public static function getLastPublish(): object|bool
     {
         $pdo = Database::getInstance();
@@ -281,7 +301,11 @@ class Story
         }
     }
 
-    public static function getMostPopular(): array|bool
+    /**
+     * Permet de récupérer les trois histoires les plus populaires sur la base des notes attribuées
+     * @return array
+     */
+    public static function getMostPopular(): array
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(DISTINCT `categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
@@ -299,9 +323,15 @@ class Story
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
+        } else {
+            return [];
         }
     }
 
+    /**
+     * Permet d'ajouter les informations de base d'une histoire
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -320,6 +350,12 @@ class Story
         return $sth->execute();
     }
 
+    /**
+     * Permet de modifier les informations de base sur une histoire en particulier
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function update(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -342,6 +378,12 @@ class Story
         }
     }
 
+    /**
+     * Permet la publication d'une histoire
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function publish(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -356,6 +398,12 @@ class Story
         return $sth->execute();
     }
 
+    /**
+     * Permet la suppression d'une histoire en particulier
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -385,6 +433,10 @@ class Story
         }
     }
 
+    /**
+     * Permet de récupérer le nombre d'histoires sur le site
+     * @return int
+     */
     public static function count(): int
     {
         $sql = 'SELECT COUNT(`id_stories`) as `storiesNb` FROM `stories`';

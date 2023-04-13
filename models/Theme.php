@@ -62,6 +62,10 @@ class Theme {
         return $this->description;
     }
 
+    /**
+     * Permet de récupérer tous les thèmes du site
+     * @return array
+     */
     public static function getAll():array {
         $pdo = Database::getInstance();
         $sql = 'SELECT * FROM `themes`;';
@@ -69,9 +73,15 @@ class Theme {
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
+        } else {
+            return [];
         }
     }
 
+    /**
+     * Permet d'ajouter un thème
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -84,6 +94,12 @@ class Theme {
         return $sth->execute();
     }
     
+    /**
+     * Permet de modifier un thème
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function update(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -101,6 +117,12 @@ class Theme {
         }
     }
 
+    /**
+     * Permet de supprimer un thème
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -115,6 +137,12 @@ class Theme {
         }
     }
 
+    /**
+     * Permet de supprimer toutes les catégories d'un thème
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function deleteAll(int $id): bool
     {
         $pdo = Database::getInstance();

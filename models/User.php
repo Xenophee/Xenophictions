@@ -268,19 +268,12 @@ class User
         return $this->admin;
     }
 
-
-    // public static function isDataExist(string $data, string $value): bool|object
-    // {
-    //     $pdo = Database::getInstance();
-    //     $sql = 'SELECT * FROM `users` WHERE :data = :value';
-    //     $sth = $pdo->prepare($sql);
-    //     $sth->bindValue(':data', $data);
-    //     $sth->bindValue(':value', $value);
-    //     $sth->execute();
-
-    //     return $sth->fetch();
-    // }
-
+    /**
+     * Vérifie si l'adresse mail de l'utilisateur existe déjà en base
+     * @param string $email
+     * 
+     * @return bool
+     */
     public static function isEmailExist(string $email): bool
     {
         $pdo = Database::getInstance();
@@ -291,6 +284,12 @@ class User
         return (!empty($result)) ? true : false;
     }
 
+    /**
+     * Vérifie si le nom de l'utilisateur existe déjà en base
+     * @param string $username
+     * 
+     * @return bool
+     */
     public static function isUsernameExist(string $username): bool
     {
         $pdo = Database::getInstance();
@@ -303,6 +302,10 @@ class User
     }
 
 
+    /**
+     * Permet d'ajouter un utilisateur
+     * @return bool
+     */
     public function add(): bool
     {
         $pdo = Database::getInstance();
@@ -319,6 +322,12 @@ class User
         return $sth->execute();
     }
 
+    /**
+     * Permet de modifier les informations d'un utilisateur
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function update(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -338,6 +347,12 @@ class User
         }
     }
 
+    /**
+     * Permet de modifier le mot de passe d'un utilisateur
+     * @param int $id
+     * 
+     * @return bool
+     */
     public function updatePassword(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -355,6 +370,12 @@ class User
         }
     }
 
+    /**
+     * Permet de supprimer un utilisateur
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function delete(int $id): bool
     {
         $pdo = Database::getInstance();
@@ -369,7 +390,14 @@ class User
         }
     }
 
-    public static function get($id): object|bool
+
+    /**
+     * Permet de récupérer toutes les informations d'un utilisateur en particulier
+     * @param int $id
+     * 
+     * @return object
+     */
+    public static function get(int $id): object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT * FROM `users`
@@ -383,7 +411,13 @@ class User
         }
     }
 
-    public static function getByEmail($value): object|bool
+    /**
+     * Permet de récupérer un utilisateur selon son adresse mail
+     * @param string $value
+     * 
+     * @return object
+     */
+    public static function getByEmail(string $value): object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT * FROM `users`
@@ -397,6 +431,16 @@ class User
         }
     }
 
+    /**
+     * Permet de récupérer toutes les informations de tous les utilisateurs sur le site.
+     * Possibilité de trier par nom d'utilisateur ou par mail.
+     * Retour par ordre alphabétique.
+     * @param string $search
+     * @param int|null $limit
+     * @param int $offset
+     * 
+     * @return array
+     */
     public static function getAll(string $search = '', int $limit = null, int $offset = 0): array
     {
         $pdo = Database::getInstance();
@@ -424,6 +468,12 @@ class User
         }
     }
 
+    /**
+     * Permet de compter le nombre d'utilisateurs sur le site
+     * @param string $search
+     * 
+     * @return int
+     */
     public static function count(string $search): int
     {
         $pdo = Database::getInstance();
@@ -436,6 +486,12 @@ class User
         return $sth->fetchColumn();
     }
 
+    /**
+     * Permet de valider le compte utilisateur à l'aide de l'adresse mail
+     * @param string $email
+     * 
+     * @return bool
+     */
     public static function validateEmail(string $email): bool
     {
         $pdo = Database::getInstance();

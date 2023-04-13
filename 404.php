@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../public/assets/bootstrap-icons-1.10.3/bootstrap-icons.css">
     <link rel="stylesheet" href="../../public/assets/css/general.css">
     <link rel="stylesheet" href="../../public/assets/css/404.css">
+    <link rel="icon" type="image/png" href="../../public/assets/img/Xenophictions_logo.png">
     <title>Erreur 404</title>
 </head>
 <body id="cover">

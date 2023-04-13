@@ -174,6 +174,12 @@ class Section
         return $this->deleted_at;
     }
 
+    /**
+     * Permet de récupérer toutes les informations relatives à une section
+     * @param int $id
+     * 
+     * @return object
+     */
     public static function get(int $id):object
     {
         $pdo = Database::getInstance();
@@ -192,7 +198,13 @@ class Section
         }
     }
 
-    public static function getFirstSection($id)
+    /**
+     * Permet de récupérer l'id de la première section d'un chapitre en particulier
+     * @param int $id
+     * 
+     * @return object
+     */
+    public static function getFirstSection(int $id):object
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.`id_sections`
@@ -208,7 +220,13 @@ class Section
         }
     }
 
-    public static function getLastSection($id)
+    /**
+     * Permet de récupérer l'id de la dernière section d'un chapitre en particulier
+     * @param int $id
+     * 
+     * @return object
+     */
+    public static function getLastSection(int $id):object
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.`id_sections`
@@ -249,7 +267,13 @@ class Section
     // }
 
 
-    public static function getAll(int $id)
+    /**
+     * Récupère toutes les sections d'un chapitre donné
+     * @param int $id
+     * 
+     * @return array
+     */
+    public static function getAll(int $id):array
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*
@@ -262,6 +286,8 @@ class Section
 
         if ($sth->execute()) {
             return ($sth->fetchAll());
+        } else {
+            return [];
         }
     }
 
