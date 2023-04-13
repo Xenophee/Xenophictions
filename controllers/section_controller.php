@@ -42,7 +42,7 @@ try {
     if (!is_null($user) && $idSection != $permission->id_sections) {
         $sectionsParent = Section_Section::getSectionsParent($idSection);
         foreach ($sectionsParent as $sectionParent) {
-            $verificationParents[] = Save::isSaveExist($sectionParent->id_sections);
+            $verificationParents[] = Save::isSaveExist($sectionParent->id_sections, $user->id_users);
         }
         
         // S'IL N'Y A PAS DE SAUVEGARDE SUR UNE SECTION PARENTE, ON EXPULSE L'UTILISATEUR
@@ -61,7 +61,7 @@ try {
 
     // VERIFICATION DE LA SAUVEGARDE SUR LES ENFANTS POUR L'AFFICHAGE OU NON DES BOUTONS DE CHOIX
     foreach($sectionsChild as $sectionChild) {
-        $verificationChilds[] = Save::isSaveExist($sectionChild->id_sections);
+        $verificationChilds[] = Save::isSaveExist($sectionChild->id_sections, $user->id_users);
     }
 
     // TITRE DU DOCUMENT

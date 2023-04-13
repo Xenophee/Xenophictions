@@ -145,7 +145,7 @@ class Note
         }
     }
 
-    public static function get(int $idUser, int $idStory):object
+    public static function get(int $idUser, int $idStory):object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `note` FROM `notes`

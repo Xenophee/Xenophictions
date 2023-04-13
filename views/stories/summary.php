@@ -127,7 +127,7 @@
 
 
 
-                    <?php if (!empty($user)) { ?>
+                    <?php if (!is_null($user)) { ?>
                         <div class="comment py-4 px-4">
                             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mb-3">
                                 <div class="d-flex flex-column flex-md-row align-items-center"><img src="../../public/assets/img/others/avatar2.jpg" class="avatar mb-3 mb-md-0 me-md-3" alt="">
@@ -140,6 +140,7 @@
                                     <textarea class="form-control" placeholder="Écrire un commentaire" id="commentary" name="commentary"></textarea>
                                     <label for="commentary">Écrire un commentaire</label>
                                 </div>
+                                <small class="text-danger fst-italic mt-2"><?= $errors['note'] ?? '' ?></small>
 
                                 <div class="d-flex flex-column flex-md-row justify-content-end mt-3">
                                     <button type="reset" class="btn stop mb-3 mb-md-0 me-3"><i class="bi bi-eraser me-3"></i>Annuler</button>
@@ -159,7 +160,7 @@
                                     </div>
                                     <small class="mt-3 mt-md-0"><?= date('d/m/Y à H:i', strtotime($comment->published_at)) ?></small>
                                 </div>
-                                <form action="">
+                                <form>
                                     <div class="commentary px-3 py-3">
                                         <p class="commentContent"><?= $comment->comment ?></p>
                                     </div>
@@ -196,7 +197,7 @@
                     <p class="text-center">La notation est réservée aux lecteurs inscrits.</p>
                 <?php } else { ?>
                     <p class="text-center">Quelle note souhaitez vous attribuer ?</p>
-                    <p class="text-center">Note actuelle : <?= $userNote->note ?></p>
+                    <p class="text-center">Note actuelle : <?= $userNote->note ?? '-' ?></p>
                     <form method="POST">
                         <label for="note" class="form-label mb-2">Note (sur 10) :</label>
                         <input type="number" class="form-control inputNote" id="note" name="note" value="">

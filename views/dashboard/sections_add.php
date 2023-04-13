@@ -24,7 +24,7 @@
 
                     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && (empty($errors))) { ?>
 
-                        <form class="formStories" method="POST" novalidate>
+                        <form class="formStories" method="POST">
 
                             <div class="d-flex flex-column align-items-center">
 
@@ -65,7 +65,7 @@
 
                     <?php } else { ?>
 
-                        <form class="formStories" method="POST" id="formStories" novalidate>
+                        <form class="formStories" method="POST" id="formStories">
 
                             <div class="d-flex justify-content-between">
 

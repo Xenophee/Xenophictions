@@ -279,7 +279,7 @@ class Section
         $sth = $pdo->prepare($sql);
 
         $sth->bindValue(':title', $this->title);
-        $sth->bindValue(':description', $this->description, PDO::PARAM_INT);
+        $sth->bindValue(':description', $this->description);
         $sth->bindValue(':content', $this->content);
 
         return $sth->execute();

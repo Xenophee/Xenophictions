@@ -123,12 +123,12 @@ class Save {
         }
     }
 
-    public static function isSaveExist(int $id): bool
+    public static function isSaveExist(int $idSection, int $idUser): bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `id_users` FROM `saves` WHERE `id_sections` = ?;';
+        $sql = 'SELECT * FROM `saves` WHERE `id_sections` = ? AND `id_users` = ?;';
         $sth = $pdo->prepare($sql);
-        $sth->execute([$id]);
+        $sth->execute([$idSection, $idUser]);
         $result = $sth->fetch();
         return (!empty($result)) ? true : false;
     }

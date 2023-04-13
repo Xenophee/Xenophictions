@@ -47,6 +47,8 @@ try {
             $_SESSION['description'] = trim((string)filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
             $_SESSION['content'] = trim((string)filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS));
 
+            var_dump($_SESSION['description']);
+            
             // VERIFICATION QU'UNE HISTOIRE A ETE SELECTIONNEE
             if (empty($_SESSION['story'])) {
                 $errors['story'] = 'Veuillez choisir l\'histoire de référence';

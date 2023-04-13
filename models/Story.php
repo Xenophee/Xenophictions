@@ -199,7 +199,7 @@ class Story
     public static function getAll(int $type = null, int $theme = null, int $limit = null, int $offset = 0): array
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(DISTINCT `categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
         FROM `stories`
         LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
         LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
@@ -247,7 +247,7 @@ class Story
     public static function get(int $id): object|bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`id_categories` SEPARATOR \', \') AS `id_categories`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories` FROM `stories`
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(DISTINCT `categories`.`id_categories` SEPARATOR \', \') AS `id_categories`, GROUP_CONCAT(DISTINCT `categories`.`name` SEPARATOR \', \') AS `categories` FROM `stories`
         LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
         LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
         LEFT JOIN `notes` ON `notes`.`id_stories` = `stories`.`id_stories`
@@ -264,7 +264,7 @@ class Story
     public static function getLastPublish(): object|bool
     {
         $pdo = Database::getInstance();
-        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(`categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
+        $sql = 'SELECT `stories`.*, AVG(`note`) AS `note`, GROUP_CONCAT(DISTINCT `categories`.`name` SEPARATOR \', \') AS `categories`, MAX(`themes`.`name`) AS `theme_name`, MAX(`themes`.`id_themes`) AS `id_theme`
         FROM `stories`
         LEFT JOIN `stories_categories` ON `stories`.`id_stories` = `stories_categories`.`id_stories`
         LEFT JOIN `categories` ON `stories_categories`.`id_categories` = `categories`.`id_categories`
