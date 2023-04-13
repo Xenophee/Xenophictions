@@ -1,0 +1,21 @@
+
+body {
+    background-image: url('../img/wall.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.message {
+    height: 100vh;
+    color: var(--light-color);
+}
+
+.text {
+    font-weight: bold;
+    font-weight: 4rem;
+}
+
+.number {
+    font-size: 7rem;
+}

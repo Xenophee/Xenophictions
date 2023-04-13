@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="../../public/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/assets/bootstrap-icons-1.10.3/bootstrap-icons.css">
     <link rel="stylesheet" href="../../public/assets/css/general.css">
+    <link rel="stylesheet" href="../../public/assets/css/404.css">
     <title>Erreur 404</title>
 </head>
-<body>
+<body id="cover">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col">
-                La ressource demandée n'existe pas
+            <div class="col d-flex flex-column justify-content-center align-items-center message">
+                <div class="text">Erreur</div>
+                <div class="number">404</div>
             </div>
         </div>
     </div>
