@@ -142,7 +142,7 @@ try {
             $newUser->setEmail($emailOk);
             $newUser->setBirthdate($birthdateOk);
             $newUser->setPassword($passwordHash);
-            $newUser->setNewsletter($newsletterOk);
+            $newUser->setNewsletter($newsletter);
 
             $isAdd = $newUser->add();
 

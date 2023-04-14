@@ -28,7 +28,7 @@
             <div class="row justify-content-center pb-5 mb-lg-5">
                 <div class="col-12 col-sm-11 col-md-9 col-lg-6 col-xxl-5">
                     <div class="blocForm shadow-lg">
-                        <form method="post" id="userForm" novalidate>
+                        <form method="post" id="userForm">
                             <fieldset class="py-5 px-2 px-sm-5">
                                 <legend class="text-center mb-5">Créer un compte</legend>
                                 <small class="text-danger fst-italic mb-2"><?= $errors['global'] ?? '' ?></small>
