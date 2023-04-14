@@ -60,8 +60,10 @@ try {
     $sectionsChild = Section_Section::getSectionsChild($idSection);
 
     // VERIFICATION DE LA SAUVEGARDE SUR LES ENFANTS POUR L'AFFICHAGE OU NON DES BOUTONS DE CHOIX
-    foreach($sectionsChild as $sectionChild) {
-        $verificationChilds[] = Save::isSaveExist($sectionChild->id_sections, $user->id_users);
+    if (!is_null($user)) {
+        foreach($sectionsChild as $sectionChild) {
+            $verificationChilds[] = Save::isSaveExist($sectionChild->id_sections, $user->id_users);
+        }
     }
 
     // TITRE DU DOCUMENT
