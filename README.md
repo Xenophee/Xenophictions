@@ -9,6 +9,10 @@ Site personnel de lecture de fictions linéaires ou intéractives rédigées de 
 Pour en savoir plus, vous pouvez consulter la page de mon [portfolio](https://perrine-dassonville.dev/portfolio/projet/xenophictions) dédiée au projet.
 
 
+> [!CAUTION]
+> Attention, le projet est ancien et n'est pas forcément conforme aux bonnes pratiques. De plus, certaines fonctionnalités peuvent ne pas fonctionner correctement ou n'ont pas été implémentées.
+
+
 ## Installation avec Laragon
 
 1. **Télécharger et installer Laragon :**
