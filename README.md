@@ -31,7 +31,7 @@ Pour en savoir plus, vous pouvez consulter la page de mon [portfolio](https://pe
       git clone https://github.com/Xenophee/Xenophictions.git
       ```
       
-4. **Mettez en place la base de données :**
+4. **Mettre en place la base de données :**
     - Créez une base de données nommée `xenophictions`. 
     - Dans le dossier `resources` du projet, vous pouvez utiliser le script vierge `bdd.sql` qui ne réalise que la création de tables ou importer le fichier `xenophictions.sql` dans la base de données nouvellement créée.
 
