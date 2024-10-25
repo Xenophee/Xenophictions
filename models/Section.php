@@ -180,7 +180,7 @@ class Section
      * 
      * @return object
      */
-    public static function get(int $id):object
+    public static function get(int $id):object|bool
     {
         $pdo = Database::getInstance();
         $sql = 'SELECT `sections`.*, `chapters`.`title` AS `chapter_title`, `stories`.`title` AS `story_title`,
