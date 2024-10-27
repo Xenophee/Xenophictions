@@ -26,7 +26,7 @@ CREATE TABLE `users`(
 CREATE TABLE `stories`(
    `id_stories` INT AUTO_INCREMENT,
    `title` VARCHAR(150) NOT NULL,
-   `author` VARCHAR(70) NOT NULL DEFAULT 'Xénophée',
+   `author` VARCHAR(70) NOT NULL DEFAULT 'Admin',
    `type` TINYINT NOT NULL,
    `synopsis` VARCHAR(1500) NOT NULL,
    `registered_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

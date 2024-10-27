@@ -53,4 +53,11 @@ Redémarrez ensuite Laragon pour que les modifications soient prises en compte e
      ```
      http://Xenophictions.test
      ```
+
+7. **Accéder à l'administration si vous utilisez le script SQL complet :**
+   - Pour accéder à l'administration, les identifiants par défaut sont :
+      - Identifiant : `admin@gmail.com`
+      - Mot de passe : `123`
+
+Les mots de passe sont tous les mêmes pour les utilisateurs créés par défaut.
     
