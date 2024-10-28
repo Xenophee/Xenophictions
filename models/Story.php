@@ -7,7 +7,7 @@ class Story
 
     private int $id_stories;
     private string $title;
-    private string $author = 'Xénophée';
+    private string $author = 'Admin';
     private int $type;
     private string $synopsis;
     private string $registered_at;
